@@ -1,0 +1,1196 @@
+<!DOCTYPE html><html class="h-full" lang="vi"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;height:100%;}body{overscroll-behavior:none;}}
+/* Custom elegant scrollbar styling */
+.custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scroll::-webkit-scrollbar-track { background: transparent; }
+.custom-scroll::-webkit-scrollbar-thumb { background: #c3c6d7; border-radius: 9999px; }
+.custom-scroll::-webkit-scrollbar-thumb:hover { background: #737686; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Micro-interaction & Keyframe Animations */
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 50%; height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+  transform: translateX(-150%);
+  pointer-events: none;
+}
+.btn-shimmer:hover::after {
+  animation: shimmer-sweep 1.2s infinite;
+}
+
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-4px) scale(1.02); }
+}
+.animate-float {
+  animation: float-subtle 3s ease-in-out infinite;
+}
+
+@keyframes ai-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  50% { box-shadow: 0 0 16px 4px rgba(37, 99, 235, 0.2); }
+}
+.animate-ai-glow {
+  animation: ai-glow-pulse 2.5s infinite;
+}
+
+@keyframes toast-slide-down {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.95); }
+  15% { opacity: 1; transform: translateY(0) scale(1); }
+  85% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-16px) scale(0.95); }
+}
+.toast-animation {
+  animation: toast-slide-down 3.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes data-refresh {
+  0% { opacity: 0.5; filter: blur(1px); }
+  100% { opacity: 1; filter: blur(0px); }
+}
+.table-refreshing {
+  animation: data-refresh 0.35s ease-out;
+}
+
+/* Sidebar collapsed tooltip and transitions */
+.sidebar-transition {
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shimmer:hover::after, .animate-float, .animate-ai-glow, .toast-animation, .table-refreshing, .sidebar-transition {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-fixed-dim": "#bec6e0", "on-tertiary-container": "#b3fff3", "tertiary-fixed-dim": "#6bd8cb", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#2563eb", "on-tertiary-fixed": "#00201d", "primary-fixed-dim": "#b4c5ff", "secondary": "#565e74", "on-secondary": "#ffffff", "on-primary-fixed": "#00174b", "primary-fixed": "#dbe1ff", "background": "#f8f9ff", "surface": "#f8f9ff", "surface-variant": "#d3e4fe", "on-primary-fixed-variant": "#003ea8", "on-secondary-fixed": "#131b2e", "tertiary-container": "#007b71", "surface-container-high": "#dce9ff", "inverse-surface": "#213145", "inverse-on-surface": "#eaf1ff", "on-primary-container": "#eeefff", "on-secondary-fixed-variant": "#3f465c", "secondary-container": "#dae2fd", "primary": "#004ac6", "outline": "#737686", "on-secondary-container": "#5c647a", "surface-dim": "#cbdbf5", "on-surface": "#0b1c30", "tertiary": "#006058", "inverse-primary": "#b4c5ff", "on-error": "#ffffff", "secondary-fixed": "#dae2fd", "on-primary": "#ffffff", "on-background": "#0b1c30", "tertiary-fixed": "#89f5e7", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "on-surface-variant": "#434655", "on-tertiary-fixed-variant": "#005049", "surface-container-highest": "#d3e4fe", "on-error-container": "#93000a", "surface-tint": "#0053db", "outline-variant": "#c3c6d7", "surface-container": "#e5eeff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "space-xl": "2rem", "gutter-dense": "0.5rem", "space-sm": "0.5rem", "margin": "1.5rem", "gutter": "1rem", "space-lg": "1.25rem", "margin-mobile": "1rem", "space-md": "0.75rem" }, fontFamily: { "body-sm": ["Hanken Grotesk"], "headline-xl": ["Manrope"], "body-lg": ["Hanken Grotesk"], "headline-md": ["Manrope"], "data-tabular": ["Hanken Grotesk"], "headline-sm": ["Manrope"], "headline-lg": ["Manrope"], "display-lg": ["Manrope"], "label-md": ["Hanken Grotesk"], "headline-xl-mobile": ["Manrope"], "body-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"] }, fontSize: { "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "data-tabular": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }], "headline-sm": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }] } } } };</script></head>
+<body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary h-screen w-full overflow-hidden flex">
+<!-- NOTIFICATION TOAST CONTAINER -->
+<div class="fixed top-5 right-6 z-[100] flex flex-col gap-2 pointer-events-none" id="toastContainer"></div>
+<!-- LEFT SIDEBAR: Collapsible 220px <-> 64px with smooth vertical scroll & Accordion -->
+<aside class="shrink-0 h-screen bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] select-none sidebar-transition relative group/sidebar overflow-x-hidden w-[220px]" id="appSidebar">
+<div class="flex flex-col min-h-0 overflow-y-auto hide-scrollbar flex-1">
+<!-- Header & Brand Logo with Collapse Toggle Button -->
+<div class="min-h-[64px] px-2.5 py-2.5 flex flex-col justify-center bg-inverse-surface/90 shrink-0 border-b border-surface-variant/10 transition-all duration-200" id="sidebarHeaderWrapper"><div class="flex items-center justify-between w-full min-w-0 gap-1.5"><div class="flex items-center gap-space-sm min-w-0 flex-1 overflow-hidden" id="sidebarBrandContainer"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 mx-auto group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-on-primary-container text-[20px]">inventory_2</span></div><div class="flex flex-col min-w-0 sidebar-label overflow-hidden"><span class="font-headline-sm text-headline-sm text-surface-container-lowest font-bold truncate leading-tight tracking-tight">IAProc</span><span class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Quản trị Mua sắm</span></div></div><button class="p-1 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0 sidebar-label" id="btnToggleSidebar" title="Thu gọn Sidebar"><span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="sidebarToggleIcon">keyboard_double_arrow_left</span></button></div><div class="flex justify-center w-full pt-1.5 border-t border-surface-variant/10 mt-1.5 hidden" id="collapsedToggleRow"><button class="p-1 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0 w-8 h-8" id="btnToggleSidebarCollapsed" title="Mở rộng Sidebar"><span class="material-symbols-outlined text-[20px]">keyboard_double_arrow_right</span></button></div></div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-1 px-space-xs py-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm" id="sidebarNav">
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200 group/nav" data-path="tong-quan" href="#" title="Tổng quan"><span class="material-symbols-outlined text-[20px] shrink-0">space_dashboard</span><span class="font-body-sm text-body-sm sidebar-label truncate">Tổng quan</span></a>
+<!-- Accordion Submenu: Quản lý Nhà cung cấp -->
+<div class="flex flex-col gap-0.5" id="supplierAccordionWrapper">
+<button class="w-full flex items-center justify-between px-space-sm py-2 transition-all duration-200 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm group/btn text-left" id="supplierAccordionBtn" title="QL Nhà cung cấp" type="button"><div class="flex items-center gap-space-sm min-w-0"><span class="material-symbols-outlined text-[20px] shrink-0">corporate_fare</span><span class="font-body-sm text-body-sm truncate sidebar-label font-semibold">Quản lý nhà cung cấp</span></div><span class="material-symbols-outlined text-[16px] transition-transform duration-200 shrink-0 sidebar-label" id="supplierAccordionChevron">expand_more</span></button>
+<div class="flex flex-col pl-7 pr-1 gap-1 overflow-hidden transition-all duration-300 max-h-48 opacity-100 sidebar-label" id="supplierAccordionMenu" style="max-height: 200px; opacity: 1;">
+<a class="py-1.5 px-space-xs rounded-lg text-primary-fixed font-semibold bg-white/10 hover:bg-white/15 font-body-sm text-body-sm transition-all duration-200 truncate" data-path="ho-so-nha-cung-cap" href="#">• Hồ sơ nhà cung cấp</a>
+<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="loai-nha-cung-cap" href="#">• Loại nhà cung cấp</a>
+<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="danh-gia-xep-hang" href="#">• Đánh giá &amp; Xếp hạng</a>
+</div>
+</div>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="danh-muc-hang-hoa" href="#" title="Danh mục hàng hóa">
+<span class="material-symbols-outlined text-[20px] shrink-0">category</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Danh mục hàng hóa</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="ke-hoach-mua-sam" href="#" title="Kế hoạch mua sắm">
+<span class="material-symbols-outlined text-[20px] shrink-0">event_note</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Kế hoạch mua sắm</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="qua-trinh-mua-sam" href="#" title="Quá trình mua sắm">
+<span class="material-symbols-outlined text-[20px] shrink-0">shopping_cart_checkout</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Quá trình mua sắm</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="thanh-toan-tam-ung" href="#" title="Thanh toán &amp; Tạm ứng">
+<span class="material-symbols-outlined text-[20px] shrink-0">payments</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Thanh toán &amp; Tạm ứng</span>
+</a>
+</nav>
+</div>
+<div class="p-space-sm bg-inverse-surface/90 flex items-center justify-between text-secondary-fixed-dim border-t border-surface-variant/10 shrink-0"><div class="flex items-center justify-center w-full gap-2"><button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" title="Cài đặt hệ thống"><span class="material-symbols-outlined text-[20px]">tune</span></button><span class="font-label-sm text-secondary-fixed-dim sidebar-label truncate">IAProc demo&nbsp;v1.0</span></div></div>
+</aside>
+<!-- MAIN WRAPPER: Takes remainder width, contains Header + Dual Split Panes (Workspace + AI Assistant) -->
+<div class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden relative">
+<!-- TOP HEADER -->
+<header class="h-16 shrink-0 bg-surface/95 backdrop-blur-xl border-b border-surface-container-high/60 z-30 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.03)]">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg text-on-surface-variant border border-transparent focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<input class="bg-transparent text-body-sm font-body-sm placeholder:text-outline focus:outline-none w-80 text-on-surface" placeholder="Tra cứu đơn hàng, nhà cung cấp, mã số thuế..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-error-container text-on-error-container shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:scale-105 active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-error">notifications_active</span>
+<span class="font-label-sm text-label-sm font-semibold">3 nhắc duyệt &gt;24h</span>
+</div>
+<div class="h-6 w-px bg-surface-container-high"></div>
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col text-right">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Trần Lâm Anh Khoa</span>
+<span class="font-label-sm text-label-sm text-secondary">Bộ phận Mua sắm</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- CONTENT VIEWPORT: Flex container holding Main Workspace and Right AI Panel -->
+<div class="flex-1 flex flex-row min-h-0 overflow-hidden relative" id="splitViewport">
+<!-- 1. CENTER MAIN WORKSPACE: Fully independent scrollable area -->
+<main class="flex-1 min-w-0 h-full overflow-y-auto custom-scroll bg-background px-space-lg py-space-md flex flex-col gap-space-md" id="mainWorkspace">
+<!-- Top Breadcrumb & Quick Workflow Banner -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm shrink-0">
+<div class="flex items-center gap-space-xs text-secondary text-body-sm font-body-sm">
+<span class="hover:text-primary transition-colors cursor-pointer">Quản lý nhà cung cấp</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Danh mục &amp; Hồ sơ nhà cung cấp</span>
+<span class="ml-space-xs inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-on-primary-fixed-variant text-label-sm font-label-sm font-semibold" id="totalRecordsBadge">
+            128 Hồ sơ
+          </span>
+</div>
+<!-- Right Global Action Group -->
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium shadow-sm hover:bg-surface-container-low hover:border-primary/40 active:scale-95 transition-all border border-outline-variant/30" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span class="">Xuất Excel</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-primary text-body-sm font-body-sm font-semibold shadow-sm hover:bg-surface-variant hover:scale-[1.02] active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">document_scanner</span>
+<span class="">Quét OCR ĐKKD hàng loạt</span>
+</button>
+<button class="btn-shimmer inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary text-body-sm font-body-sm font-semibold shadow-md hover:bg-primary hover:shadow-lg active:scale-95 transition-all" id="btnCreateSupplier" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">+ Tạo mới hồ sơ (Form)</span>
+</button>
+</div>
+</div>
+<!-- Sub-Navigation Segment Tabs with Live Count Badges -->
+<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-1.5 shadow-sm border border-surface-container-high/60 shrink-0">
+<div class="flex items-center gap-1" id="tabSegmentContainer">
+<button class="tab-item relative px-3.5 py-2 rounded-lg bg-surface-container-low text-primary font-headline-sm text-headline-sm flex items-center gap-2 font-semibold transition-all duration-200">
+<span class="">Hồ sơ Nhà cung cấp</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm">128</span>
+<div class="tab-indicator absolute bottom-0 left-3 right-3 h-0.5 bg-primary-container rounded-full transition-all duration-300"></div>
+</button>
+<button class="tab-item relative px-3.5 py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm flex items-center gap-2 transition-all duration-200">
+<span class="">Danh mục Loại NCC</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm">12</span>
+</button>
+<button class="tab-item relative px-3.5 py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm flex items-center gap-2 transition-all duration-200">
+<span class="">Hồ sơ chờ Cấp phê duyệt</span>
+<span class="px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">5</span>
+</button>
+</div>
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary pr-2">
+<span class="flex items-center gap-2 bg-surface-container-low px-2.5 py-1 rounded-full border border-surface-container-high/50 hover:bg-surface-container-high/50 transition-colors">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
+</span>
+<span class="text-tertiary font-medium">RPA Đang giám sát thuế</span>
+</span>
+</div>
+</div>
+<!-- Multi-Criteria Filter Console -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm border border-surface-container-high/60 shrink-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">filter_alt</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Bộ lọc &amp; Tra cứu nâng cao</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Áp dụng 4 tiêu chí song song</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm">
+<!-- Text Search Field -->
+<div class="md:col-span-4 relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span>
+<input class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest border border-transparent focus:border-primary/30 transition-all" id="searchInput" placeholder="Tìm theo Mã NCC, Tên doanh nghiệp, MST..." type="text" value="Sao Việt">
+</div>
+<!-- Dropdown 1: Loại NCC -->
+<div class="md:col-span-2">
+<div class="relative w-full">
+<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
+<option value="">Loại: Tất cả</option>
+<option selected="" value="net">Thiết bị mạng</option>
+<option value="it">Thiết bị CNTT</option>
+<option value="stationery">Văn phòng phẩm</option>
+<option value="construction">Xây dựng</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
+</div>
+</div>
+<!-- Dropdown 2: Trạng thái hoạt động -->
+<div class="md:col-span-2">
+<div class="relative w-full">
+<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
+<option value="">TT Hoạt động: Tất cả</option>
+<option value="active">Đang hoạt động</option>
+<option value="paused">Tạm dừng</option>
+<option value="blacklist">Khóa/Blacklist</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
+</div>
+</div>
+<!-- Dropdown 3: Tình trạng duyệt -->
+<div class="md:col-span-2">
+<div class="relative w-full">
+<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
+<option value="">Tình trạng duyệt: Tất cả</option>
+<option value="draft">Bản nháp</option>
+<option value="pending">Chờ phê duyệt</option>
+<option value="approved">Đã duyệt</option>
+<option value="rejected">Bị từ chối</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
+</div>
+</div>
+<!-- Dropdown 4: Xếp hạng -->
+<div class="md:col-span-2">
+<div class="relative w-full">
+<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
+<option value="">Xếp hạng: Tất cả</option>
+<option value="a">Hạng A (&gt;85đ)</option>
+<option value="b">Hạng B (70-85đ)</option>
+<option value="c">Hạng C (&lt;70đ)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2 flex-wrap" id="filterBadgesContainer">
+<span class="font-label-sm text-label-sm text-secondary">Đang lọc theo:</span>
+<span class="filter-chip inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm hover:scale-105 active:scale-95 transition-transform duration-200">
+              Tên: "Sao Việt"
+              <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error transition-colors" onclick="this.closest('.filter-chip').remove()">close</span>
+</span>
+<span class="filter-chip inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm hover:scale-105 active:scale-95 transition-transform duration-200">
+              Loại: Thiết bị mạng
+              <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error transition-colors" onclick="this.closest('.filter-chip').remove()">close</span>
+</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-3 py-1 rounded-lg text-secondary hover:text-on-surface text-body-sm font-body-sm hover:bg-surface-container-low active:scale-95 transition-all" id="btnResetFilter" type="button">
+              Đặt lại
+            </button>
+<button class="btn-shimmer px-4 py-1.5 rounded-lg bg-primary-container text-on-primary text-body-sm font-body-sm font-semibold shadow-sm hover:bg-primary active:scale-95 transition-all duration-200 flex items-center gap-1.5" id="btnApplyFilter" type="button">
+<span class="material-symbols-outlined text-[18px] transition-transform duration-300" id="filterIcon">sync</span>
+<span id="filterBtnText" class="">Lọc dữ liệu</span>
+</button>
+</div>
+</div>
+</div>
+<!-- High-Density Interactive Data Grid with Sortable Columns -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col border border-surface-container-high/60 shrink-0 relative" id="tableContainer">
+<!-- Table Scroll Container -->
+<div class="overflow-x-auto w-full custom-scroll">
+<table class="w-full text-left border-collapse min-w-[780px] font-sans text-[13px]" id="dataTable">
+<thead>
+<tr class="bg-surface-container-low text-secondary uppercase tracking-wider border-b border-surface-container-high/60 select-none text-[12px] font-semibold">
+<th class="py-3 px-3 w-10 text-center">
+<input class="rounded accent-primary cursor-pointer transition-transform hover:scale-110" id="selectAllCheckbox" type="checkbox">
+</th>
+<th class="py-3 px-2 font-semibold cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="code">
+<div class="flex items-center gap-1">
+<span class="">Mã NCC</span>
+<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="code">swap_vert</span>
+</div>
+</th>
+<th class="py-3 px-3 font-semibold min-w-[210px] cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="name">
+<div class="flex items-center gap-1">
+<span class="">Tên Nhà cung cấp &amp; MST</span>
+<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="name">swap_vert</span>
+</div>
+</th>
+<th class="py-3 px-3 min-w-[130px] font-semibold cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="type">
+<div class="flex items-center gap-1">
+<span class="">Loại NCC</span>
+<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="type">swap_vert</span>
+</div>
+</th>
+<th class="py-3 px-3 font-semibold min-w-[200px]">Xác thực OCR &amp; RPA</th>
+<th class="py-3 px-3 min-w-[130px] font-semibold cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="score">
+<div class="flex items-center gap-1">
+<span class="">Hạng (Điểm)</span>
+<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="score">swap_vert</span>
+</div>
+</th>
+<th class="py-3 px-2 font-semibold">Trạng thái</th>
+<th class="py-3 px-2 font-semibold">Tình trạng duyệt</th>
+<th class="py-3 px-3 text-right font-semibold">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low text-on-surface text-[13px]" id="tableBody">
+<tr class="bg-blue-50/40 hover:bg-blue-50 hover:shadow-sm transition-all duration-200 relative group table-row-item" data-code="NCC088" data-name="Công ty TNHH Kỹ thuật Sao Việt" data-score="0" data-type="Thiết bị mạng">
+<td class="py-3 px-3 text-center">
+<input checked="" class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
+</td>
+<td class="py-3 px-2 font-semibold text-primary">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+<span class="code-val">NCC088</span>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Kỹ thuật Sao Việt</span>
+<span class="text-[12px] text-secondary font-mono">MST: 0314567890 • Tel: 0908112233</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Thiết bị mạng</span></td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-tertiary-container/15 text-tertiary text-[12px] font-semibold rounded hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span class="">✓ RPA: MST Hợp lệ (OCR 98%)</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="text-secondary text-[12px] italic whitespace-nowrap score-val">Chưa xếp hạng</span></td>
+<td class="py-3 px-2"><span class="font-semibold text-tertiary text-[12px]">Online</span></td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center px-2 py-0.5 bg-surface-container-high text-secondary text-[12px] font-medium rounded">
+Nháp (Chưa duyệt)
+</span>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-primary-container hover:text-on-primary text-primary transition-all duration-200 active:scale-90" title="Gửi xét duyệt ngay">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Chỉnh sửa hồ sơ">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button class="p-1 rounded hover:bg-error-container hover:text-error text-secondary transition-all duration-200 active:scale-90" title="Hủy bản nháp">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC012" data-name="Công ty CP Giải pháp Số Toàn Cầu" data-score="92.5" data-type="Thiết bị CNTT">
+<td class="py-3 px-3 text-center">
+<input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
+</td>
+<td class="py-3 px-2 font-semibold text-on-surface code-val">NCC012</td>
+<td class="py-3 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty CP Giải pháp Số Toàn Cầu</span>
+<span class="text-[12px] text-secondary font-mono">MST: 0312456789 • Đối tác chiến lược</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Thiết bị CNTT</span></td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-tertiary-container/15 text-tertiary text-[12px] font-semibold rounded hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span class="">✓ Đã đối soát ĐKKD &amp; MST</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-[12px] font-bold border border-tertiary/20 whitespace-nowrap score-val">Hạng A (92.5đ)</span></td>
+<td class="py-3 px-2"><span class="font-semibold text-tertiary text-[12px]">Online</span></td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[12px] font-semibold rounded">
+Đã duyệt
+</span>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Xem hồ sơ">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Chỉnh sửa">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+<button class="p-1 rounded hover:bg-error-container hover:text-error text-secondary transition-all duration-200 active:scale-90" title="Khóa/Blacklist">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC045" data-name="Công ty TNHH Xây dựng Phú Hưng" data-score="78.0" data-type="Xây dựng">
+<td class="py-3 px-3 text-center">
+<input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
+</td>
+<td class="py-3 px-2 font-semibold text-on-surface code-val">NCC045</td>
+<td class="py-3 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Xây dựng Phú Hưng</span>
+<span class="text-[12px] text-secondary font-mono">MST: 0319876543 • Gói thầu Cơ điện</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Xây dựng</span></td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-secondary-container text-on-secondary-fixed text-[12px] font-medium rounded hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+<span class="">⏳ Chờ duyệt &gt;24h</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[12px] font-bold border bg-amber-100 text-amber-800 border-amber-300 whitespace-nowrap score-val">Hạng B (78.0đ)</span></td>
+<td class="py-3 px-2"><span class="font-semibold text-tertiary text-[12px]">Online</span></td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-[12px] font-semibold rounded">
+Chờ phê duyệt
+</span>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Thu hồi hồ sơ">
+<span class="material-symbols-outlined text-[18px]">undo</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Lịch sử luồng duyệt">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC019" data-name="Công ty TNHH Vật tư Minh Phát" data-score="62.0" data-type="Văn phòng phẩm">
+<td class="py-3 px-3 text-center">
+<input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
+</td>
+<td class="py-3 px-2 font-semibold text-on-surface code-val">NCC019</td>
+<td class="py-3 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Vật tư Minh Phát</span>
+<span class="text-[12px] text-secondary font-mono">MST: 0311122334 • Hàng tiêu dùng VP</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Văn phòng phẩm</span></td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-error-container text-on-error-container text-[12px] font-semibold rounded hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[15px] text-error">warning</span>
+<span class="">⚠ RPA: MST Ngừng HĐ</span>
+</div>
+</td>
+<td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[12px] font-bold border bg-orange-100 text-orange-800 border-orange-300 whitespace-nowrap score-val">Hạng C (62.0đ)</span></td>
+<td class="py-3 px-2"><span class="font-semibold text-error text-[12px]">Locked/Blacklist</span></td>
+<td class="py-3 px-2">
+<span class="inline-flex items-center px-2 py-0.5 bg-error-container text-on-error-container text-[12px] font-bold rounded">
+Bị từ chối
+</span>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container-high text-error transition-all duration-200 active:scale-90" title="Lý do từ chối">
+<span class="material-symbols-outlined text-[18px]">report</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Cập nhật lại">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Density Summary Footer -->
+<div class="p-3 bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm font-body-sm text-body-sm text-secondary border-t border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<span class="">Hiển thị <strong class="text-on-surface">1 - 4</strong> trong tổng số <strong class="text-on-surface">128</strong> nhà cung cấp</span>
+<div class="flex items-center gap-1 ml-2">
+<span class="font-label-sm text-label-sm">Dòng / trang:</span>
+<select class="bg-surface-container-lowest rounded px-2 py-0.5 text-label-sm font-label-sm text-on-surface focus:outline-none border border-surface-container-high transition-colors">
+<option>20</option>
+<option>50</option>
+<option>100</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-7 h-7 rounded flex items-center justify-center text-secondary hover:bg-surface-container-lowest active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-7 h-7 rounded bg-primary-container text-on-primary font-semibold text-label-sm font-label-sm flex items-center justify-center shadow-xs">1</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container-lowest text-on-surface font-medium text-label-sm font-label-sm flex items-center justify-center transition-colors">2</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container-lowest text-on-surface font-medium text-label-sm font-label-sm flex items-center justify-center transition-colors">3</button>
+<span class="px-1 text-secondary">...</span>
+<button class="w-7 h-7 rounded hover:bg-surface-container-lowest text-on-surface font-medium text-label-sm font-label-sm flex items-center justify-center transition-colors">13</button>
+<button class="w-7 h-7 rounded flex items-center justify-center text-secondary hover:bg-surface-container-lowest active:scale-90 transition-all">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Metrics Insight Strip (Always viewable by scrolling down) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm shrink-0 pb-6">
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-primary/20 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/15 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-secondary truncate">Hồ sơ đã chuẩn hóa RPA</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface leading-tight">114 / 128</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-primary/20 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">speed</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-secondary truncate">Thời gian duyệt trung bình</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface leading-tight">4.2 giờ</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-error/20 transition-all duration-200">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-secondary truncate">Cảnh báo rủi ro thuế/pháp lý</span>
+<span class="font-headline-lg text-headline-lg font-bold text-error leading-tight">2 NCC</span>
+</div>
+</div>
+</div>
+</main>
+<!-- 2. RESIZABLE SPLITTER / DRAG DIVIDER -->
+<div class="w-1.5 hover:w-2 bg-surface-container-high/70 hover:bg-primary cursor-col-resize shrink-0 transition-all duration-150 z-20 flex items-center justify-center relative select-none group hidden" id="dragDivider" title="Kéo chuột sang trái/phải để đổi kích thước khung AI">
+<div class="w-0.5 h-8 bg-outline-variant group-hover:bg-white rounded-full transition-colors"></div>
+</div>
+<!-- 3. RIGHT DOCKED PANEL: IAProc AI Chatbot & RPA Assistant (Resizable & Collapsible) -->
+<aside class="w-[380px] min-w-[280px] max-w-[560px] shrink-0 h-full bg-surface-container-lowest border-l border-surface-container-high flex flex-col z-10 shadow-lg relative transition-all duration-300 ease-in-out hidden" id="aiAssistantPanel" style="width: 280px;">
+<!-- Panel Header: Copilot Presence & Collapse Button -->
+<div class="p-space-md bg-gradient-to-r from-surface-container-low via-surface-container-lowest to-surface-container-low flex items-center justify-between border-b border-surface-container-high/50 shrink-0">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-container to-tertiary-container text-surface-container-lowest flex items-center justify-center shadow-sm shrink-0 animate-ai-glow">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Trợ lý IAProc</span>
+<span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-primary font-semibold shrink-0">AI &amp; Bot RPA</span>
+</div>
+<div class="flex items-center gap-1.5 text-label-sm font-label-sm text-tertiary font-medium">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="truncate">Trực tuyến • Sẵn sàng tiếp nhận lệnh</span>
+</div>
+</div>
+</div>
+<!-- Collapse Button -->
+<div class="flex items-center gap-1 text-secondary shrink-0">
+<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-secondary hover:text-on-surface active:scale-90 transition-all duration-200 flex items-center justify-center" id="collapseBtn" title="Thu gọn khung trợ lý">
+<span class="material-symbols-outlined text-[20px]">dock_to_right</span>
+</button>
+</div>
+</div>
+<!-- Quick Action Chips (Horizontally Scrollable) -->
+<div class="px-space-md py-2 bg-surface-container-low/50 flex items-center gap-1.5 overflow-x-auto hide-scrollbar border-b border-surface-container-high/40 shrink-0" id="quickActionChips">
+<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-primary text-label-sm font-label-sm font-semibold shadow-sm hover:bg-surface-container-high hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1 border border-primary/10" data-prompt="+ Tạo nhanh NCC: ">
+<span class="material-symbols-outlined text-[14px]">add_circle</span>
+<span class="">+ Tạo nhanh NCC</span>
+</button>
+<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-secondary hover:text-on-surface text-label-sm font-label-sm font-medium shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1 border border-outline-variant/30" data-prompt="Tra cứu thông tin MST bằng RPA: ">
+<span class="material-symbols-outlined text-[14px]">search_check</span>
+<span class="">Tra cứu MST bằng RPA</span>
+</button>
+<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-secondary hover:text-on-surface text-label-sm font-label-sm font-medium shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1 border border-outline-variant/30" data-prompt="Cập nhật trạng thái nhà cung cấp: ">
+<span class="material-symbols-outlined text-[14px]">published_with_changes</span>
+<span class="">Sửa trạng thái NCC</span>
+</button>
+<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-secondary hover:text-error text-label-sm font-label-sm font-medium shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 border border-outline-variant/30" data-prompt="Xóa các hồ sơ nhà cung cấp bản nháp">
+<span class="">Xóa bản nháp</span>
+</button>
+</div>
+<!-- Dedicated Scrollable Conversation Feed -->
+<div class="flex-1 p-space-md overflow-y-auto custom-scroll flex flex-col gap-space-md" id="chatFeed">
+<!-- System Timestamp Marker -->
+<div class="flex items-center justify-center shrink-0">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-low text-secondary text-label-sm font-label-sm">
+            Hôm nay, 14:32:05
+          </span>
+</div>
+<!-- 1. User Command Message (Right Aligned) -->
+<div class="flex flex-col items-end gap-1 shrink-0">
+<div class="max-w-[90%] bg-inverse-surface text-inverse-on-surface rounded-2xl rounded-tr-none px-3.5 py-2.5 shadow-sm text-body-sm font-body-sm leading-relaxed">
+            Thêm nhà cung cấp Công ty TNHH Kỹ thuật Sao Việt, mã NCC088, MST 0314567890, loại Thiết bị mạng, SĐT 0908112233, tình trạng Đang hoạt động, ghi chú là Đối tác Cisco
+          </div>
+<div class="flex items-center gap-1 text-label-sm font-label-sm text-secondary">
+<span class="">Trần Lâm Anh Khoa</span>
+<span class="">• 14:32</span>
+</div>
+</div>
+<!-- 2. AI Assistant Response with Confirmation Card (Human-in-the-Loop) -->
+<div class="flex flex-col gap-2 shrink-0">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[12px] font-bold shadow-xs">
+              AI
+            </div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Trợ lý Mua sắm</span>
+<span class="font-label-sm text-label-sm text-secondary">vừa xong</span>
+</div>
+<!-- Structured Confirmation Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm shadow-sm border border-surface-container-high/60 transition-shadow hover:shadow-md">
+<!-- Entity Extraction Header Badge -->
+<div class="flex items-center justify-between bg-surface-container-lowest px-2.5 py-1.5 rounded-lg shadow-sm border border-surface-container-high/40">
+<div class="flex items-center gap-1.5 text-primary text-label-sm font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+<span class="">Đã bóc tách thực thể (Intent: create_supplier)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-bold text-label-sm font-label-sm">
+                Độ chính xác 99%
+              </span>
+</div>
+<!-- Key-Value Property Table -->
+<div class="bg-surface-container-lowest rounded-lg p-2.5 shadow-sm flex flex-col gap-2 text-body-sm font-body-sm border border-surface-container-high/40">
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm">Mã NCC:</span>
+<div class="flex items-center gap-1">
+<span class="font-bold text-on-surface font-mono">NCC088</span>
+<span class="text-label-sm font-label-sm text-tertiary bg-tertiary-container/15 px-1.5 py-0.2 rounded font-semibold">
+                    Hợp lệ - Chưa trùng
+                  </span>
+</div>
+</div>
+<div class="flex items-start justify-between">
+<span class="text-secondary font-label-sm text-label-sm">Tên doanh nghiệp:</span>
+<span class="font-semibold text-on-surface text-right max-w-[65%] truncate">Công ty TNHH Kỹ thuật Sao Việt</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm">Mã số thuế:</span>
+<span class="font-mono text-on-surface font-bold">0314567890</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm">Loại NCC | SĐT:</span>
+<span class="text-on-surface font-medium">Thiết bị mạng • 0908112233</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm">Trạng thái:</span>
+<span class="inline-flex items-center gap-1 text-tertiary font-bold text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Đang hoạt động
+                </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-secondary font-label-sm text-label-sm">Ghi chú đối tác:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-secondary-fixed text-label-sm font-label-sm font-medium">
+                  Đối tác Cisco
+                </span>
+</div>
+</div>
+<!-- Live RPA Bot Direct Validation Status Block -->
+<div class="rounded-lg p-2.5 bg-tertiary-container/10 flex items-start gap-2 text-tertiary text-body-sm font-body-sm border border-tertiary/20">
+<span class="material-symbols-outlined text-[18px] text-tertiary shrink-0 mt-0.5 animate-pulse">bolt</span>
+<div class="flex flex-col text-label-sm font-label-sm leading-snug">
+<span class="font-bold">Bot RPA hoàn tất tra cứu Cổng Thuế Quốc Gia:</span>
+<span class="">MST 0314567890 khớp 100% pháp nhân, trạng thái Nộp thuế bình thường.</span>
+</div>
+</div>
+<!-- Card Interactive Triggers: Optimized for narrow widths without wrapping artifacts -->
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<button class="btn-shimmer flex-1 min-w-[130px] py-2 px-2.5 rounded-lg bg-primary-container text-on-primary font-headline-sm text-xs sm:text-body-sm font-semibold shadow-sm hover:bg-primary active:scale-95 transition-all flex items-center justify-center gap-1 whitespace-nowrap" id="btnConfirmDraft" type="button">
+<span class="material-symbols-outlined text-[16px] shrink-0">check_circle</span>
+<span class="truncate">Xác nhận lưu nháp</span>
+</button>
+<button class="btn-shimmer flex-1 min-w-[100px] py-2 px-2.5 rounded-lg bg-surface-container-high text-primary font-headline-sm text-xs sm:text-body-sm font-semibold hover:bg-surface-variant active:scale-95 transition-all text-center whitespace-nowrap truncate" id="btnSubmitReview" type="button">
+                Gửi xét duyệt
+              </button>
+<button class="py-2 px-3 rounded-lg text-secondary hover:text-error text-xs sm:text-body-sm font-body-sm hover:bg-surface-container-lowest active:scale-90 transition-all text-center whitespace-nowrap" id="btnCancelCard" type="button">
+                Hủy
+              </button>
+</div>
+</div>
+</div>
+<!-- Assistant Follow-Up Hint -->
+<div class="bg-surface-container-lowest p-2.5 rounded-lg shadow-sm flex items-center gap-2 text-secondary text-label-sm font-label-sm border border-surface-container-high/60 shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 animate-bounce">lightbulb</span>
+<span class="">Gợi ý: Bạn có thể nhập <em>"Gửi duyệt NCC088"</em> hoặc đính kèm file PDF Giấy phép kinh doanh để đối chiếu.</span>
+</div>
+</div>
+<!-- Docked Input & Multi-modal Dispatch Controls -->
+<div class="p-space-md bg-surface-container-lowest flex flex-col gap-2 border-t border-surface-container-high/60 shrink-0">
+<div class="relative flex items-center rounded-xl bg-surface-container-low p-1.5 shadow-sm border border-transparent focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all">
+<textarea class="w-full bg-transparent resize-none px-2 py-1 text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none" id="chatInputArea" placeholder="Nhập yêu cầu tạo/sửa/xóa/tra cứu NCC hoặc thả file ĐKKD vào đây..." rows="2"></textarea>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-low text-secondary hover:text-primary active:scale-90 transition-all" title="Đính kèm tài liệu OCR">
+<span class="material-symbols-outlined text-[20px]">attach_file</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-low text-secondary hover:text-primary active:scale-90 transition-all" title="Kéo thả tập tin ĐKKD">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-low text-secondary hover:text-primary active:scale-90 transition-all" title="Thu âm giọng nói (Speech-to-text)">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+</div>
+<button class="btn-shimmer inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold shadow-sm hover:bg-primary active:scale-95 transition-all" id="btnSendMessage" type="button">
+<span class="">Gửi</span>
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- 4. FREELY DRAGGABLE FLOATING ACTION PILL: Appears when AI Panel is collapsed -->
+<div class="fixed z-50 select-none cursor-grab active:cursor-grabbing shadow-2xl rounded-full" id="floatingAiTriggerWrapper" style="top: 942px; right: auto; cursor: grab; left: 1119px;">
+<button class="bg-gradient-to-r from-primary-container to-primary text-on-primary px-3.5 py-2.5 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-transform flex items-center gap-2 font-headline-sm text-headline-sm border border-white/20 animate-float" id="floatingAiTrigger" title="Nhấp để mở hoặc Kéo để di chuyển">
+<div class="relative flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-tertiary-fixed rounded-full border-2 border-primary-container"></span>
+</div>
+<span class="font-semibold text-body-sm pointer-events-none whitespace-nowrap">Trợ lý IAProc</span>
+<span class="relative flex h-2 w-2 pointer-events-none">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary-fixed"></span>
+</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ENHANCED CONTROLLER: SORTING, COLLAPSIBLE SIDEBAR, DRAGGABLE FLOATING BUTTON & RESIZING -->
+<script>
+  (function() {
+    const divider = document.getElementById('dragDivider');
+    const aiPanel = document.getElementById('aiAssistantPanel');
+    const collapseBtn = document.getElementById('collapseBtn');
+    const floatingAiTriggerWrapper = document.getElementById('floatingAiTriggerWrapper');
+    const floatingAiTrigger = document.getElementById('floatingAiTrigger');
+    const toastContainer = document.getElementById('toastContainer');
+    
+    // Sidebar elements
+    const appSidebar = document.getElementById('appSidebar');
+    const btnToggleSidebar = document.getElementById('btnToggleSidebar');
+    const sidebarToggleIcon = document.getElementById('sidebarToggleIcon');
+    const supplierAccordionBtn = document.getElementById('supplierAccordionBtn');
+    const supplierAccordionMenu = document.getElementById('supplierAccordionMenu');
+    const supplierAccordionChevron = document.getElementById('supplierAccordionChevron');
+
+    let isSidebarCollapsed = false;
+    let isAccordionOpen = true;
+
+    // --- 1. SIDEBAR TOGGLE & ACCORDION BEHAVIOR ---
+    if (btnToggleSidebar && appSidebar) {
+      btnToggleSidebar.addEventListener('click', function() {
+        isSidebarCollapsed = !isSidebarCollapsed;
+        const labels = appSidebar.querySelectorAll('.sidebar-label');
+        if (isSidebarCollapsed) {
+          appSidebar.classList.remove('w-[220px]');
+          appSidebar.classList.add('w-[64px]');
+          labels.forEach(el => el.classList.add('hidden'));
+          sidebarToggleIcon.textContent = 'keyboard_double_arrow_right';
+          btnToggleSidebar.title = 'Mở rộng Sidebar';
+        } else {
+          appSidebar.classList.remove('w-[64px]');
+          appSidebar.classList.add('w-[220px]');
+          labels.forEach(el => el.classList.remove('hidden'));
+          sidebarToggleIcon.textContent = 'keyboard_double_arrow_left';
+          btnToggleSidebar.title = 'Thu gọn Sidebar';
+          if (!isAccordionOpen) {
+            supplierAccordionMenu.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    // Accordion submenu toggle
+    if (supplierAccordionBtn && supplierAccordionMenu && supplierAccordionChevron) {
+      supplierAccordionBtn.addEventListener('click', function(e) {
+        if (isSidebarCollapsed) {
+          // If sidebar is collapsed, open sidebar first
+          btnToggleSidebar.click();
+          return;
+        }
+        isAccordionOpen = !isAccordionOpen;
+        if (isAccordionOpen) {
+          supplierAccordionMenu.style.maxHeight = '200px';
+          supplierAccordionMenu.style.opacity = '1';
+          supplierAccordionMenu.classList.remove('hidden');
+          supplierAccordionChevron.classList.remove('rotate-180');
+        } else {
+          supplierAccordionMenu.style.maxHeight = '0px';
+          supplierAccordionMenu.style.opacity = '0';
+          setTimeout(() => {
+            if (!isAccordionOpen) supplierAccordionMenu.classList.add('hidden');
+          }, 250);
+          supplierAccordionChevron.classList.add('rotate-180');
+        }
+      });
+    }
+
+    // --- 2. DATA GRID COLUMN SORTING ---
+    const sortableHeaders = document.querySelectorAll('.sortable-header');
+    const tableBody = document.getElementById('tableBody');
+    const currentSort = { column: null, direction: 'none' }; // 'none', 'asc', 'desc'
+
+    sortableHeaders.forEach(th => {
+      th.addEventListener('click', function() {
+        const col = this.getAttribute('data-sort-col');
+        let newDirection = 'asc';
+
+        if (currentSort.column === col) {
+          if (currentSort.direction === 'asc') newDirection = 'desc';
+          else if (currentSort.direction === 'desc') newDirection = 'none';
+          else newDirection = 'asc';
+        }
+
+        currentSort.column = newDirection === 'none' ? null : col;
+        currentSort.direction = newDirection;
+
+        // Reset all sort icons and active styling
+        sortableHeaders.forEach(header => {
+          const icon = header.querySelector('.sort-icon');
+          header.classList.remove('text-primary');
+          if (icon) {
+            icon.textContent = 'swap_vert';
+            icon.classList.remove('text-primary', 'font-bold');
+            icon.classList.add('text-outline');
+          }
+        });
+
+        // Apply active sort indicator
+        const activeIcon = this.querySelector('.sort-icon');
+        if (newDirection !== 'none') {
+          this.classList.add('text-primary');
+          activeIcon.classList.remove('text-outline');
+          activeIcon.classList.add('text-primary', 'font-bold');
+          if (newDirection === 'asc') {
+            activeIcon.textContent = 'arrow_upward';
+          } else {
+            activeIcon.textContent = 'arrow_downward';
+          }
+        }
+
+        // Execute table row sorting
+        sortTableRows(col, newDirection);
+      });
+    });
+
+    function sortTableRows(column, direction) {
+      if (!tableBody) return;
+      tableBody.classList.add('table-refreshing');
+      setTimeout(() => tableBody.classList.remove('table-refreshing'), 300);
+
+      const rows = Array.from(tableBody.querySelectorAll('.table-row-item'));
+
+      if (direction === 'none') {
+        // Restore original HTML order using data-code order or initial array
+        rows.sort((a, b) => {
+          const order = ['NCC088', 'NCC012', 'NCC045', 'NCC019'];
+          return order.indexOf(a.getAttribute('data-code')) - order.indexOf(b.getAttribute('data-code'));
+        });
+      } else {
+        rows.sort((a, b) => {
+          let valA = a.getAttribute(`data-${column}`) || '';
+          let valB = b.getAttribute(`data-${column}`) || '';
+
+          if (column === 'score') {
+            valA = parseFloat(valA) || 0;
+            valB = parseFloat(valB) || 0;
+            return direction === 'asc' ? valA - valB : valB - valA;
+          }
+
+          valA = valA.toString().toLowerCase();
+          valB = valB.toString().toLowerCase();
+          const cmp = valA.localeCompare(valB, 'vi');
+          return direction === 'asc' ? cmp : -cmp;
+        });
+      }
+
+      // Re-append rows in sorted order
+      rows.forEach(r => tableBody.appendChild(r));
+
+      const dirLabel = direction === 'asc' ? 'Tăng dần (A-Z)' : direction === 'desc' ? 'Giảm dần (Z-A)' : 'Mặc định';
+      showToast(`Đã sắp xếp cột theo: ${dirLabel}`);
+    }
+
+    // --- 3. TOAST UTILITY ---
+    window.showToast = function(message, type = 'success') {
+      const toast = document.createElement('div');
+      const isError = type === 'error';
+      toast.className = `toast-animation pointer-events-auto flex items-center gap-2.5 px-4 py-2.5 rounded-xl shadow-xl text-body-sm font-medium border ${
+        isError 
+          ? 'bg-error-container text-on-error-container border-error/30' 
+          : 'bg-surface-container-lowest text-on-surface border-tertiary/40'
+      }`;
+      toast.innerHTML = `
+        <span class="material-symbols-outlined text-[20px] ${isError ? 'text-error' : 'text-tertiary'}">
+          ${isError ? 'error' : 'check_circle'}
+        </span>
+        <span class="font-medium">${message}</span>
+      `;
+      toastContainer.appendChild(toast);
+      setTimeout(() => {
+        if (toast.parentNode) toast.remove();
+      }, 3300);
+    };
+
+    // --- 4. RESIZING LOGIC (AI PANEL SPLITTER) ---
+    let isDraggingDivider = false;
+    let startX = 0;
+    let startWidth = 380;
+    let lastSavedWidth = 380;
+
+    if (divider && aiPanel) {
+      divider.addEventListener('mousedown', function(e) {
+        isDraggingDivider = true;
+        startX = e.clientX;
+        startWidth = aiPanel.getBoundingClientRect().width;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        divider.classList.add('bg-primary', 'w-2');
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isDraggingDivider) return;
+        const dx = startX - e.clientX;
+        let newWidth = startWidth + dx;
+        
+        // Boundaries: 280px to 560px
+        if (newWidth < 280) newWidth = 280;
+        if (newWidth > 560) newWidth = 560;
+        
+        aiPanel.style.width = newWidth + 'px';
+        lastSavedWidth = newWidth;
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDraggingDivider) {
+          isDraggingDivider = false;
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+          divider.classList.remove('bg-primary', 'w-2');
+        }
+      });
+    }
+
+    // --- 5. PANEL COLLAPSE & DRAGGABLE FLOATING BUTTON ---
+    function collapseAiPanel() {
+      aiPanel.classList.add('opacity-0', 'pointer-events-none', '-translate-x-4');
+      setTimeout(() => {
+        aiPanel.classList.add('hidden');
+        aiPanel.classList.remove('opacity-0', 'pointer-events-none', '-translate-x-4');
+        divider.classList.add('hidden');
+        floatingAiTriggerWrapper.classList.remove('hidden');
+      }, 200);
+    }
+
+    function expandAiPanel() {
+      aiPanel.classList.remove('hidden');
+      divider.classList.remove('hidden');
+      floatingAiTriggerWrapper.classList.add('hidden');
+      aiPanel.style.width = (lastSavedWidth || 380) + 'px';
+      aiPanel.classList.add('opacity-0');
+      requestAnimationFrame(() => {
+        aiPanel.classList.remove('opacity-0');
+      });
+    }
+
+    if (collapseBtn) {
+      collapseBtn.addEventListener('click', collapseAiPanel);
+    }
+
+    // Make floating button freely draggable while differentiating drag vs click
+    let isDraggingPill = false;
+    let pillStartX = 0;
+    let pillStartY = 0;
+    let pillElemX = 0;
+    let pillElemY = 0;
+    let hasMovedPill = false;
+
+    if (floatingAiTriggerWrapper) {
+      floatingAiTriggerWrapper.addEventListener('mousedown', function(e) {
+        isDraggingPill = true;
+        hasMovedPill = false;
+        pillStartX = e.clientX;
+        pillStartY = e.clientY;
+        const rect = floatingAiTriggerWrapper.getBoundingClientRect();
+        pillElemX = rect.left;
+        pillElemY = rect.top;
+        floatingAiTriggerWrapper.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isDraggingPill) return;
+        const dx = e.clientX - pillStartX;
+        const dy = e.clientY - pillStartY;
+        if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+          hasMovedPill = true;
+        }
+        
+        let newX = pillElemX + dx;
+        let newY = pillElemY + dy;
+
+        // Viewport boundaries constraint
+        const maxX = window.innerWidth - floatingAiTriggerWrapper.offsetWidth - 10;
+        const maxY = window.innerHeight - floatingAiTriggerWrapper.offsetHeight - 10;
+        if (newX < 10) newX = 10;
+        if (newX > maxX) newX = maxX;
+        if (newY < 10) newY = 10;
+        if (newY > maxY) newY = maxY;
+
+        floatingAiTriggerWrapper.style.left = newX + 'px';
+        floatingAiTriggerWrapper.style.top = newY + 'px';
+        floatingAiTriggerWrapper.style.right = 'auto'; // cancel right constraint
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDraggingPill) {
+          isDraggingPill = false;
+          floatingAiTriggerWrapper.style.cursor = 'grab';
+        }
+      });
+
+      floatingAiTrigger.addEventListener('click', function(e) {
+        if (hasMovedPill) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        expandAiPanel();
+      });
+    }
+
+    // --- 6. EXISTING ACTIONS PRESERVATION ---
+    // Checkbox master toggle
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+    if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener('change', function() {
+        rowCheckboxes.forEach(cb => {
+          cb.checked = selectAllCheckbox.checked;
+        });
+      });
+    }
+
+    // Tab segment switching
+    const tabButtons = document.querySelectorAll('#tabSegmentContainer .tab-item');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-surface-container-low', 'text-primary', 'font-semibold');
+          b.classList.add('text-secondary');
+          const ind = b.querySelector('.tab-indicator');
+          if (ind) ind.remove();
+        });
+        btn.classList.add('bg-surface-container-low', 'text-primary', 'font-semibold');
+        btn.classList.remove('text-secondary');
+        const indicator = document.createElement('div');
+        indicator.className = 'tab-indicator absolute bottom-0 left-3 right-3 h-0.5 bg-primary-container rounded-full transition-all duration-300';
+        btn.appendChild(indicator);
+      });
+    });
+
+    // Filter simulation
+    const btnApplyFilter = document.getElementById('btnApplyFilter');
+    const filterIcon = document.getElementById('filterIcon');
+    if (btnApplyFilter && tableBody) {
+      btnApplyFilter.addEventListener('click', function() {
+        filterIcon.classList.add('animate-spin');
+        btnApplyFilter.classList.add('opacity-75');
+        tableBody.classList.add('table-refreshing');
+        
+        setTimeout(() => {
+          filterIcon.classList.remove('animate-spin');
+          btnApplyFilter.classList.remove('opacity-75');
+          tableBody.classList.remove('table-refreshing');
+          showToast('Đã cập nhật danh sách lọc: 4 nhà cung cấp phù hợp');
+        }, 500);
+      });
+    }
+
+    const btnResetFilter = document.getElementById('btnResetFilter');
+    if (btnResetFilter) {
+      btnResetFilter.addEventListener('click', function() {
+        document.getElementById('searchInput').value = '';
+        showToast('Đã đặt lại bộ lọc tìm kiếm', 'info');
+      });
+    }
+
+    // Confirmation Card Buttons
+    const btnConfirmDraft = document.getElementById('btnConfirmDraft');
+    if (btnConfirmDraft) {
+      btnConfirmDraft.addEventListener('click', function() {
+        showToast('✓ Đã lưu hồ sơ nháp NCC088 thành công!');
+        btnConfirmDraft.innerHTML = '<span class="material-symbols-outlined text-[16px]">done_all</span><span class="truncate">Đã lưu nháp</span>';
+        btnConfirmDraft.classList.replace('bg-primary-container', 'bg-tertiary');
+      });
+    }
+
+    const btnSubmitReview = document.getElementById('btnSubmitReview');
+    if (btnSubmitReview) {
+      btnSubmitReview.addEventListener('click', function() {
+        showToast('Đã gửi xét duyệt hồ sơ NCC088 tới Trưởng bộ phận!');
+      });
+    }
+
+    const btnCancelCard = document.getElementById('btnCancelCard');
+    if (btnCancelCard) {
+      btnCancelCard.addEventListener('click', function() {
+        showToast('Đã hủy thao tác với hồ sơ NCC088', 'error');
+      });
+    }
+
+    // Chat chips & Send message
+    const chatInput = document.getElementById('chatInputArea');
+    const chatChips = document.querySelectorAll('.chat-chip');
+    chatChips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        const promptText = chip.getAttribute('data-prompt');
+        if (chatInput && promptText) {
+          chatInput.value = promptText;
+          chatInput.focus();
+        }
+      });
+    });
+
+    const btnSendMessage = document.getElementById('btnSendMessage');
+    const chatFeed = document.getElementById('chatFeed');
+    if (btnSendMessage && chatInput && chatFeed) {
+      btnSendMessage.addEventListener('click', function() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        
+        const userMsg = document.createElement('div');
+        userMsg.className = 'flex flex-col items-end gap-1 shrink-0';
+        userMsg.innerHTML = `
+          <div class="max-w-[90%] bg-inverse-surface text-inverse-on-surface rounded-2xl rounded-tr-none px-3.5 py-2.5 shadow-sm text-body-sm font-body-sm leading-relaxed">
+            ${text}
+          </div>
+          <div class="flex items-center gap-1 text-label-sm font-label-sm text-secondary">
+            <span>Bạn</span>
+            <span>• Vừa xong</span>
+          </div>
+        `;
+        chatFeed.appendChild(userMsg);
+        chatInput.value = '';
+        chatFeed.scrollTop = chatFeed.scrollHeight;
+
+        setTimeout(() => {
+          const aiMsg = document.createElement('div');
+          aiMsg.className = 'flex flex-col gap-2 shrink-0';
+          aiMsg.innerHTML = `
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[12px] font-bold">AI</div>
+              <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Trợ lý Mua sắm</span>
+              <span class="font-label-sm text-label-sm text-secondary">Vừa xong</span>
+            </div>
+            <div class="bg-surface-container-low rounded-xl p-3 text-body-sm text-on-surface shadow-sm border border-surface-container-high/60">
+              Đang phân tích yêu cầu: <strong>"${text}"</strong>. Bot RPA đang kích hoạt kiểm tra cơ sở dữ liệu...
+            </div>
+          `;
+          chatFeed.appendChild(aiMsg);
+          chatFeed.scrollTop = chatFeed.scrollHeight;
+        }, 600);
+      });
+    }
+
+    const btnCreateSupplier = document.getElementById('btnCreateSupplier');
+    if (btnCreateSupplier) {
+      btnCreateSupplier.addEventListener('click', function() {
+        showToast('Mở cửa sổ khởi tạo Nhà cung cấp mới');
+      });
+    }
+  })();
+</script>
+
+
+<script>document.addEventListener('DOMContentLoaded',function(){var cBtn=document.getElementById('btnToggleSidebarCollapsed');var mainBtn=document.getElementById('btnToggleSidebar');var collRow=document.getElementById('collapsedToggleRow');if(cBtn&&mainBtn){cBtn.addEventListener('click',function(){mainBtn.click();});mainBtn.addEventListener('click',function(){setTimeout(function(){var isCol=document.getElementById('appSidebar').classList.contains('w-[64px]');if(isCol){collRow.classList.remove('hidden');}else{collRow.classList.add('hidden');}},50);});}});</script>
+
+
+
+</body></html>
