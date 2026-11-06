@@ -78,21 +78,55 @@
 <body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary h-screen w-full overflow-hidden flex">
 <!-- NOTIFICATION TOAST CONTAINER -->
 <div class="fixed top-5 right-6 z-[100] flex flex-col gap-2 pointer-events-none" id="toastContainer"></div>
-<!-- LEFT SIDEBAR: Collapsible 220px <-> 64px with smooth vertical scroll & Accordion -->
-<aside class="shrink-0 h-screen bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] select-none sidebar-transition relative group/sidebar overflow-x-hidden w-[220px]" id="appSidebar">
+<!-- LEFT SIDEBAR: Collapsible 230px <-> 68px with smooth vertical scroll & Accordion -->
+<aside class="shrink-0 h-screen bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] select-none sidebar-transition relative group/sidebar overflow-x-hidden w-[230px] min-w-[230px]" id="appSidebar">
 <div class="flex flex-col min-h-0 overflow-y-auto hide-scrollbar flex-1">
-<!-- Header & Brand Logo with Collapse Toggle Button -->
-<div class="min-h-[64px] px-2.5 py-2.5 flex flex-col justify-center bg-inverse-surface/90 shrink-0 border-b border-surface-variant/10 transition-all duration-200" id="sidebarHeaderWrapper"><div class="flex items-center justify-between w-full min-w-0 gap-1.5"><div class="flex items-center gap-space-sm min-w-0 flex-1 overflow-hidden" id="sidebarBrandContainer"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 mx-auto group-hover:scale-105 transition-transform"><span class="material-symbols-outlined text-on-primary-container text-[20px]">inventory_2</span></div><div class="flex flex-col min-w-0 sidebar-label overflow-hidden"><span class="font-headline-sm text-headline-sm text-surface-container-lowest font-bold truncate leading-tight tracking-tight">IAProc</span><span class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Quản trị Mua sắm</span></div></div><button class="p-1 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0 sidebar-label" id="btnToggleSidebar" title="Thu gọn Sidebar"><span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="sidebarToggleIcon">keyboard_double_arrow_left</span></button></div><div class="flex justify-center w-full pt-1.5 border-t border-surface-variant/10 mt-1.5 hidden" id="collapsedToggleRow"><button class="p-1 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0 w-8 h-8" id="btnToggleSidebarCollapsed" title="Mở rộng Sidebar"><span class="material-symbols-outlined text-[20px]">keyboard_double_arrow_right</span></button></div></div>
-<!-- Navigation Links -->
-<nav class="flex flex-col gap-1 px-space-xs py-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm" id="sidebarNav">
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200 group/nav" data-path="tong-quan" href="#" title="Tổng quan"><span class="material-symbols-outlined text-[20px] shrink-0">space_dashboard</span><span class="font-body-sm text-body-sm sidebar-label truncate">Tổng quan</span></a>
-<!-- Accordion Submenu: Quản lý Nhà cung cấp -->
+<!-- 1. Expanded Header: Logo IAProc (Icon + Text) + Collapse Button '<<' -->
+<div class="min-h-[64px] px-3 py-2.5 flex items-center justify-between bg-inverse-surface/90 shrink-0 border-b border-surface-variant/10" id="sidebarHeaderWrapper">
+<div class="flex items-center gap-space-sm min-w-0 flex-1 overflow-hidden" id="sidebarBrandContainer">
+<div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 cursor-pointer" id="sidebarLogoIcon" title="Hệ thống IAProc">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">inventory_2</span>
+</div>
+<div class="flex flex-col min-w-0 sidebar-label overflow-hidden">
+<span class="font-headline-sm text-headline-sm text-surface-container-lowest font-bold truncate leading-tight tracking-tight">IAProc</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Quản trị Mua sắm</span>
+</div>
+</div>
+<button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" id="btnToggleSidebar" title="Thu gọn sidebar">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="sidebarToggleIcon">keyboard_double_arrow_left</span>
+</button>
+</div>
+<!-- 2. Collapsed Header Bar: Vẫn giữ Logo IAProc trên cùng (căn giữa) + Nút mở rộng (>>) ngay bên dưới logo -->
+<div class="py-3 px-2 flex-col items-center justify-center gap-2 bg-inverse-surface/95 border-b border-surface-variant/15 shrink-0 hidden" id="collapsedExpandHeader">
+<!-- Logo IAProc icon box (Giữ nguyên trên cùng căn giữa) -->
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform" id="collapsedLogoIcon" title="Hệ thống IAProc - Nhấp để mở rộng">
+<span class="material-symbols-outlined text-on-primary-container text-[22px]">inventory_2</span>
+</div>
+<!-- Nút mở rộng >> đặt ngay bên dưới Logo IAProc -->
+<button class="w-9 h-9 rounded-lg bg-on-secondary-fixed-variant/40 hover:bg-primary-container text-secondary-fixed-dim hover:text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm group" id="btnExpandSidebarDirect" title="Mở rộng sidebar">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-0.5">keyboard_double_arrow_right</span>
+</button>
+</div>
+<nav class="flex flex-col gap-1 px-space-xs py-space-sm" id="sidebarNav">
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200 group/nav" data-path="tong-quan" href="#" title="Tổng quan">
+<span class="material-symbols-outlined text-[20px] shrink-0">space_dashboard</span>
+<span class="font-body-sm text-body-sm sidebar-label truncate">Tổng quan</span>
+</a>
 <div class="flex flex-col gap-0.5" id="supplierAccordionWrapper">
-<button class="w-full flex items-center justify-between px-space-sm py-2 transition-all duration-200 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm group/btn text-left" id="supplierAccordionBtn" title="QL Nhà cung cấp" type="button"><div class="flex items-center gap-space-sm min-w-0"><span class="material-symbols-outlined text-[20px] shrink-0">corporate_fare</span><span class="font-body-sm text-body-sm truncate sidebar-label font-semibold">Quản lý nhà cung cấp</span></div><span class="material-symbols-outlined text-[16px] transition-transform duration-200 shrink-0 sidebar-label" id="supplierAccordionChevron">expand_more</span></button>
-<div class="flex flex-col pl-7 pr-1 gap-1 overflow-hidden transition-all duration-300 max-h-48 opacity-100 sidebar-label" id="supplierAccordionMenu" style="max-height: 200px; opacity: 1;">
-<a class="py-1.5 px-space-xs rounded-lg text-primary-fixed font-semibold bg-white/10 hover:bg-white/15 font-body-sm text-body-sm transition-all duration-200 truncate" data-path="ho-so-nha-cung-cap" href="#">• Hồ sơ nhà cung cấp</a>
-<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="loai-nha-cung-cap" href="#">• Loại nhà cung cấp</a>
-<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="danh-gia-xep-hang" href="#">• Đánh giá &amp; Xếp hạng</a>
+<button class="w-full flex items-center justify-between px-space-sm py-2 transition-all duration-200 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm group/btn text-left" id="supplierAccordionBtn" title="Quản lý nhà cung cấp" type="button">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-[20px] shrink-0">corporate_fare</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label font-semibold">Quản lý nhà cung cấp</span>
+</div>
+<span class="material-symbols-outlined text-[16px] transition-transform duration-200 shrink-0 sidebar-label" id="supplierAccordionChevron">expand_more</span>
+</button>
+<div class="flex flex-col pl-6 pr-1 gap-1 overflow-hidden transition-all duration-300 sidebar-label" id="supplierAccordionMenu" style="max-height: 200px; opacity: 1;">
+<a class="py-1.5 px-space-xs rounded-lg text-white font-semibold bg-white/10 hover:bg-white/15 font-body-sm text-body-sm transition-all duration-200 truncate flex items-center gap-1.5 border-l-2 border-primary-container" data-path="ho-so-nha-cung-cap" href="#">
+<span class="text-primary-fixed">•</span> Hồ sơ nhà cung cấp
+</a>
+<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="danh-gia-xep-hang" href="#">
+            • Đánh giá &amp; Xếp hạng
+          </a>
 </div>
 </div>
 <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="danh-muc-hang-hoa" href="#" title="Danh mục hàng hóa">
@@ -113,379 +147,34 @@
 </a>
 </nav>
 </div>
-<div class="p-space-sm bg-inverse-surface/90 flex items-center justify-between text-secondary-fixed-dim border-t border-surface-variant/10 shrink-0"><div class="flex items-center justify-center w-full gap-2"><button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" title="Cài đặt hệ thống"><span class="material-symbols-outlined text-[20px]">tune</span></button><span class="font-label-sm text-secondary-fixed-dim sidebar-label truncate">IAProc demo&nbsp;v1.0</span></div></div>
+<div class="p-space-sm bg-inverse-surface/90 flex items-center justify-between text-secondary-fixed-dim border-t border-surface-variant/10 shrink-0">
+<div class="flex items-center justify-center w-full gap-2">
+<button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" title="Cài đặt hệ thống">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+<span class="font-label-sm text-secondary-fixed-dim sidebar-label truncate">IAProc v1.0 - Phân vùng Nội bộ</span>
+</div>
+</div>
 </aside>
 <!-- MAIN WRAPPER: Takes remainder width, contains Header + Dual Split Panes (Workspace + AI Assistant) -->
 <div class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden relative">
 <!-- TOP HEADER -->
-<header class="h-16 shrink-0 bg-surface/95 backdrop-blur-xl border-b border-surface-container-high/60 z-30 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.03)]">
-<div class="flex items-center gap-space-md">
-<div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg text-on-surface-variant border border-transparent focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all">
-<span class="material-symbols-outlined text-[18px]">search</span>
-<input class="bg-transparent text-body-sm font-body-sm placeholder:text-outline focus:outline-none w-80 text-on-surface" placeholder="Tra cứu đơn hàng, nhà cung cấp, mã số thuế..." type="text">
-</div>
-</div>
-<div class="flex items-center gap-space-lg">
-<div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-error-container text-on-error-container shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:scale-105 active:scale-95 transition-transform cursor-pointer">
-<span class="material-symbols-outlined text-[16px] text-error">notifications_active</span>
-<span class="font-label-sm text-label-sm font-semibold">3 nhắc duyệt &gt;24h</span>
-</div>
-<div class="h-6 w-px bg-surface-container-high"></div>
-<div class="flex items-center gap-space-md">
-<div class="flex flex-col text-right">
-<span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight">Trần Lâm Anh Khoa</span>
-<span class="font-label-sm text-label-sm text-secondary">Bộ phận Mua sắm</span>
-</div>
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm transition-transform hover:scale-105">
-<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-</div>
-</div>
-</div>
-</header>
+<header class="h-16 shrink-0 bg-surface/95 backdrop-blur-xl border-b border-surface-container-high/60 z-30 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg text-on-surface-variant border border-outline-variant/30 focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all w-[320px]"><span class="material-symbols-outlined text-[18px] text-outline">search</span><input class="bg-transparent text-body-sm font-body-sm placeholder:text-outline focus:outline-none w-full text-on-surface" placeholder="Tra cứu nhanh nhà cung cấp, mã số thuế, hợp đồng..." type="text"></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 shadow-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer"><span class="material-symbols-outlined text-[16px] text-amber-800">warning</span><span class="font-label-sm text-label-sm font-semibold whitespace-nowrap">2 hồ sơ trả về cần xử lý</span></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-2.5"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight whitespace-nowrap">Trần Lâm Anh Khoa</span><span class="font-label-sm text-label-sm text-secondary whitespace-nowrap">Bộ phận Mua sắm</span></div><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm transition-transform hover:scale-105 shrink-0"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header>
 <!-- CONTENT VIEWPORT: Flex container holding Main Workspace and Right AI Panel -->
 <div class="flex-1 flex flex-row min-h-0 overflow-hidden relative" id="splitViewport">
 <!-- 1. CENTER MAIN WORKSPACE: Fully independent scrollable area -->
 <main class="flex-1 min-w-0 h-full overflow-y-auto custom-scroll bg-background px-space-lg py-space-md flex flex-col gap-space-md" id="mainWorkspace">
 <!-- Top Breadcrumb & Quick Workflow Banner -->
-<div class="flex flex-wrap items-center justify-between gap-space-sm shrink-0">
-<div class="flex items-center gap-space-xs text-secondary text-body-sm font-body-sm">
-<span class="hover:text-primary transition-colors cursor-pointer">Quản lý nhà cung cấp</span>
-<span class="material-symbols-outlined text-[16px]">chevron_right</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Danh mục &amp; Hồ sơ nhà cung cấp</span>
-<span class="ml-space-xs inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-on-primary-fixed-variant text-label-sm font-label-sm font-semibold" id="totalRecordsBadge">
-            128 Hồ sơ
-          </span>
-</div>
-<!-- Right Global Action Group -->
-<div class="flex items-center gap-space-sm">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium shadow-sm hover:bg-surface-container-low hover:border-primary/40 active:scale-95 transition-all border border-outline-variant/30" type="button">
-<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
-<span class="">Xuất Excel</span>
-</button>
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high text-primary text-body-sm font-body-sm font-semibold shadow-sm hover:bg-surface-variant hover:scale-[1.02] active:scale-95 transition-all" type="button">
-<span class="material-symbols-outlined text-[18px]">document_scanner</span>
-<span class="">Quét OCR ĐKKD hàng loạt</span>
-</button>
-<button class="btn-shimmer inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary text-body-sm font-body-sm font-semibold shadow-md hover:bg-primary hover:shadow-lg active:scale-95 transition-all" id="btnCreateSupplier" type="button">
-<span class="material-symbols-outlined text-[18px]">add</span>
-<span class="">+ Tạo mới hồ sơ (Form)</span>
-</button>
-</div>
-</div>
+<div class="flex flex-col justify-between gap-3 shrink-0 bg-surface-container-lowest p-3 rounded-xl border border-surface-container-high/60 shadow-xs"><div class="flex items-center justify-between gap-3 flex-wrap"><div class="flex items-center gap-2 text-secondary whitespace-nowrap min-w-0 shrink-0 flex-wrap sm:flex-nowrap"><span class="hover:text-primary transition-colors cursor-pointer text-secondary font-medium whitespace-nowrap text-[14px]">Quản lý nhà cung cấp</span><span class="material-symbols-outlined text-[16px] text-secondary shrink-0">chevron_right</span><h1 class="text-[18px] text-on-surface font-bold whitespace-nowrap leading-tight m-0">Danh mục &amp; Hồ sơ nhà cung cấp</h1><span class="ml-1 inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-on-primary-fixed-variant text-label-sm font-label-sm font-semibold whitespace-nowrap shrink-0" id="totalRecordsBadge">128 Hồ sơ</span></div></div><div class="flex items-center gap-2.5 whitespace-nowrap flex-wrap justify-end pt-2 border-t border-surface-container-high/40"><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium shadow-sm hover:bg-surface-container-low hover:border-primary/40 active:scale-95 transition-all border border-outline-variant/30 whitespace-nowrap shrink-0" type="button"><span class="material-symbols-outlined text-[18px] text-secondary shrink-0">file_download</span><span class="whitespace-nowrap">Xuất Excel</span></button><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest text-primary text-body-sm font-body-sm font-semibold shadow-sm hover:bg-surface-variant active:scale-95 transition-all border border-primary/30 whitespace-nowrap shrink-0" type="button"><span class="material-symbols-outlined text-[18px] shrink-0">document_scanner</span><span class="whitespace-nowrap">Quét OCR ĐKKD hàng loạt</span></button><button class="btn-shimmer inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary text-on-primary text-body-sm font-body-sm font-semibold shadow-md hover:bg-primary-container hover:shadow-lg active:scale-95 transition-all whitespace-nowrap shrink-0" id="btnCreateSupplier" type="button"><span class="material-symbols-outlined text-[18px] shrink-0">add</span><span class="whitespace-nowrap">Tạo mới hồ sơ (Form)</span></button></div></div>
 <!-- Sub-Navigation Segment Tabs with Live Count Badges -->
-<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-1.5 shadow-sm border border-surface-container-high/60 shrink-0">
-<div class="flex items-center gap-1" id="tabSegmentContainer">
-<button class="tab-item relative px-3.5 py-2 rounded-lg bg-surface-container-low text-primary font-headline-sm text-headline-sm flex items-center gap-2 font-semibold transition-all duration-200">
-<span class="">Hồ sơ Nhà cung cấp</span>
-<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm">128</span>
-<div class="tab-indicator absolute bottom-0 left-3 right-3 h-0.5 bg-primary-container rounded-full transition-all duration-300"></div>
-</button>
-<button class="tab-item relative px-3.5 py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm flex items-center gap-2 transition-all duration-200">
-<span class="">Danh mục Loại NCC</span>
-<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm">12</span>
-</button>
-<button class="tab-item relative px-3.5 py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container-low font-body-sm text-body-sm flex items-center gap-2 transition-all duration-200">
-<span class="">Hồ sơ chờ Cấp phê duyệt</span>
-<span class="px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">5</span>
-</button>
-</div>
-<div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary pr-2">
-<span class="flex items-center gap-2 bg-surface-container-low px-2.5 py-1 rounded-full border border-surface-container-high/50 hover:bg-surface-container-high/50 transition-colors">
-<span class="relative flex h-2.5 w-2.5">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-container opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
-</span>
-<span class="text-tertiary font-medium">RPA Đang giám sát thuế</span>
-</span>
-</div>
-</div>
+<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-1.5 shadow-sm border border-surface-container-high/60 shrink-0 gap-2 overflow-x-auto custom-scroll"><div class="flex items-center gap-1.5 flex-nowrap shrink-0 overflow-x-auto hide-scrollbar" id="tabSegmentContainer"><button class="tab-item relative px-3.5 py-2 rounded-lg bg-surface-container-low text-primary text-[15px] flex items-center gap-2 font-bold transition-all duration-200 shadow-xs border-b-2 border-primary whitespace-nowrap flex-nowrap shrink-0"><span class="whitespace-nowrap shrink-0">Hồ sơ Nhà cung cấp</span><span class="px-2 py-0.5 rounded-full bg-primary text-white font-label-sm text-label-sm font-bold whitespace-nowrap shrink-0">128</span></button><button class="tab-item relative px-3.5 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low text-[15px] font-semibold flex items-center gap-2 transition-all duration-200 whitespace-nowrap flex-nowrap shrink-0"><span class="whitespace-nowrap shrink-0">Bản nháp &amp; Hồ sơ cần xử lý</span><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm font-bold border border-amber-300 whitespace-nowrap shrink-0">8</span></button><button class="tab-item relative px-3.5 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low text-[15px] font-semibold flex items-center gap-2 transition-all duration-200 whitespace-nowrap flex-nowrap shrink-0"><span class="whitespace-nowrap shrink-0">Danh mục Loại NCC</span><span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold whitespace-nowrap shrink-0">12</span></button></div><div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary pr-2 whitespace-nowrap shrink-0"><span class="flex items-center gap-2 bg-surface-container-low px-2.5 py-1 rounded-full border border-surface-container-high/50 hover:bg-surface-container-high/50 transition-colors whitespace-nowrap shrink-0"><span class="relative flex h-2 w-2 shrink-0"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="text-tertiary font-semibold whitespace-nowrap shrink-0">Bot RPA Thuế: Đang hoạt động</span></span></div></div>
 <!-- Multi-Criteria Filter Console -->
-<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm border border-surface-container-high/60 shrink-0">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">filter_alt</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Bộ lọc &amp; Tra cứu nâng cao</span>
-</div>
-<span class="font-label-sm text-label-sm text-secondary">Áp dụng 4 tiêu chí song song</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm">
-<!-- Text Search Field -->
-<div class="md:col-span-4 relative flex items-center">
-<span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span>
-<input class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest border border-transparent focus:border-primary/30 transition-all" id="searchInput" placeholder="Tìm theo Mã NCC, Tên doanh nghiệp, MST..." type="text" value="Sao Việt">
-</div>
-<!-- Dropdown 1: Loại NCC -->
-<div class="md:col-span-2">
-<div class="relative w-full">
-<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
-<option value="">Loại: Tất cả</option>
-<option selected="" value="net">Thiết bị mạng</option>
-<option value="it">Thiết bị CNTT</option>
-<option value="stationery">Văn phòng phẩm</option>
-<option value="construction">Xây dựng</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
-</div>
-</div>
-<!-- Dropdown 2: Trạng thái hoạt động -->
-<div class="md:col-span-2">
-<div class="relative w-full">
-<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
-<option value="">TT Hoạt động: Tất cả</option>
-<option value="active">Đang hoạt động</option>
-<option value="paused">Tạm dừng</option>
-<option value="blacklist">Khóa/Blacklist</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
-</div>
-</div>
-<!-- Dropdown 3: Tình trạng duyệt -->
-<div class="md:col-span-2">
-<div class="relative w-full">
-<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
-<option value="">Tình trạng duyệt: Tất cả</option>
-<option value="draft">Bản nháp</option>
-<option value="pending">Chờ phê duyệt</option>
-<option value="approved">Đã duyệt</option>
-<option value="rejected">Bị từ chối</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
-</div>
-</div>
-<!-- Dropdown 4: Xếp hạng -->
-<div class="md:col-span-2">
-<div class="relative w-full">
-<select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-transparent focus:border-primary/30">
-<option value="">Xếp hạng: Tất cả</option>
-<option value="a">Hạng A (&gt;85đ)</option>
-<option value="b">Hạng B (70-85đ)</option>
-<option value="c">Hạng C (&lt;70đ)</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span>
-</div>
-</div>
-</div>
-<div class="flex items-center justify-between pt-1">
-<div class="flex items-center gap-2 flex-wrap" id="filterBadgesContainer">
-<span class="font-label-sm text-label-sm text-secondary">Đang lọc theo:</span>
-<span class="filter-chip inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm hover:scale-105 active:scale-95 transition-transform duration-200">
-              Tên: "Sao Việt"
-              <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error transition-colors" onclick="this.closest('.filter-chip').remove()">close</span>
-</span>
-<span class="filter-chip inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm hover:scale-105 active:scale-95 transition-transform duration-200">
-              Loại: Thiết bị mạng
-              <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error transition-colors" onclick="this.closest('.filter-chip').remove()">close</span>
-</span>
-</div>
-<div class="flex items-center gap-space-sm">
-<button class="px-3 py-1 rounded-lg text-secondary hover:text-on-surface text-body-sm font-body-sm hover:bg-surface-container-low active:scale-95 transition-all" id="btnResetFilter" type="button">
-              Đặt lại
-            </button>
-<button class="btn-shimmer px-4 py-1.5 rounded-lg bg-primary-container text-on-primary text-body-sm font-body-sm font-semibold shadow-sm hover:bg-primary active:scale-95 transition-all duration-200 flex items-center gap-1.5" id="btnApplyFilter" type="button">
-<span class="material-symbols-outlined text-[18px] transition-transform duration-300" id="filterIcon">sync</span>
-<span id="filterBtnText" class="">Lọc dữ liệu</span>
-</button>
-</div>
-</div>
-</div>
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col gap-2.5 border border-surface-container-high/60 shrink-0"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]">filter_alt</span><span class="font-headline-sm text-headline-sm text-on-surface font-bold">Bộ lọc &amp; Tra cứu nâng cao</span></div><div class="flex items-center gap-2 flex-wrap" id="filterBadgesContainer"><span class="font-label-sm text-label-sm text-secondary">Đang áp dụng:</span><span class="filter-chip inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm">Tên: "Sao Việt"<span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error transition-colors" onclick="this.closest('.filter-chip').remove()">close</span></span><span class="filter-chip inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface text-label-sm font-label-sm">Loại: Thiết bị mạng<span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error transition-colors" onclick="this.closest('.filter-chip').remove()">close</span></span></div></div><div class="flex items-center gap-2 w-full"><div class="relative flex-1 min-w-0 flex items-center"><span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span><input class="w-full h-9 pl-8 pr-2 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest border border-surface-container-high/50 focus:border-primary/30 transition-all" id="searchInput" placeholder="Từ khóa: Sao Việt..." type="text" value="Sao Việt"></div><div class="relative flex-1 min-w-0"><select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-surface-container-high/50 focus:border-primary/30 truncate"><option value="">Loại NCC: Tất cả</option><option selected="" value="net">Loại NCC: Thiết bị mạng</option><option value="it">Thiết bị CNTT</option><option value="stationery">Văn phòng phẩm</option><option value="construction">Xây dựng</option></select><span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span></div><div class="relative flex-1 min-w-0"><select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-surface-container-high/50 focus:border-primary/30 truncate"><option selected="" value="">Trạng thái HĐ: Tất cả</option><option value="active">Đang hoạt động</option><option value="paused">Chưa kích hoạt</option><option value="blacklist">Khóa/Blacklist</option></select><span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span></div><div class="relative flex-1 min-w-0"><select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-surface-container-high/50 focus:border-primary/30 truncate"><option selected="" value="">Tình trạng duyệt: Tất cả</option><option value="draft">Bản nháp</option><option value="pending">Chờ phê duyệt</option><option value="approved">Đã duyệt</option><option value="rejected">B bị từ chối</option></select><span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span></div><div class="relative flex-1 min-w-0"><select class="w-full h-9 px-2.5 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface appearance-none focus:outline-none cursor-pointer border border-surface-container-high/50 focus:border-primary/30 truncate"><option selected="" value="">Xếp hạng: Tất cả</option><option value="a">Hạng A (&gt;85đ)</option><option value="b">Hạng B (70-85đ)</option><option value="c">Hạng C (&lt;70đ)</option></select><span class="material-symbols-outlined absolute right-2 top-2 text-outline pointer-events-none text-[18px]">unfold_more</span></div><button class="px-2.5 py-1.5 rounded-lg text-secondary hover:text-on-surface text-body-sm font-body-sm hover:bg-surface-container-low active:scale-95 transition-all shrink-0" id="btnResetFilter" type="button">Đặt lại</button><button class="btn-shimmer px-3.5 py-1.5 rounded-lg bg-primary text-on-primary text-body-sm font-body-sm font-semibold shadow-sm hover:bg-primary-container active:scale-95 transition-all flex items-center gap-1.5 shrink-0" id="btnApplyFilter" type="button"><span class="material-symbols-outlined text-[18px]" id="filterIcon">sync</span><span class="" id="filterBtnText">Lọc dữ liệu</span></button></div></div>
 <!-- High-Density Interactive Data Grid with Sortable Columns -->
 <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col border border-surface-container-high/60 shrink-0 relative" id="tableContainer">
 <!-- Table Scroll Container -->
 <div class="overflow-x-auto w-full custom-scroll">
-<table class="w-full text-left border-collapse min-w-[780px] font-sans text-[13px]" id="dataTable">
-<thead>
-<tr class="bg-surface-container-low text-secondary uppercase tracking-wider border-b border-surface-container-high/60 select-none text-[12px] font-semibold">
-<th class="py-3 px-3 w-10 text-center">
-<input class="rounded accent-primary cursor-pointer transition-transform hover:scale-110" id="selectAllCheckbox" type="checkbox">
-</th>
-<th class="py-3 px-2 font-semibold cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="code">
-<div class="flex items-center gap-1">
-<span class="">Mã NCC</span>
-<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="code">swap_vert</span>
-</div>
-</th>
-<th class="py-3 px-3 font-semibold min-w-[210px] cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="name">
-<div class="flex items-center gap-1">
-<span class="">Tên Nhà cung cấp &amp; MST</span>
-<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="name">swap_vert</span>
-</div>
-</th>
-<th class="py-3 px-3 min-w-[130px] font-semibold cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="type">
-<div class="flex items-center gap-1">
-<span class="">Loại NCC</span>
-<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="type">swap_vert</span>
-</div>
-</th>
-<th class="py-3 px-3 font-semibold min-w-[200px]">Xác thực OCR &amp; RPA</th>
-<th class="py-3 px-3 min-w-[130px] font-semibold cursor-pointer group hover:text-primary transition-colors sortable-header" data-sort-col="score">
-<div class="flex items-center gap-1">
-<span class="">Hạng (Điểm)</span>
-<span class="material-symbols-outlined text-[15px] text-outline group-hover:text-primary transition-transform sort-icon" data-col="score">swap_vert</span>
-</div>
-</th>
-<th class="py-3 px-2 font-semibold">Trạng thái</th>
-<th class="py-3 px-2 font-semibold">Tình trạng duyệt</th>
-<th class="py-3 px-3 text-right font-semibold">Thao tác</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-surface-container-low text-on-surface text-[13px]" id="tableBody">
-<tr class="bg-blue-50/40 hover:bg-blue-50 hover:shadow-sm transition-all duration-200 relative group table-row-item" data-code="NCC088" data-name="Công ty TNHH Kỹ thuật Sao Việt" data-score="0" data-type="Thiết bị mạng">
-<td class="py-3 px-3 text-center">
-<input checked="" class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
-</td>
-<td class="py-3 px-2 font-semibold text-primary">
-<div class="flex items-center gap-1.5">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
-<span class="code-val">NCC088</span>
-</div>
-</td>
-<td class="py-3 px-3">
-<div class="flex flex-col gap-0.5">
-<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Kỹ thuật Sao Việt</span>
-<span class="text-[12px] text-secondary font-mono">MST: 0314567890 • Tel: 0908112233</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Thiết bị mạng</span></td>
-<td class="py-3 px-3">
-<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-tertiary-container/15 text-tertiary text-[12px] font-semibold rounded hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[15px]">verified</span>
-<span class="">✓ RPA: MST Hợp lệ (OCR 98%)</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="text-secondary text-[12px] italic whitespace-nowrap score-val">Chưa xếp hạng</span></td>
-<td class="py-3 px-2"><span class="font-semibold text-tertiary text-[12px]">Online</span></td>
-<td class="py-3 px-2">
-<span class="inline-flex items-center px-2 py-0.5 bg-surface-container-high text-secondary text-[12px] font-medium rounded">
-Nháp (Chưa duyệt)
-</span>
-</td>
-<td class="py-3 px-3 text-right">
-<div class="flex items-center justify-end gap-1">
-<button class="p-1 rounded hover:bg-primary-container hover:text-on-primary text-primary transition-all duration-200 active:scale-90" title="Gửi xét duyệt ngay">
-<span class="material-symbols-outlined text-[18px]">send</span>
-</button>
-<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Chỉnh sửa hồ sơ">
-<span class="material-symbols-outlined text-[18px]">edit_square</span>
-</button>
-<button class="p-1 rounded hover:bg-error-container hover:text-error text-secondary transition-all duration-200 active:scale-90" title="Hủy bản nháp">
-<span class="material-symbols-outlined text-[18px]">delete</span>
-</button>
-</div>
-</td>
-</tr>
-<tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC012" data-name="Công ty CP Giải pháp Số Toàn Cầu" data-score="92.5" data-type="Thiết bị CNTT">
-<td class="py-3 px-3 text-center">
-<input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
-</td>
-<td class="py-3 px-2 font-semibold text-on-surface code-val">NCC012</td>
-<td class="py-3 px-3">
-<div class="flex flex-col gap-0.5">
-<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty CP Giải pháp Số Toàn Cầu</span>
-<span class="text-[12px] text-secondary font-mono">MST: 0312456789 • Đối tác chiến lược</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Thiết bị CNTT</span></td>
-<td class="py-3 px-3">
-<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-tertiary-container/15 text-tertiary text-[12px] font-semibold rounded hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[15px]">verified_user</span>
-<span class="">✓ Đã đối soát ĐKKD &amp; MST</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-[12px] font-bold border border-tertiary/20 whitespace-nowrap score-val">Hạng A (92.5đ)</span></td>
-<td class="py-3 px-2"><span class="font-semibold text-tertiary text-[12px]">Online</span></td>
-<td class="py-3 px-2">
-<span class="inline-flex items-center px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[12px] font-semibold rounded">
-Đã duyệt
-</span>
-</td>
-<td class="py-3 px-3 text-right">
-<div class="flex items-center justify-end gap-1">
-<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Xem hồ sơ">
-<span class="material-symbols-outlined text-[18px]">visibility</span>
-</button>
-<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Chỉnh sửa">
-<span class="material-symbols-outlined text-[18px]">edit_square</span>
-</button>
-<button class="p-1 rounded hover:bg-error-container hover:text-error text-secondary transition-all duration-200 active:scale-90" title="Khóa/Blacklist">
-<span class="material-symbols-outlined text-[18px]">lock</span>
-</button>
-</div>
-</td>
-</tr>
-<tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC045" data-name="Công ty TNHH Xây dựng Phú Hưng" data-score="78.0" data-type="Xây dựng">
-<td class="py-3 px-3 text-center">
-<input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
-</td>
-<td class="py-3 px-2 font-semibold text-on-surface code-val">NCC045</td>
-<td class="py-3 px-3">
-<div class="flex flex-col gap-0.5">
-<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Xây dựng Phú Hưng</span>
-<span class="text-[12px] text-secondary font-mono">MST: 0319876543 • Gói thầu Cơ điện</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Xây dựng</span></td>
-<td class="py-3 px-3">
-<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-secondary-container text-on-secondary-fixed text-[12px] font-medium rounded hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
-<span class="">⏳ Chờ duyệt &gt;24h</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[12px] font-bold border bg-amber-100 text-amber-800 border-amber-300 whitespace-nowrap score-val">Hạng B (78.0đ)</span></td>
-<td class="py-3 px-2"><span class="font-semibold text-tertiary text-[12px]">Online</span></td>
-<td class="py-3 px-2">
-<span class="inline-flex items-center px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-[12px] font-semibold rounded">
-Chờ phê duyệt
-</span>
-</td>
-<td class="py-3 px-3 text-right">
-<div class="flex items-center justify-end gap-1">
-<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Thu hồi hồ sơ">
-<span class="material-symbols-outlined text-[18px]">undo</span>
-</button>
-<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Lịch sử luồng duyệt">
-<span class="material-symbols-outlined text-[18px]">history</span>
-</button>
-</div>
-</td>
-</tr>
-<tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC019" data-name="Công ty TNHH Vật tư Minh Phát" data-score="62.0" data-type="Văn phòng phẩm">
-<td class="py-3 px-3 text-center">
-<input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox">
-</td>
-<td class="py-3 px-2 font-semibold text-on-surface code-val">NCC019</td>
-<td class="py-3 px-3">
-<div class="flex flex-col gap-0.5">
-<span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Vật tư Minh Phát</span>
-<span class="text-[12px] text-secondary font-mono">MST: 0311122334 • Hàng tiêu dùng VP</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Văn phòng phẩm</span></td>
-<td class="py-3 px-3">
-<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-error-container text-on-error-container text-[12px] font-semibold rounded hover:scale-105 transition-transform">
-<span class="material-symbols-outlined text-[15px] text-error">warning</span>
-<span class="">⚠ RPA: MST Ngừng HĐ</span>
-</div>
-</td>
-<td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[12px] font-bold border bg-orange-100 text-orange-800 border-orange-300 whitespace-nowrap score-val">Hạng C (62.0đ)</span></td>
-<td class="py-3 px-2"><span class="font-semibold text-error text-[12px]">Locked/Blacklist</span></td>
-<td class="py-3 px-2">
-<span class="inline-flex items-center px-2 py-0.5 bg-error-container text-on-error-container text-[12px] font-bold rounded">
-Bị từ chối
-</span>
-</td>
-<td class="py-3 px-3 text-right">
-<div class="flex items-center justify-end gap-1">
-<button class="p-1 rounded hover:bg-surface-container-high text-error transition-all duration-200 active:scale-90" title="Lý do từ chối">
-<span class="material-symbols-outlined text-[18px]">report</span>
-</button>
-<button class="p-1 rounded hover:bg-surface-container-high text-secondary transition-all duration-200 active:scale-90" title="Cập nhật lại">
-<span class="material-symbols-outlined text-[18px]">edit_square</span>
-</button>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
+<table class="w-full text-left border-collapse min-w-[780px] font-sans text-[13px]" id="dataTable"><thead><tr class="bg-primary text-on-primary uppercase tracking-wider border-b border-primary/20 select-none text-[12px] font-bold whitespace-nowrap"><th class="py-3 px-3 w-10 text-center whitespace-nowrap"><input class="rounded accent-primary cursor-pointer transition-transform hover:scale-110" id="selectAllCheckbox" type="checkbox"></th><th class="py-3 px-3.5 font-bold cursor-pointer group hover:text-white transition-colors sortable-header whitespace-nowrap min-w-[100px] text-primary" data-sort-col="code"><div class="flex items-center gap-1 whitespace-nowrap"><span class="text-white whitespace-nowrap">MÃ NCC</span><span class="material-symbols-outlined text-[15px] text-white/80 group-hover:text-white transition-transform sort-icon text-primary font-bold" data-col="code">arrow_downward</span></div></th><th class="py-3 px-4 font-bold min-w-[280px] cursor-pointer group hover:text-white transition-colors sortable-header whitespace-nowrap" data-sort-col="name"><div class="flex items-center gap-1 whitespace-nowrap"><span class="text-white whitespace-nowrap">TÊN NHÀ CUNG CẤP &amp; MST</span><span class="material-symbols-outlined text-[15px] text-white/80 group-hover:text-white transition-transform sort-icon text-outline" data-col="name">swap_vert</span></div></th><th class="py-3 px-4 min-w-[140px] font-bold cursor-pointer group hover:text-white transition-colors sortable-header whitespace-nowrap" data-sort-col="type"><div class="flex items-center gap-1 whitespace-nowrap"><span class="text-white whitespace-nowrap">LOẠI NCC</span><span class="material-symbols-outlined text-[15px] text-white/80 group-hover:text-white transition-transform sort-icon text-outline" data-col="type">swap_vert</span></div></th><th class="py-3 px-4 min-w-[210px] font-bold text-white whitespace-nowrap">XÁC THỰC OCR &amp; RPA</th><th class="py-3 px-4 min-w-[140px] font-bold cursor-pointer group hover:text-white transition-colors sortable-header whitespace-nowrap" data-sort-col="score"><div class="flex items-center gap-1 whitespace-nowrap"><span class="text-white whitespace-nowrap">HẠNG (ĐIỂM)</span><span class="material-symbols-outlined text-[15px] text-white/80 group-hover:text-white transition-transform sort-icon text-outline" data-col="score">swap_vert</span></div></th><th class="py-3 px-4 font-bold text-white whitespace-nowrap min-w-[180px] text-center">TRẠNG THÁI HOẠT ĐỘNG</th><th class="py-3 px-4 font-bold min-w-[180px] text-white whitespace-nowrap">TÌNH TRẠNG DUYỆT</th><th class="py-3 px-4 text-right font-bold text-white whitespace-nowrap min-w-[120px]">THAO TÁC</th></tr></thead><tbody class="divide-y divide-surface-container-low text-on-surface text-[13px]" id="tableBody"><tr class="bg-blue-50/40 hover:bg-blue-50 hover:shadow-sm transition-all duration-200 relative group table-row-item" data-code="NCC088" data-name="Công ty TNHH Kỹ thuật Sao Việt" data-score="0" data-type="Thiết bị mạng"><td class="py-3 px-3 text-center"><input checked="" class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox"></td><td class="py-3 px-2 font-bold text-primary"><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span><span class="code-val font-bold text-primary">NCC088</span></div></td><td class="py-3 px-3"><div class="flex flex-col gap-0.5"><span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Kỹ thuật Sao Việt</span><span class="text-[12px] text-secondary font-mono">MST: 0314567890 • SĐT: 0908112233</span></div></td><td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Thiết bị mạng</span></td><td class="py-3 px-3"><span class="text-[12px] text-tertiary font-bold italic whitespace-nowrap">RPA: MST Hợp lệ (OCR 98%)</span></td><td class="py-3 px-3"><span class="text-secondary text-[12px] italic whitespace-nowrap score-val">Chưa xếp hạng</span></td><td class="py-3 px-2 text-center"><span class="text-[12px] text-on-surface-variant italic whitespace-nowrap">Chưa kích hoạt</span></td><td class="py-3 px-2"><span class="text-[12px] text-on-surface-variant italic whitespace-nowrap">Nháp (Chưa duyệt)</span></td><td class="py-3 px-3 text-right"><div class="flex items-center justify-end gap-1"><button class="p-1.5 rounded-lg text-primary hover:bg-primary/10 transition-colors flex items-center justify-center" title="Gửi duyệt"><span class="material-symbols-outlined text-[18px]">send</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Sửa"><span class="material-symbols-outlined text-[18px]">edit</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-error hover:bg-error-container transition-colors flex items-center justify-center" title="Hủy"><span class="material-symbols-outlined text-[18px]">delete</span></button></div></td></tr><tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC045" data-name="Công ty TNHH Xây dựng Phú Hưng" data-score="78.0" data-type="Xây dựng"><td class="py-3 px-3 text-center"><input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox"></td><td class="py-3 px-2 font-bold text-on-surface code-val">NCC045</td><td class="py-3 px-3"><div class="flex flex-col gap-0.5"><span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Xây dựng Phú Hưng</span><span class="text-[12px] text-secondary font-mono">MST: 0319876543 • Gói thầu Cơ điện</span></div></td><td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Xây dựng</span></td><td class="py-3 px-3"><span class="text-[12px] text-tertiary font-bold italic whitespace-nowrap">Đã đối soát ĐKKD &amp; MST</span></td><td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[12px] font-bold border bg-amber-100 text-amber-800 border-amber-300 whitespace-nowrap score-val">Hạng B (78.0đ)</span></td><td class="py-3 px-2 text-center"><span class="text-[12px] text-tertiary font-medium whitespace-nowrap">Đang hoạt động</span></td><td class="py-3 px-2"><span class="text-[12px] text-amber-800 font-bold italic whitespace-nowrap">Chờ Cấp phê duyệt</span></td><td class="py-3 px-3 text-right"><div class="flex items-center justify-end gap-1"><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Chi tiết"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-amber-800 hover:bg-amber-100 transition-colors flex items-center justify-center" title="Thu hồi"><span class="material-symbols-outlined text-[18px]">undo</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Lịch sử"><span class="material-symbols-outlined text-[18px]">history</span></button></div></td></tr><tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC019" data-name="Công ty TNHH Vật tư Minh Phát" data-score="62.0" data-type="Văn phòng phẩm"><td class="py-3 px-3 text-center"><input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox"></td><td class="py-3 px-2 font-bold text-on-surface code-val">NCC019</td><td class="py-3 px-3"><div class="flex flex-col gap-0.5"><span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty TNHH Vật tư Minh Phát</span><span class="text-[12px] text-secondary font-mono">MST: 0311122334 • Hàng tiêu dùng VP</span></div></td><td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Văn phòng phẩm</span></td><td class="py-3 px-3"><span class="inline-flex px-2.5 py-1 bg-error-container text-on-error-container text-[12px] font-semibold rounded whitespace-nowrap">RPA: MST Ngừng hoạt động</span></td><td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[12px] font-bold border bg-orange-100 text-orange-800 border-orange-300 whitespace-nowrap score-val">Hạng C (62.0đ)</span></td><td class="py-3 px-2 text-center"><span class="text-[12px] text-error font-medium whitespace-nowrap">Khóa/Blacklist</span></td><td class="py-3 px-2"><span class="inline-flex items-center px-2.5 py-1 bg-error-container text-on-error-container text-[12px] font-bold rounded whitespace-nowrap">Bị từ chối (Trả về)</span></td><td class="py-3 px-3 text-right"><div class="flex items-center justify-end gap-1"><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Chi tiết"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-lg text-error hover:bg-error-container transition-colors flex items-center justify-center" title="Lý do trả về"><span class="material-symbols-outlined text-[18px]">error_outline</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Sửa lại"><span class="material-symbols-outlined text-[18px]">edit</span></button></div></td></tr><tr class="hover:bg-blue-50/50 hover:shadow-sm transition-all duration-200 group table-row-item" data-code="NCC012" data-name="Công ty CP Giải pháp Số Toàn Cầu" data-score="92.5" data-type="Thiết bị CNTT"><td class="py-3 px-3 text-center"><input class="row-checkbox rounded accent-primary cursor-pointer transition-transform hover:scale-110" type="checkbox"></td><td class="py-3 px-2 font-bold text-on-surface code-val">NCC012</td><td class="py-3 px-3"><div class="flex flex-col gap-0.5"><span class="text-[13px] text-on-surface font-semibold leading-snug group-hover:text-primary transition-colors name-val">Công ty CP Giải pháp Số Toàn Cầu</span><span class="text-[12px] text-secondary font-mono">MST: 0312456789 • Đối tác chiến lược</span></div></td><td class="py-3 px-3"><span class="inline-flex px-2 py-0.5 rounded-md bg-surface-container-high text-on-secondary-fixed text-[12px] whitespace-nowrap type-val font-medium">Thiết bị CNTT</span></td><td class="py-3 px-3"><span class="text-[12px] text-tertiary font-bold italic whitespace-nowrap">Đã đối soát ĐKKD &amp; MST</span></td><td class="py-3 px-3"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-[12px] font-bold border border-tertiary/20 whitespace-nowrap score-val">Hạng A (92.5đ)</span></td><td class="py-3 px-2 text-center"><span class="text-[12px] text-tertiary font-medium whitespace-nowrap">Đang hoạt động</span></td><td class="py-3 px-2"><span class="text-[12px] text-tertiary font-bold italic whitespace-nowrap">Đã duyệt</span></td><td class="py-3 px-3 text-right"><div class="flex items-center justify-end gap-1"><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Chi tiết"><span class="material-symbols-outlined text-[18px]">visibility</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Sửa"><span class="material-symbols-outlined text-[18px]">edit</span></button><button class="p-1.5 rounded-lg text-secondary hover:text-error hover:bg-error-container transition-colors flex items-center justify-center" title="Khóa"><span class="material-symbols-outlined text-[18px]">lock</span></button></div></td></tr></tbody></table>
 </div>
 <!-- Pagination & Density Summary Footer -->
 <div class="p-3 bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm font-body-sm text-body-sm text-secondary border-t border-surface-container-high/60">
@@ -516,42 +205,14 @@ Bị từ chối
 </div>
 </div>
 <!-- Quick Metrics Insight Strip (Always viewable by scrolling down) -->
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm shrink-0 pb-6">
-<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-primary/20 transition-all duration-200">
-<div class="w-10 h-10 rounded-lg bg-tertiary-container/15 text-tertiary flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[22px]">verified</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-label-sm text-label-sm text-secondary truncate">Hồ sơ đã chuẩn hóa RPA</span>
-<span class="font-headline-lg text-headline-lg font-bold text-on-surface leading-tight">114 / 128</span>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-primary/20 transition-all duration-200">
-<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[22px]">speed</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-label-sm text-label-sm text-secondary truncate">Thời gian duyệt trung bình</span>
-<span class="font-headline-lg text-headline-lg font-bold text-on-surface leading-tight">4.2 giờ</span>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-error/20 transition-all duration-200">
-<div class="w-10 h-10 rounded-lg bg-error-container text-error flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-[22px]">policy</span>
-</div>
-<div class="flex flex-col min-w-0">
-<span class="font-label-sm text-label-sm text-secondary truncate">Cảnh báo rủi ro thuế/pháp lý</span>
-<span class="font-headline-lg text-headline-lg font-bold text-error leading-tight">2 NCC</span>
-</div>
-</div>
-</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm shrink-0 pb-6"><div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-primary/20 transition-all duration-200"><div class="w-10 h-10 rounded-lg bg-tertiary-container/15 text-tertiary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[22px]">verified</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-secondary truncate">Hồ sơ đã xác thực OCR &amp; RPA</span><span class="font-headline-lg text-headline-lg font-bold text-on-surface leading-tight">114 / 128 NCC</span></div></div><div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-primary/20 transition-all duration-200"><div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[22px]">description</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-secondary truncate">Hồ sơ nháp &amp; Chờ xử lý</span><span class="font-headline-lg text-headline-lg font-bold text-on-surface leading-tight">08 Hồ sơ</span></div></div><div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3 border border-surface-container-high/60 hover:shadow-md hover:border-error/20 transition-all duration-200"><div class="w-10 h-10 rounded-lg bg-error-container text-error flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[22px]">warning</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-secondary truncate">Cảnh báo rủi ro pháp lý / Khóa Blacklist</span><span class="font-headline-lg text-headline-lg font-bold text-error leading-tight">02 NCC</span></div></div></div>
 </main>
 <!-- 2. RESIZABLE SPLITTER / DRAG DIVIDER -->
-<div class="w-1.5 hover:w-2 bg-surface-container-high/70 hover:bg-primary cursor-col-resize shrink-0 transition-all duration-150 z-20 flex items-center justify-center relative select-none group hidden" id="dragDivider" title="Kéo chuột sang trái/phải để đổi kích thước khung AI">
+<div class="w-1.5 hover:w-2 bg-surface-container-high/70 hover:bg-primary cursor-col-resize shrink-0 transition-all duration-150 z-20 flex items-center justify-center relative select-none group" id="dragDivider" title="Kéo chuột sang trái/phải để đổi kích thước khung AI">
 <div class="w-0.5 h-8 bg-outline-variant group-hover:bg-white rounded-full transition-colors"></div>
 </div>
 <!-- 3. RIGHT DOCKED PANEL: IAProc AI Chatbot & RPA Assistant (Resizable & Collapsible) -->
-<aside class="w-[380px] min-w-[280px] max-w-[560px] shrink-0 h-full bg-surface-container-lowest border-l border-surface-container-high flex flex-col z-10 shadow-lg relative transition-all duration-300 ease-in-out hidden" id="aiAssistantPanel" style="width: 280px;">
+<aside class="w-[380px] min-w-[280px] max-w-[560px] shrink-0 h-full bg-surface-container-lowest border-l border-surface-container-high flex flex-col z-10 shadow-lg relative transition-all duration-300 ease-in-out" id="aiAssistantPanel" style="width: 280px;">
 <!-- Panel Header: Copilot Presence & Collapse Button -->
 <div class="p-space-md bg-gradient-to-r from-surface-container-low via-surface-container-lowest to-surface-container-low flex items-center justify-between border-b border-surface-container-high/50 shrink-0">
 <div class="flex items-center gap-space-sm min-w-0">
@@ -632,9 +293,6 @@ Bị từ chối
 <span class="material-symbols-outlined text-[16px]">psychology</span>
 <span class="">Đã bóc tách thực thể (Intent: create_supplier)</span>
 </div>
-<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-bold text-label-sm font-label-sm">
-                Độ chính xác 99%
-              </span>
 </div>
 <!-- Key-Value Property Table -->
 <div class="bg-surface-container-lowest rounded-lg p-2.5 shadow-sm flex flex-col gap-2 text-body-sm font-body-sm border border-surface-container-high/40">
@@ -642,9 +300,7 @@ Bị từ chối
 <span class="text-secondary font-label-sm text-label-sm">Mã NCC:</span>
 <div class="flex items-center gap-1">
 <span class="font-bold text-on-surface font-mono">NCC088</span>
-<span class="text-label-sm font-label-sm text-tertiary bg-tertiary-container/15 px-1.5 py-0.2 rounded font-semibold">
-                    Hợp lệ - Chưa trùng
-                  </span>
+<span class="text-label-sm font-label-sm text-tertiary font-semibold italic font-bold">(Hợp lệ)</span>
 </div>
 </div>
 <div class="flex items-start justify-between">
@@ -727,7 +383,7 @@ Bị từ chối
 </div>
 </aside>
 <!-- 4. FREELY DRAGGABLE FLOATING ACTION PILL: Appears when AI Panel is collapsed -->
-<div class="fixed z-50 select-none cursor-grab active:cursor-grabbing shadow-2xl rounded-full" id="floatingAiTriggerWrapper" style="top: 942px; right: auto; cursor: grab; left: 1119px;">
+<div class="fixed z-50 select-none cursor-grab active:cursor-grabbing shadow-2xl rounded-full hidden" id="floatingAiTriggerWrapper" style="top: 16px; right: auto; cursor: grab; left: 714px;">
 <button class="bg-gradient-to-r from-primary-container to-primary text-on-primary px-3.5 py-2.5 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-transform flex items-center gap-2 font-headline-sm text-headline-sm border border-white/20 animate-float" id="floatingAiTrigger" title="Nhấp để mở hoặc Kéo để di chuyển">
 <div class="relative flex items-center justify-center pointer-events-none">
 <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
@@ -742,7 +398,7 @@ Bị từ chối
 </div>
 </div>
 </div>
-<!-- ENHANCED CONTROLLER: SORTING, COLLAPSIBLE SIDEBAR, DRAGGABLE FLOATING BUTTON & RESIZING -->
+<!-- ENHANCED CONTROLLER: SORTING, COLLAPSIBLE SIDEBAR, EXPAND TOGGLE, DRAGGABLE FLOATING BUTTON & RESIZING -->
 <script>
   (function() {
     const divider = document.getElementById('dragDivider');
@@ -756,6 +412,11 @@ Bị từ chối
     const appSidebar = document.getElementById('appSidebar');
     const btnToggleSidebar = document.getElementById('btnToggleSidebar');
     const sidebarToggleIcon = document.getElementById('sidebarToggleIcon');
+    const collapsedExpandHeader = document.getElementById('collapsedExpandHeader');
+    const btnExpandSidebarDirect = document.getElementById('btnExpandSidebarDirect');
+    const collapsedLogoIcon = document.getElementById('collapsedLogoIcon');
+    const sidebarHeaderWrapper = document.getElementById('sidebarHeaderWrapper');
+    const sidebarLogoIcon = document.getElementById('sidebarLogoIcon');
     const supplierAccordionBtn = document.getElementById('supplierAccordionBtn');
     const supplierAccordionMenu = document.getElementById('supplierAccordionMenu');
     const supplierAccordionChevron = document.getElementById('supplierAccordionChevron');
@@ -764,25 +425,71 @@ Bị từ chối
     let isAccordionOpen = true;
 
     // --- 1. SIDEBAR TOGGLE & ACCORDION BEHAVIOR ---
-    if (btnToggleSidebar && appSidebar) {
-      btnToggleSidebar.addEventListener('click', function() {
-        isSidebarCollapsed = !isSidebarCollapsed;
-        const labels = appSidebar.querySelectorAll('.sidebar-label');
+    function setSidebarState(collapsed) {
+      isSidebarCollapsed = collapsed;
+      const labels = appSidebar.querySelectorAll('.sidebar-label');
+      
+      if (isSidebarCollapsed) {
+        // Thu gọn về mini sidebar 68px
+        appSidebar.classList.remove('w-[230px]', 'min-w-[230px]');
+        appSidebar.classList.add('w-[68px]', 'min-w-[68px]');
+        labels.forEach(el => el.classList.add('hidden'));
+        
+        // Ẩn header ban đầu, hiển thị cụm mini-header: Logo IAProc (giữ trên cùng) + Nút mở rộng >> ngay bên dưới logo
+        sidebarHeaderWrapper.classList.add('hidden');
+        collapsedExpandHeader.classList.remove('hidden');
+        collapsedExpandHeader.classList.add('flex');
+        
+        if (sidebarToggleIcon) sidebarToggleIcon.textContent = 'keyboard_double_arrow_right';
+        if (btnToggleSidebar) btnToggleSidebar.title = 'Mở rộng sidebar';
+      } else {
+        // Mở rộng về kích thước ban đầu 230px
+        appSidebar.classList.remove('w-[68px]', 'min-w-[68px]');
+        appSidebar.classList.add('w-[230px]', 'min-w-[230px]');
+        labels.forEach(el => el.classList.remove('hidden'));
+        
+        // Hiện lại header ban đầu với Logo đầy đủ và nút << bên phải
+        sidebarHeaderWrapper.classList.remove('hidden');
+        collapsedExpandHeader.classList.add('hidden');
+        collapsedExpandHeader.classList.remove('flex');
+        
+        if (sidebarToggleIcon) sidebarToggleIcon.textContent = 'keyboard_double_arrow_left';
+        if (btnToggleSidebar) btnToggleSidebar.title = 'Thu gọn sidebar';
+        
+        if (!isAccordionOpen) {
+          supplierAccordionMenu.classList.add('hidden');
+        }
+      }
+    }
+
+    if (btnToggleSidebar) {
+      btnToggleSidebar.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setSidebarState(!isSidebarCollapsed);
+      });
+    }
+
+    // Nút mở rộng >> ngay dưới Logo IAProc khi sidebar co lại
+    if (btnExpandSidebarDirect) {
+      btnExpandSidebarDirect.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setSidebarState(false);
+      });
+    }
+
+    // Nhấp vào logo ở trạng thái co lại cũng mở rộng sidebar
+    if (collapsedLogoIcon) {
+      collapsedLogoIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setSidebarState(false);
+      });
+    }
+
+    if (sidebarLogoIcon) {
+      sidebarLogoIcon.addEventListener('click', function(e) {
         if (isSidebarCollapsed) {
-          appSidebar.classList.remove('w-[220px]');
-          appSidebar.classList.add('w-[64px]');
-          labels.forEach(el => el.classList.add('hidden'));
-          sidebarToggleIcon.textContent = 'keyboard_double_arrow_right';
-          btnToggleSidebar.title = 'Mở rộng Sidebar';
-        } else {
-          appSidebar.classList.remove('w-[64px]');
-          appSidebar.classList.add('w-[220px]');
-          labels.forEach(el => el.classList.remove('hidden'));
-          sidebarToggleIcon.textContent = 'keyboard_double_arrow_left';
-          btnToggleSidebar.title = 'Thu gọn Sidebar';
-          if (!isAccordionOpen) {
-            supplierAccordionMenu.classList.add('hidden');
-          }
+          e.stopPropagation();
+          setSidebarState(false);
         }
       });
     }
@@ -792,7 +499,7 @@ Bị từ chối
       supplierAccordionBtn.addEventListener('click', function(e) {
         if (isSidebarCollapsed) {
           // If sidebar is collapsed, open sidebar first
-          btnToggleSidebar.click();
+          setSidebarState(false);
           return;
         }
         isAccordionOpen = !isAccordionOpen;
@@ -902,14 +609,17 @@ Bị từ chối
     window.showToast = function(message, type = 'success') {
       const toast = document.createElement('div');
       const isError = type === 'error';
+      const isInfo = type === 'info';
       toast.className = `toast-animation pointer-events-auto flex items-center gap-2.5 px-4 py-2.5 rounded-xl shadow-xl text-body-sm font-medium border ${
         isError 
           ? 'bg-error-container text-on-error-container border-error/30' 
-          : 'bg-surface-container-lowest text-on-surface border-tertiary/40'
+          : isInfo 
+            ? 'bg-surface-container-high text-on-surface border-primary/30' 
+            : 'bg-surface-container-lowest text-on-surface border-tertiary/40'
       }`;
       toast.innerHTML = `
-        <span class="material-symbols-outlined text-[20px] ${isError ? 'text-error' : 'text-tertiary'}">
-          ${isError ? 'error' : 'check_circle'}
+        <span class="material-symbols-outlined text-[20px] ${isError ? 'text-error' : isInfo ? 'text-primary' : 'text-tertiary'}">
+          ${isError ? 'error' : isInfo ? 'info' : 'check_circle'}
         </span>
         <span class="font-medium">${message}</span>
       `;
@@ -1189,7 +899,9 @@ Bị từ chối
 </script>
 
 
-<script>document.addEventListener('DOMContentLoaded',function(){var cBtn=document.getElementById('btnToggleSidebarCollapsed');var mainBtn=document.getElementById('btnToggleSidebar');var collRow=document.getElementById('collapsedToggleRow');if(cBtn&&mainBtn){cBtn.addEventListener('click',function(){mainBtn.click();});mainBtn.addEventListener('click',function(){setTimeout(function(){var isCol=document.getElementById('appSidebar').classList.contains('w-[64px]');if(isCol){collRow.classList.remove('hidden');}else{collRow.classList.add('hidden');}},50);});}});</script>
+
+
+
 
 
 
