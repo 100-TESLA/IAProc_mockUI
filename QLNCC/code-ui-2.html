@@ -222,7 +222,7 @@
     <!-- Source Dropdown -->
     <div class="relative min-w-[170px] flex-1 sm:flex-initial">
       <label class="sr-only" for="filterSource">Phân loại nguồn hồ sơ</label>
-      <select class="w-full bg-surface-container-low px-3 py-2 rounded-lg font-body-sm text-body-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all" id="filterSource">
+      <select class="w-full bg-surface-container-low pl-3 pr-10 py-2 rounded-lg font-body-sm text-body-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all" id="filterSource">
         <option value="">Nguồn: Tất cả nguồn</option>
         <option value="ai">Bản nháp AI Chatbot</option>
         <option value="portal">Từ Cổng thông tin NCC</option>
@@ -233,7 +233,7 @@
     <!-- Category Dropdown -->
     <div class="relative min-w-[170px] flex-1 sm:flex-initial">
       <label class="sr-only" for="filterCategory">Loại nhà cung cấp</label>
-      <select class="w-full bg-surface-container-low px-3 py-2 rounded-lg font-body-sm text-body-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all" id="filterCategory">
+      <select class="w-full bg-surface-container-low pl-3 pr-10 py-2 rounded-lg font-body-sm text-body-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all" id="filterCategory">
         <option value="">Loại NCC: Tất cả</option>
         <option value="network">Thiết bị mạng &amp; Viễn thông</option>
         <option value="it">Thiết bị &amp; Dịch vụ CNTT</option>
@@ -242,9 +242,9 @@
       </select>
     </div>
     <!-- OCR & RPA Status Dropdown -->
-    <div class="relative min-w-[180px] flex-1 sm:flex-initial">
+    <div class="relative min-w-[220px] flex-1 sm:flex-initial">
       <label class="sr-only" for="filterStatus">Trạng thái đối soát OCR và RPA</label>
-      <select class="w-full bg-surface-container-low px-3 py-2 rounded-lg font-body-sm text-body-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all" id="filterStatus">
+      <select class="w-full bg-surface-container-low pl-3 pr-10 py-2 rounded-lg font-body-sm text-body-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all" id="filterStatus">
         <option value="">Kiểm tra: Tất cả trạng thái</option>
         <option value="valid">Đã xác thực hợp lệ</option>
         <option value="missing">Thiếu ĐKKD / Chứng từ</option>
@@ -557,7 +557,7 @@ Thiếu tệp chứng từ pháp lý bắt buộc (BR-SUP-01.3). Vui lòng tải
 <span class="whitespace-nowrap">trong tổng số</span>
 <span class="font-bold text-on-surface whitespace-nowrap">8</span>
 <span class="whitespace-nowrap">hồ sơ cần xử lý</span>
-</div><div class="inline-flex items-center gap-2 font-body-sm text-body-sm text-secondary whitespace-nowrap shrink-0"><label for="rowsPerPageSelect" class="font-label-sm text-label-sm text-secondary whitespace-nowrap">Dòng / trang:</label><div class="relative inline-flex items-center"><select id="rowsPerPageSelect" class="bg-surface-container-low px-2.5 py-1 pr-6 rounded-lg font-data-tabular text-data-tabular font-semibold text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all text-xs appearance-none"><option value="10" selected="">10</option><option value="20">20</option><option value="50">50</option></select><span class="material-symbols-outlined text-[16px] text-secondary pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2">arrow_drop_down</span></div></div>
+</div><div class="inline-flex items-center gap-2 font-body-sm text-body-sm text-secondary whitespace-nowrap shrink-0"><label for="rowsPerPageSelect" class="font-label-sm text-label-sm text-secondary whitespace-nowrap">Dòng / trang:</label><div class="relative inline-flex items-center"><select id="rowsPerPageSelect" class="bg-surface-container-low px-2.5 py-1 pr-6 rounded-lg font-data-tabular text-data-tabular font-semibold text-on-surface border border-outline-variant/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer transition-all text-xs appearance-none"><option value="10" selected="">10</option><option value="20">20</option><option value="50">50</option></select><span class="material-symbols-outlined text-[16px] text-secondary pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2"></span></div></div>
 <div class="flex items-center gap-3 whitespace-nowrap flex-nowrap shrink-0">
 <button class="btn-shimmer flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold shadow-xs hover:bg-primary transition-all active:scale-95 whitespace-nowrap shrink-0" id="btnBatchApproveSubmit" type="button">
 <span class="material-symbols-outlined text-[18px]">send</span>
