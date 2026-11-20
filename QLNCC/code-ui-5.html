@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html class="h-full" lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAProc — Lịch sử đã xét duyệt | Cấp phê duyệt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {
+  "darkMode": "class",
+  "theme": {
+    "extend": {
+      "colors": {
+        "surface": "#f8f9ff",
+        "surface-dim": "#cbdbf5",
+        "surface-bright": "#f8f9ff",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#eff4ff",
+        "surface-container": "#e5eeff",
+        "surface-container-high": "#dce9ff",
+        "surface-container-highest": "#d3e4fe",
+        "on-surface": "#0b1c30",
+        "on-surface-variant": "#434655",
+        "inverse-surface": "#213145",
+        "inverse-on-surface": "#eaf1ff",
+        "outline": "#737686",
+        "outline-variant": "#c3c6d7",
+        "surface-tint": "#0053db",
+        "primary": "#004ac6",
+        "on-primary": "#ffffff",
+        "primary-container": "#2563eb",
+        "on-primary-container": "#eeefff",
+        "inverse-primary": "#b4c5ff",
+        "secondary": "#565e74",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#dae2fd",
+        "on-secondary-container": "#5c647a",
+        "tertiary": "#006058",
+        "on-tertiary": "#ffffff",
+        "tertiary-container": "#007b71",
+        "on-tertiary-container": "#b3fff3",
+        "error": "#ba1a1a",
+        "on-error": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-error-container": "#93000a",
+        "primary-fixed": "#dbe1ff",
+        "primary-fixed-dim": "#b4c5ff",
+        "on-primary-fixed": "#00174b",
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed": "#dae2fd",
+        "secondary-fixed-dim": "#bec6e0",
+        "on-secondary-fixed": "#131b2e",
+        "on-secondary-fixed-variant": "#3f465c",
+        "tertiary-fixed": "#89f5e7",
+        "tertiary-fixed-dim": "#6bd8cb",
+        "on-tertiary-fixed": "#00201d",
+        "on-tertiary-fixed-variant": "#005049",
+        "background": "#f8f9ff",
+        "on-background": "#0b1c30",
+        "surface-variant": "#d3e4fe"
+      },
+      "borderRadius": {
+        "sm": "0.25rem",
+        "DEFAULT": "0.5rem",
+        "md": "0.75rem",
+        "lg": "1rem",
+        "xl": "1.5rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "gutter": "1rem",
+        "gutter-dense": "0.5rem",
+        "margin": "1.5rem",
+        "margin-mobile": "1rem",
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "space-md": "0.75rem",
+        "space-lg": "1.25rem",
+        "space-xl": "2rem"
+      },
+      "fontFamily": {
+        "display-lg": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-xl": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-xl-mobile": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-lg": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-md": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-sm": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "body-lg": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "body-md": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "body-sm": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "label-md": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "label-sm": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "data-tabular": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "headline": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "body": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ]
+      },
+      "fontSize": {
+        "display-lg": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.025em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-xl": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-xl-mobile": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg": [
+          "22px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-md": [
+          "18px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-sm": [
+          "16px",
+          {
+            "lineHeight": "22px",
+            "letterSpacing": "-0.005em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-lg": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "body-md": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.005em",
+            "fontWeight": "400"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "label-sm": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.03em",
+            "fontWeight": "600"
+          }
+        ],
+        "data-tabular": [
+          "13px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "500"
+          }
+        ]
+      }
+    }
+  }
+};</script>
+<style>html,body { margin:0; padding:0; height:100%; }
+body { font-family:'Hanken Grotesk',sans-serif; overscroll-behavior:none; }
+.material-symbols-outlined { font-family:'Material Symbols Outlined'; font-weight:400; font-style:normal; line-height:1; letter-spacing:normal; text-transform:none; display:inline-block; white-space:nowrap; word-wrap:normal; direction:ltr; -webkit-font-smoothing:antialiased; font-feature-settings:'liga'; }
+.custom-scroll { scrollbar-width:thin; scrollbar-color:#c3c6d7 transparent; }
+.custom-scroll::-webkit-scrollbar { width:6px; height:6px; }
+.custom-scroll::-webkit-scrollbar-thumb { background:#c3c6d7; border-radius:9999px; }
+.hide-scrollbar { scrollbar-width:none; }
+.hide-scrollbar::-webkit-scrollbar { display:none; }
+#appSidebar { width:230px; min-width:230px; transition:width .3s ease,min-width .3s ease; }
+#appSidebar.is-collapsed { width:68px; min-width:68px; }
+#appSidebar.is-collapsed #sidebarNav > a,
+#appSidebar.is-collapsed #supplierAccordionBtn { justify-content:center; }
+#appSidebar.is-collapsed #supplierAccordionBtn > div { justify-content:center; }
+#mainWorkspace > * { flex-shrink:0; }
+.dense-grid th { font-size:11px; line-height:16px; letter-spacing:.02em; }
+.dense-grid td { font-size:12px; line-height:18px; overflow-wrap:anywhere; }
+.dense-grid th,.dense-grid td { min-width:0; }
+.dense-grid td > *, .dense-grid td span { max-width:100%; }
+.dense-grid th .whitespace-nowrap,.dense-grid td .whitespace-nowrap { white-space:normal; }
+.dense-grid td .truncate { white-space:normal; overflow:visible; text-overflow:clip; }
+.dense-grid td .flex { min-width:0; flex-wrap:wrap; }
+.dense-grid td button { flex-shrink:0; }
+.dense-grid td button .material-symbols-outlined { font-size:18px; }
+.dense-grid td:last-child button { padding:4px; }
+.dense-grid td:last-child > .flex { gap:2px; }
+#categoryTable th,#categoryTable td { padding-left:6px; padding-right:6px; }
+#categoryTable .font-headline-sm { font-family:'Hanken Grotesk',sans-serif; font-size:13px; line-height:18px; }
+#approvalQueueTable .action-buttons-container { gap:5px; }
+#approvalQueueTable .action-buttons-container button { font-size:11px; padding:6px 8px; white-space:nowrap; }
+[hidden] { display:none !important; }
+#chatSlideOverPanel.translate-x-full { transform:translateX(100%); pointer-events:none; visibility:hidden; }
+#chatSlideOverPanel { transition:transform .3s ease-out,visibility .3s; }
+#chatSlideOverPanel:not(.translate-x-full) { transform:translateX(0); visibility:visible; }
+#chatFeed { min-height:0; }
+#chatFeed > * { flex-shrink:0; }
+#chatFeed .truncate { white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:anywhere; }
+#chatSlideOverPanel textarea { box-shadow:none; }
+#aiFloatingBtn { touch-action:none; max-width:calc(100vw - 16px); border-radius:9999px; }
+.assistant-pulse { animation:assistant-pulse 3.2s infinite ease-in-out; }
+@keyframes assistant-pulse { 0%,100% { box-shadow:0 10px 25px -5px #004ac659; } 50% { box-shadow:0 12px 30px -3px #004ac68c; } }
+.modal-backdrop { transition:opacity .25s ease; }
+.modal-card { transition:transform .25s ease; max-height:calc(100vh - 32px); overflow-y:auto; }
+.sortable-header,.sortable-th { cursor:pointer; user-select:none; }
+.sortable-th:hover { background:#003ea8; }
+.table-refreshing { animation:table-refresh .3s ease; }
+@keyframes table-refresh { from { opacity:.4; } to { opacity:1; } }
+input,select,textarea { font-variant-numeric:tabular-nums; }
+.font-data-tabular { font-variant-numeric:tabular-nums; }
+[data-queue-scope][aria-pressed=true] { outline:2px solid #004ac6; outline-offset:-2px; }
+:focus-visible { outline:2px solid #004ac6; outline-offset:2px; }
+@media(max-width:1100px) { header > div:last-child { gap:8px; } header input { font-size:12px; } #tabSegmentContainer a { font-size:13px; padding-left:10px; padding-right:10px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+.filter-row { display:grid; grid-template-columns:minmax(220px,1.45fr) minmax(150px,1fr) minmax(150px,1fr) minmax(170px,1.15fr) auto auto; align-items:center; gap:8px; }
+.filter-control,input.filter-control { width:100%; min-width:0; height:36px; border:1px solid #c3c6d74d; border-radius:1rem; background:#eff4ff; padding:6px 10px; font-family:'Hanken Grotesk',sans-serif; font-size:12px; color:#0b1c30; }
+input.filter-control { padding-left:32px; }
+.filter-control:focus { outline:none; border-color:#004ac6; background:#fff; box-shadow:0 0 0 2px #004ac61a; }
+.filter-control::placeholder { color:#737686; }
+.table-footer select { min-width:64px; padding-right:24px; appearance:auto; background-image:none; }
+#approvalHistoryTable th,#supplierDirectoryTable th { padding:12px 10px; font-size:12px; line-height:17px; font-weight:700; }
+#approvalHistoryTable td,#supplierDirectoryTable td { padding:12px 10px; vertical-align:middle; font-size:12px; line-height:18px; }
+#approvalHistoryTable th button,#supplierDirectoryTable th button { min-height:34px; }
+#approvalHistoryTable th[aria-sort="ascending"],#approvalHistoryTable th[aria-sort="descending"],#supplierDirectoryTable th[aria-sort="ascending"],#supplierDirectoryTable th[aria-sort="descending"] { background:#003ea8; }
+.read-only-modal { position:fixed; inset:0; z-index:70; display:flex; align-items:center; justify-content:center; padding:24px; background:#0b1c3080; backdrop-filter:blur(4px); }
+.read-only-modal .dialog-card { width:min(960px,100%); max-height:calc(100vh - 48px); display:flex; flex-direction:column; background:#fff; border:1px solid #dce9ff; border-radius:24px; box-shadow:0 20px 50px #0b1c3033; overflow:hidden; }
+.dialog-body { overflow-y:auto; min-height:0; padding:20px; }
+.detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+.detail-grid dt { color:#565e74; font-size:11px; line-height:16px; margin-bottom:3px; }
+.detail-grid dd { font-size:13px; line-height:20px; font-weight:600; overflow-wrap:anywhere; }
+.detail-block { border:1px solid #dce9ff; background:#eff4ff80; border-radius:16px; padding:14px; }
+.detail-block h3 { font-family:Manrope,sans-serif; font-weight:700; font-size:14px; margin-bottom:12px; }
+.timeline { border-left:2px solid #dce9ff; margin-left:6px; padding-left:20px; display:grid; gap:16px; }
+.timeline li { position:relative; }
+.timeline li::before { content:''; position:absolute; left:-27px; top:5px; width:12px; height:12px; background:#004ac6; border:3px solid #eff4ff; border-radius:50%; }
+.detail-note { border-radius:12px; border:1px solid; padding:12px; font-size:13px; line-height:20px; }
+[role="tab"][aria-selected="true"] { color:#004ac6; background:#eff4ff; border-bottom:2px solid #004ac6; font-weight:700; }
+@media(max-width:1250px) { .approval-tab-bar { overflow-x:auto; } .filter-row { grid-template-columns:minmax(180px,1.3fr) repeat(3,minmax(125px,1fr)) auto auto; } }
+@media(max-width:1000px) { .filter-row { display:flex; flex-wrap:wrap; } .filter-row > .relative { flex:1 1 220px; } .filter-row > select { flex:1 1 160px; width:auto; } .table-footer { flex-wrap:wrap; } }
+@media(max-width:640px) { .detail-grid { grid-template-columns:1fr; } .read-only-modal { padding:12px; } .read-only-modal .dialog-card { max-height:calc(100vh - 24px); } }
+
+</style>
+</head><body class="h-screen w-full overflow-hidden flex bg-background text-on-surface antialiased font-body-md" data-screen="5">
+<div id="toastContainer" role="status" aria-live="polite" class="fixed top-5 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+<aside class="shrink-0 h-screen bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] select-none sidebar-transition relative group/sidebar overflow-x-hidden w-[230px] min-w-[230px]" id="appSidebar">
+<div class="flex flex-col min-h-0 overflow-y-auto hide-scrollbar flex-1">
+<!-- 1. Expanded Header: Logo IAProc (Icon + Text) + Collapse Button '<<' -->
+<div class="min-h-[64px] px-3 py-2.5 flex items-center justify-between bg-inverse-surface/90 shrink-0 border-b border-surface-variant/10" id="sidebarHeaderWrapper">
+<div class="flex items-center gap-space-sm min-w-0 flex-1 overflow-hidden" id="sidebarBrandContainer">
+<div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 cursor-pointer" id="sidebarLogoIcon" title="Hệ thống IAProc">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">inventory_2</span>
+</div>
+<div class="flex flex-col min-w-0 sidebar-label overflow-hidden">
+<span class="font-headline-sm text-headline-sm text-surface-container-lowest font-bold truncate leading-tight tracking-tight">IAProc</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Quản trị Mua sắm</span>
+</div>
+</div>
+<button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" aria-controls="appSidebar" aria-expanded="true" id="btnToggleSidebar" title="Thu gọn sidebar">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="sidebarToggleIcon">keyboard_double_arrow_left</span>
+</button>
+</div>
+<!-- 2. Collapsed Header Bar: Vẫn giữ Logo IAProc trên cùng (căn giữa) + Nút mở rộng (>>) ngay bên dưới logo -->
+<div class="py-3 px-2 flex-col items-center justify-center gap-2 bg-inverse-surface/95 border-b border-surface-variant/15 shrink-0 hidden" id="collapsedExpandHeader">
+<!-- Logo IAProc icon box (Giữ nguyên trên cùng căn giữa) -->
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform" id="collapsedLogoIcon" title="Hệ thống IAProc - Nhấp để mở rộng">
+<span class="material-symbols-outlined text-on-primary-container text-[22px]">inventory_2</span>
+</div>
+<!-- Nút mở rộng >> đặt ngay bên dưới Logo IAProc -->
+<button class="w-9 h-9 rounded-lg bg-on-secondary-fixed-variant/40 hover:bg-primary-container text-secondary-fixed-dim hover:text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm group" id="btnExpandSidebarDirect" title="Mở rộng sidebar">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-0.5">keyboard_double_arrow_right</span>
+</button>
+</div>
+<nav class="flex flex-col gap-1 px-space-xs py-space-sm" id="sidebarNav">
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200 group/nav" data-path="tong-quan" href="#" title="Tổng quan">
+<span class="material-symbols-outlined text-[20px] shrink-0">space_dashboard</span>
+<span class="font-body-sm text-body-sm sidebar-label truncate">Tổng quan</span>
+</a>
+<div class="flex flex-col gap-0.5" id="supplierAccordionWrapper">
+<button class="w-full flex items-center justify-between px-space-sm py-2 transition-all duration-200 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm group/btn text-left" aria-controls="supplierAccordionMenu" aria-expanded="true" id="supplierAccordionBtn" title="Quản lý nhà cung cấp" type="button">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-[20px] shrink-0">corporate_fare</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label font-semibold">Quản lý nhà cung cấp</span>
+</div>
+<span class="material-symbols-outlined text-[16px] transition-transform duration-200 shrink-0 sidebar-label" id="supplierAccordionChevron">expand_more</span>
+</button>
+<div class="flex flex-col pl-6 pr-1 gap-1 overflow-hidden transition-all duration-300 sidebar-label" id="supplierAccordionMenu" style="max-height: 200px; opacity: 1;">
+<a class="py-1.5 px-space-xs rounded-lg text-white font-semibold bg-white/10 hover:bg-white/15 font-body-sm text-body-sm transition-all duration-200 truncate flex items-center gap-1.5 border-l-2 border-primary-container" data-path="ho-so-nha-cung-cap" href="code-ui-4.html">
+<span class="text-primary-fixed">•</span> Hồ sơ nhà cung cấp
+</a>
+<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="danh-gia-xep-hang" href="#">
+            • Đánh giá &amp; Xếp hạng
+          </a>
+</div>
+</div>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="danh-muc-hang-hoa" href="#" title="Danh mục hàng hóa">
+<span class="material-symbols-outlined text-[20px] shrink-0">category</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Danh mục hàng hóa</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="ke-hoach-mua-sam" href="#" title="Kế hoạch mua sắm">
+<span class="material-symbols-outlined text-[20px] shrink-0">event_note</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Kế hoạch mua sắm</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="qua-trinh-mua-sam" href="#" title="Quá trình mua sắm">
+<span class="material-symbols-outlined text-[20px] shrink-0">shopping_cart_checkout</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Quá trình mua sắm</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="thanh-toan-tam-ung" href="#" title="Thanh toán &amp; Tạm ứng">
+<span class="material-symbols-outlined text-[20px] shrink-0">payments</span>
+<span class="font-body-sm text-body-sm truncate sidebar-label">Thanh toán &amp; Tạm ứng</span>
+</a>
+</nav>
+</div>
+<div class="p-space-sm bg-inverse-surface/90 flex items-center justify-between text-secondary-fixed-dim border-t border-surface-variant/10 shrink-0">
+<div class="flex items-center justify-center w-full gap-2">
+<button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" title="Cài đặt hệ thống">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+<span class="font-semibold text-xs text-secondary-fixed-dim tracking-wide sidebar-label whitespace-nowrap">IAProc v1.0</span>
+</div>
+</div>
+</aside>
+<div id="mainContentWrapper" class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden relative"><header class="h-16 shrink-0 bg-surface/95 backdrop-blur-xl border-b border-surface-container-high/60 z-30 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg text-on-surface-variant border border-outline-variant/30 focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all w-[340px] max-w-full"><span class="material-symbols-outlined text-[18px] text-outline">search</span><input id="quickSearchInput" aria-label="Tra cứu nhanh" class="bg-transparent text-body-sm font-body-sm placeholder:text-outline focus:outline-none w-full min-w-0 border-0 p-0 focus:ring-0 text-on-surface" placeholder="Tra cứu nhanh mã LS, mã NCC, tên công ty..." type="text"></div></div><div class="flex items-center gap-space-md"><a href="code-ui-4.html" class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 shadow-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer" id="slaBadgeNav"><span class="material-symbols-outlined text-[16px] text-amber-800">warning</span><span class="font-label-sm text-label-sm font-semibold whitespace-nowrap" id="slaBadgeText">3 nhắc duyệt &gt;24h</span></a><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-2.5"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight whitespace-nowrap">Lê Hoàng Nam</span><span class="font-label-sm text-label-sm text-secondary whitespace-nowrap">Cấp phê duyệt (Trưởng ĐMMS)</span></div><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm transition-transform hover:scale-105 shrink-0">HN</div></div></div></header>
+<main id="mainWorkspace" class="flex-1 min-h-0 min-w-0 overflow-y-auto custom-scroll bg-background px-space-lg py-space-md flex flex-col gap-space-md">
+<div class="w-full shrink-0"><div class="bg-white rounded-xl border border-surface-container-high p-4 shadow-xs flex flex-col gap-3.5"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-surface-container-high"><div class="flex items-center gap-2.5 flex-wrap text-sm"><span class="text-secondary font-medium">Quản lý nhà cung cấp</span><span class="text-secondary text-xs">&gt;</span><h2 class="font-bold text-on-surface text-base font-headline">Danh mục &amp; Hồ sơ nhà cung cấp</h2><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#dbe1ff] text-primary" id="headerCountBadge">128 Hồ sơ</span></div></div><div class="flex items-center justify-end gap-2.5 flex-wrap"><button id="exportExcelBtn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-outline-variant bg-white text-on-surface hover:bg-surface-container transition-colors shadow-xs"><svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Xuất Excel</span></button></div></div></div>
+<div id="approvalTabBar" class="approval-tab-bar bg-white rounded-xl border border-surface-container-high p-2 px-3 shadow-sm flex items-center justify-between gap-3"><nav id="approvalTabs" aria-label="Các màn hình Cấp phê duyệt" class="flex items-center gap-1 flex-nowrap min-w-0 overflow-x-auto hide-scrollbar"><a href="code-ui-4.html" class="inline-flex items-center gap-2 px-3 py-2 text-xs rounded-lg border-b-2 whitespace-nowrap shrink-0 text-secondary font-semibold border-transparent hover:bg-surface-container-low hover:text-primary"><span id="tabCountLabel">Hồ sơ chờ phê duyệt</span><span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-surface-container text-secondary">5</span></a><a href="code-ui-5.html" class="inline-flex items-center gap-2 px-3 py-2 text-xs rounded-lg border-b-2 whitespace-nowrap shrink-0 bg-surface-container-low text-primary font-bold border-primary" aria-current="page"><span id="tabApprovedLabel">Lịch sử đã xét duyệt</span><span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-primary text-white">42</span></a><a href="code-ui-6.html" class="inline-flex items-center gap-2 px-3 py-2 text-xs rounded-lg border-b-2 whitespace-nowrap shrink-0 text-secondary font-semibold border-transparent hover:bg-surface-container-low hover:text-primary"><span id="tabDraftLabel">Tra cứu Danh mục NCC</span><span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-surface-container text-secondary">128</span></a></nav><div class="flex items-center gap-2 shrink-0 whitespace-nowrap"><span class="inline-flex items-center gap-1.5 text-[10px] text-tertiary font-semibold bg-tertiary/5 px-2.5 py-1.5 rounded-full border border-tertiary/20"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>Bot RPA Thuế: Đang hoạt động</span></div></div>
+<section class="bg-white border border-surface-container-high rounded-xl p-3 shadow-sm" aria-label="Bộ lọc dữ liệu"><div class="flex items-center justify-between gap-3 mb-3"><h1 class="font-headline-sm text-headline-sm font-bold flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">filter_list</span>Bộ lọc Lịch sử thẩm định &amp; Phê duyệt (UC-SUP-03)</h1><span class="px-2 py-1 rounded-full bg-surface-container-low text-secondary text-[10px] font-semibold">Audit Log bất biến</span></div>
+<div class="filter-row"><div class="relative min-w-0"><label class="sr-only" for="tableSearchInput">Tìm mã LS, mã NCC, tên công ty...</label><span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px] pointer-events-none">search</span><input id="tableSearchInput" class="filter-control pl-8" type="search" placeholder="Tìm mã LS, mã NCC, tên công ty..."></div><label class="sr-only" for="decisionFilter">Quyết định</label><select id="decisionFilter" class="filter-control" aria-label="Quyết định"><option value="">Quyết định: Tất cả</option><option value="approved">Đã phê duyệt</option><option value="rejected">Bị từ chối (Trả về)</option></select><label class="sr-only" for="timeFilter">Thời gian</label><select id="timeFilter" class="filter-control" aria-label="Thời gian"><option value="30">30 ngày gần nhất</option><option value="7">7 ngày gần nhất</option><option value="quarter">Quý hiện tại</option><option value="all">Tất cả thời gian</option></select><label class="sr-only" for="submitterFilter">Người trình</label><select id="submitterFilter" class="filter-control" aria-label="Người trình"><option value="">Người trình: Tất cả</option><option value="Trần Lâm Anh Khoa">Trần Lâm Anh Khoa</option><option value="Nguyễn Hữu Thắng">Nguyễn Hữu Thắng</option></select><button type="button" id="resetFilters" class="px-2 py-2 text-secondary text-body-sm font-semibold hover:text-primary whitespace-nowrap">Đặt lại</button><button type="button" id="applyFilters" class="px-3 py-2 rounded-lg bg-primary hover:bg-primary-container text-white text-body-sm font-bold whitespace-nowrap">Lọc dữ liệu</button></div></section>
+<section class="bg-white border border-surface-container-high rounded-xl shadow-sm overflow-hidden" aria-label="Lịch sử đã xét duyệt"><div class="flex items-center justify-between gap-3 px-3 py-2 border-b border-surface-container-high/60 text-label-sm text-secondary"><span id="gridStatus" role="status" aria-live="polite">6 dòng đại diện • Dữ liệu mô phỏng</span><span>NFR-SUP-04 • Lưu vết nguyên trạng</span></div>
+<div class="w-full overflow-x-auto"><table id="approvalHistoryTable" class="dense-grid w-full table-fixed border-collapse text-left text-body-sm"><colgroup><col style="width:9%"><col style="width:21%"><col style="width:14%"><col style="width:17%"><col style="width:10%"><col style="width:23%"><col style="width:6%"></colgroup><thead class="bg-primary text-on-primary uppercase text-[12px] font-bold"><tr><th scope="col" data-sort-header="code" aria-sort="none"><button type="button" data-sort="code" class="flex w-full items-center justify-between gap-1 text-left uppercase font-bold"><span>MÃ NCC / LS</span><span data-sort-icon aria-hidden="true" class="text-[14px] opacity-80">↕</span></button></th><th scope="col">TÊN NHÀ CUNG CẤP &amp; MST</th><th scope="col">ĐỐI SOÁT OCR &amp; RPA</th><th scope="col" data-sort-header="decidedAt" aria-sort="none"><button type="button" data-sort="decidedAt" class="flex w-full items-center justify-between gap-1 text-left uppercase font-bold"><span>NGƯỜI TRÌNH &amp; THỜI GIAN DUYỆT</span><span data-sort-icon aria-hidden="true" class="text-[14px] opacity-80">↕</span></button></th><th scope="col" data-sort-header="decision" aria-sort="none"><button type="button" data-sort="decision" class="flex w-full items-center justify-between gap-1 text-left uppercase font-bold"><span>QUYẾT ĐỊNH</span><span data-sort-icon aria-hidden="true" class="text-[14px] opacity-80">↕</span></button></th><th scope="col">LÝ DO TRẢ VỀ / GHI CHÚ DUYỆT</th><th scope="col" class="text-center">CHI TIẾT</th></tr></thead><tbody id="dataBody" class="divide-y divide-surface-container-high/60"><tr data-record-id="LS-SUP-108" class="data-row hover:bg-surface-container-low/60 transition-colors">
+<td><strong class="text-primary">NCC012</strong><span class="block text-[10px] text-secondary mt-0.5">LS-SUP-108</span></td>
+<td><strong>Công ty CP Giải pháp Số Toàn Cầu</strong><span class="block text-[11px] text-secondary mt-1">MST: 0312456789 • Thiết bị CNTT</span></td>
+<td class="text-tertiary">Khớp ĐKKD (OCR 99%) &amp; MST</td>
+<td><span class="font-semibold">Trần Lâm Anh Khoa</span><span class="block text-[11px] text-secondary">Phòng Mua sắm</span><time class="block text-[11px] mt-1 font-medium" datetime="2026-11-08T09:15:00+07:00">08/11/2026 • 09:15</time></td>
+<td><span class="inline-block px-2 py-1 rounded-full border text-[11px] font-bold bg-tertiary/10 text-tertiary border-tertiary/20">Đã duyệt</span></td><td class="text-on-surface-variant">Đủ năng lực pháp lý, kích hoạt trạng thái Đang hoạt động.</td>
+<td class="text-center"><button type="button" data-history-detail="LS-SUP-108" class="px-2 py-1.5 rounded-lg border border-primary/20 text-primary font-semibold hover:bg-surface-container-high" aria-label="Xem lịch sử LS-SUP-108 của NCC012">Xem</button></td></tr><tr data-record-id="LS-SUP-107" class="data-row hover:bg-surface-container-low/60 transition-colors">
+<td><strong class="text-primary">NCC019</strong><span class="block text-[10px] text-secondary mt-0.5">LS-SUP-107</span></td>
+<td><strong>Công ty TNHH Vật tư Minh Phát</strong><span class="block text-[11px] text-secondary mt-1">MST: 0311122334 • Văn phòng phẩm</span></td>
+<td class="text-error">Cảnh báo: MST khóa / OCR 72%</td>
+<td><span class="font-semibold">Trần Lâm Anh Khoa</span><span class="block text-[11px] text-secondary">Phòng Mua sắm</span><time class="block text-[11px] mt-1 font-medium" datetime="2026-11-07T16:40:00+07:00">07/11/2026 • 16:40</time></td>
+<td><span class="inline-block px-2 py-1 rounded-full border text-[11px] font-bold bg-error/10 text-error border-error/20">Bị từ chối</span></td><td class="text-error font-medium">Lý do trả về: Bản scan ĐKKD bị mờ địa chỉ trụ sở và MST đang ngừng hoạt động trên cổng thuế.</td>
+<td class="text-center"><button type="button" data-history-detail="LS-SUP-107" class="px-2 py-1.5 rounded-lg border border-primary/20 text-primary font-semibold hover:bg-surface-container-high" aria-label="Xem lịch sử LS-SUP-107 của NCC019">Xem</button></td></tr><tr data-record-id="LS-SUP-106" class="data-row hover:bg-surface-container-low/60 transition-colors">
+<td><strong class="text-primary">NCC074</strong><span class="block text-[10px] text-secondary mt-0.5">LS-SUP-106</span></td>
+<td><strong>Công ty TNHH TMDV Hoàng Gia</strong><span class="block text-[11px] text-secondary mt-1">MST: 0315544332 • Dịch vụ bảo trì</span></td>
+<td class="text-error">Cảnh báo: Lệch tên chủ TK Ngân hàng</td>
+<td><span class="font-semibold">Nguyễn Hữu Thắng</span><span class="block text-[11px] text-secondary">Phòng Mua sắm</span><time class="block text-[11px] mt-1 font-medium" datetime="2026-11-06T14:20:00+07:00">06/11/2026 • 14:20</time></td>
+<td><span class="inline-block px-2 py-1 rounded-full border text-[11px] font-bold bg-error/10 text-error border-error/20">Bị từ chối</span></td><td class="text-error font-medium">Lý do trả về: Tên người thụ hưởng tài khoản nhận tiền không khớp tên pháp nhân trên ĐKKD.</td>
+<td class="text-center"><button type="button" data-history-detail="LS-SUP-106" class="px-2 py-1.5 rounded-lg border border-primary/20 text-primary font-semibold hover:bg-surface-container-high" aria-label="Xem lịch sử LS-SUP-106 của NCC074">Xem</button></td></tr><tr data-record-id="LS-SUP-105" class="data-row hover:bg-surface-container-low/60 transition-colors">
+<td><strong class="text-primary">NCC031</strong><span class="block text-[10px] text-secondary mt-0.5">LS-SUP-105</span></td>
+<td><strong>Công ty CP Viễn thông Miền Nam</strong><span class="block text-[11px] text-secondary mt-1">MST: 0313344556 • Thiết bị mạng</span></td>
+<td class="text-tertiary">Khớp ĐKKD (OCR 97%) &amp; MST</td>
+<td><span class="font-semibold">Trần Lâm Anh Khoa</span><span class="block text-[11px] text-secondary">Phòng Mua sắm</span><time class="block text-[11px] mt-1 font-medium" datetime="2026-11-05T10:05:00+07:00">05/11/2026 • 10:05</time></td>
+<td><span class="inline-block px-2 py-1 rounded-full border text-[11px] font-bold bg-tertiary/10 text-tertiary border-tertiary/20">Đã duyệt</span></td><td class="text-on-surface-variant">Hồ sơ pháp lý và chứng chỉ đại lý ủy quyền hợp lệ.</td>
+<td class="text-center"><button type="button" data-history-detail="LS-SUP-105" class="px-2 py-1.5 rounded-lg border border-primary/20 text-primary font-semibold hover:bg-surface-container-high" aria-label="Xem lịch sử LS-SUP-105 của NCC031">Xem</button></td></tr><tr data-record-id="LS-SUP-104" class="data-row hover:bg-surface-container-low/60 transition-colors">
+<td><strong class="text-primary">NCC052</strong><span class="block text-[10px] text-secondary mt-0.5">LS-SUP-104</span></td>
+<td><strong>Công ty TNHH Nội thất Hòa Bình</strong><span class="block text-[11px] text-secondary mt-1">MST: 0317711229 • Nội thất VP</span></td>
+<td class="text-tertiary">Khớp ĐKKD (OCR 95%) &amp; MST</td>
+<td><span class="font-semibold">Nguyễn Hữu Thắng</span><span class="block text-[11px] text-secondary">Phòng Mua sắm</span><time class="block text-[11px] mt-1 font-medium" datetime="2026-11-04T15:30:00+07:00">04/11/2026 • 15:30</time></td>
+<td><span class="inline-block px-2 py-1 rounded-full border text-[11px] font-bold bg-tertiary/10 text-tertiary border-tertiary/20">Đã duyệt</span></td><td class="text-on-surface-variant">Đã đối soát ĐKKD đầy đủ, đồng ý đưa vào danh mục NCC chính thức.</td>
+<td class="text-center"><button type="button" data-history-detail="LS-SUP-104" class="px-2 py-1.5 rounded-lg border border-primary/20 text-primary font-semibold hover:bg-surface-container-high" aria-label="Xem lịch sử LS-SUP-104 của NCC052">Xem</button></td></tr><tr data-record-id="LS-SUP-103" class="data-row hover:bg-surface-container-low/60 transition-colors">
+<td><strong class="text-primary">NCC066</strong><span class="block text-[10px] text-secondary mt-0.5">LS-SUP-103</span></td>
+<td><strong>Công ty TNHH Cơ điện Thành Công</strong><span class="block text-[11px] text-secondary mt-1">MST: 0316622118 • Xây dựng</span></td>
+<td class="text-error">Thiếu chữ ký người đại diện ĐKKD</td>
+<td><span class="font-semibold">Trần Lâm Anh Khoa</span><span class="block text-[11px] text-secondary">Phòng Mua sắm</span><time class="block text-[11px] mt-1 font-medium" datetime="2026-11-03T11:20:00+07:00">03/11/2026 • 11:20</time></td>
+<td><span class="inline-block px-2 py-1 rounded-full border text-[11px] font-bold bg-error/10 text-error border-error/20">Bị từ chối</span></td><td class="text-error font-medium">Lý do trả về: Thiếu trang 2 Giấy phép ĐKKD có thông tin người đại diện pháp luật.</td>
+<td class="text-center"><button type="button" data-history-detail="LS-SUP-103" class="px-2 py-1.5 rounded-lg border border-primary/20 text-primary font-semibold hover:bg-surface-container-high" aria-label="Xem lịch sử LS-SUP-103 của NCC066">Xem</button></td></tr><tr id="emptyState" hidden><td colspan="7" class="text-center py-8 text-secondary">Không có dữ liệu mẫu phù hợp. Hãy thử từ khóa khác hoặc đặt lại bộ lọc.</td></tr></tbody></table></div>
+<div class="table-footer px-3 py-3 bg-surface-container-low border-t border-surface-container-high flex items-center justify-between gap-3 text-[11px] text-secondary"><div class="flex items-center gap-3"><span id="resultRange">Hiển thị 1 - 6 trong tổng số 42 bản ghi lịch sử xét duyệt</span><label class="flex items-center gap-2 whitespace-nowrap">Dòng / trang:<select id="rowsPerPage" class="bg-white border border-surface-container-high rounded px-2 py-1 text-xs"><option value="6">6</option><option value="10">10</option><option value="20">20</option><option value="50">50</option></select></label></div><nav class="flex items-center gap-1 shrink-0" aria-label="Phân trang dữ liệu"><button type="button" data-page="previous" aria-label="Trang ‹" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white text-secondary">‹</button><button type="button" data-page="1" aria-label="Trang 1" aria-current="page" class="w-7 h-7 rounded-lg flex items-center justify-center bg-primary text-white font-bold">1</button><button type="button" data-page="2" aria-label="Trang 2" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white text-secondary">2</button><button type="button" data-page="3" aria-label="Trang 3" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white text-secondary">3</button><button type="button" data-page="ellipsis" aria-label="Trang …" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white text-secondary">…</button><button type="button" data-page="7" aria-label="Trang 7" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white text-secondary">7</button><button type="button" data-page="next" aria-label="Trang ›" class="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-white text-secondary">›</button></nav></div></section>
+<div class="grid grid-cols-3 gap-3" aria-label="Chỉ số tổng hợp hệ thống"><section class="bg-white border border-primary/25 rounded-xl p-4 shadow-sm"><div class="flex items-start justify-between gap-2"><h2 class="text-[11px] font-bold text-primary leading-relaxed">TỔNG HỒ SƠ ĐÃ XÉT DUYỆT</h2><span class="material-symbols-outlined text-primary text-[22px]" aria-hidden="true">fact_check</span></div><div class="flex items-baseline gap-2 mt-3"><strong class="font-headline-xl text-headline-xl text-primary">42</strong><span class="text-[11px] font-semibold text-primary">Hồ sơ</span></div><p class="text-[11px] text-secondary mt-2 leading-relaxed">Lưu vết Audit Log bất biến theo NFR-SUP-04</p></section><section class="bg-white border border-tertiary/25 rounded-xl p-4 shadow-sm"><div class="flex items-start justify-between gap-2"><h2 class="text-[11px] font-bold text-tertiary leading-relaxed">ĐÃ PHÊ DUYỆT (KÍCH HOẠT HĐ)</h2><span class="material-symbols-outlined text-tertiary text-[22px]" aria-hidden="true">verified</span></div><div class="flex items-baseline gap-2 mt-3"><strong class="font-headline-xl text-headline-xl text-tertiary">36</strong><span class="text-[11px] font-semibold text-tertiary">Hồ sơ • 85.7%</span></div><p class="text-[11px] text-secondary mt-2 leading-relaxed">Hồ sơ được phê duyệt và kích hoạt hoạt động</p></section><section class="bg-white border border-error/25 rounded-xl p-4 shadow-sm"><div class="flex items-start justify-between gap-2"><h2 class="text-[11px] font-bold text-error leading-relaxed">BỊ TỪ CHỐI / TRẢ VỀ (BR-SUP-05.2)</h2><span class="material-symbols-outlined text-error text-[22px]" aria-hidden="true">assignment_return</span></div><div class="flex items-baseline gap-2 mt-3"><strong class="font-headline-xl text-headline-xl text-error">06</strong><span class="text-[11px] font-semibold text-error">Hồ sơ • 14.3%</span></div><p class="text-[11px] text-secondary mt-2 leading-relaxed">Lý do trả về được lưu bắt buộc trong lịch sử</p></section></div>
+<footer class="text-label-sm text-secondary border-t border-surface-container-high py-3 mt-auto">IAProc v1.0 • Hệ thống Quản trị Nhà Cung Cấp &amp; Mua sắm Tập trung</footer>
+</main></div>
+<aside id="chatSlideOverPanel" role="dialog" aria-label="Trợ lý IAProc" aria-hidden="true" inert class="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[410px] bg-white border-l border-surface-container-high shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-out translate-x-full">
+<!-- Chat Header -->
+<div class="p-3.5 bg-gradient-to-r from-[#0b1c30] via-[#0F172A] to-[#1e293b] text-white flex items-center justify-between border-b border-slate-700/80 shrink-0">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-blue-400 text-white flex items-center justify-center shadow-md font-bold text-sm shrink-0">
+<span class="text-amber-300 text-base leading-none">✦</span>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-1.5">
+<h3 class="font-headline font-bold text-xs tracking-wide text-white truncate">Trợ lý IAProc</h3>
+<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30">AI &amp; RPA</span>
+</div>
+<div class="flex items-center gap-1.5 text-[10px] text-slate-300 mt-0.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+<span class="truncate text-emerald-400 font-medium">Trực tuyến • Sẵn sàng tiếp nhận lệnh</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/60 transition-colors" id="minimizeChatBtn" title="Thu nhỏ panel">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/60 transition-colors" id="closeChatPanelBtn" title="Đóng trợ lý">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+<div id="quickActionChips" class="px-3 py-2 bg-surface-container-low flex gap-1.5 overflow-x-auto hide-scrollbar border-b border-surface-container-high shrink-0"><button type="button" class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-white border border-surface-container-high text-primary text-label-sm font-semibold hover:bg-surface-container-high" data-prompt="Thống kê lý do từ chối tháng này">Thống kê lý do từ chối tháng này</button><button type="button" class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-white border border-surface-container-high text-primary text-label-sm font-semibold hover:bg-surface-container-high" data-prompt="Tra cứu lịch sử NCC019">Tra cứu lịch sử NCC019</button><button type="button" class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-white border border-surface-container-high text-primary text-label-sm font-semibold hover:bg-surface-container-high" data-prompt="Tổng hợp tỷ lệ duyệt theo đơn vị">Tổng hợp tỷ lệ duyệt theo đơn vị</button></div><div id="chatFeed" class="flex-1 p-space-md overflow-y-auto custom-scroll flex flex-col gap-space-md bg-background"><p class="text-center text-label-sm text-secondary">Lê Hoàng Nam • Phiên phân tích chỉ đọc</p><div class="self-end max-w-[92%] bg-inverse-surface text-white rounded-xl p-3 text-body-sm">Thống kê các lý do từ chối phổ biến trong 30 ngày qua</div><div class="bg-white border border-surface-container-high rounded-xl p-3 text-body-sm"><h3 class="font-bold text-primary">Tổng hợp 30 ngày • 6 hồ sơ trả về</h3><table class="w-full text-xs mt-3"><caption class="sr-only">Nhóm lý do trả về hồ sơ</caption><thead class="bg-surface-container-low"><tr><th class="p-2 text-left">Nhóm lý do</th><th class="p-2 text-right">Số hồ sơ</th></tr></thead><tbody><tr><td class="p-2 border-b border-surface-container-high">ĐKKD / OCR chưa đạt</td><td class="p-2 text-right border-b border-surface-container-high font-bold">3</td></tr><tr><td class="p-2 border-b border-surface-container-high">Lệch tài khoản ngân hàng</td><td class="p-2 text-right border-b border-surface-container-high font-bold">2</td></tr><tr><td class="p-2">MST bị khóa / ngừng hoạt động</td><td class="p-2 text-right font-bold">1</td></tr></tbody></table><p class="mt-3 text-label-sm text-secondary">Tỷ lệ trả về 14.3% (6/42). Nên ưu tiên kiểm tra chất lượng scan và tên chủ tài khoản trước khi trình duyệt. Đây là số tổng hợp mô phỏng; bảng hiển thị 6 bản ghi đại diện.</p></div></div>
+<div class="p-space-md border-t border-surface-container-high bg-white shrink-0"><textarea id="chatInputArea" rows="2" class="w-full resize-none rounded-lg bg-surface-container-low border border-outline-variant/30 text-body-sm focus:ring-primary" placeholder="Yêu cầu phân tích hoặc tra cứu lịch sử xét duyệt..."></textarea><div class="flex items-center justify-between mt-2"><span class="text-label-sm text-secondary">Ctrl + Enter để gửi • FR-IA-01</span><button id="btnSendMessage" type="button" class="px-3 py-1.5 rounded-lg bg-primary text-white text-body-sm font-semibold">Gửi</button></div></div></aside>
+<div id="aiFloatingBtn" class="fixed z-40 select-none cursor-grab assistant-pulse" style="bottom:24px; right:24px;"><button type="button" aria-controls="chatSlideOverPanel" aria-expanded="false" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary hover:bg-primary-container text-white text-xs font-bold shadow-xl border border-white/20 transition-transform active:scale-95"><span class="text-amber-300">✦</span><span>Trợ lý IAProc</span><span class="w-2 h-2 rounded-full bg-emerald-400"></span></button></div>
+<div id="historyDetailModal" class="read-only-modal" hidden>
+  <section class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle" tabindex="-1">
+    <header class="px-5 py-4 border-b border-surface-container-high shrink-0">
+      <div class="flex items-center justify-between gap-3"><h2 id="historyModalTitle" class="font-headline-md text-headline-md font-bold">Chi tiết Lịch sử xét duyệt</h2><span class="text-[10px] px-2 py-1 rounded-full bg-surface-container-low text-secondary font-semibold">Audit Log bất biến • NFR-SUP-04</span></div>
+      <p id="historyModalSubtitle" class="text-label-sm text-secondary mt-1"></p>
+    </header>
+    <div id="historyModalContent" class="dialog-body custom-scroll space-y-4"></div>
+    <footer class="px-5 py-3 border-t border-surface-container-high flex justify-end gap-2 shrink-0 bg-surface-container-low/50">
+      <button id="closeHistoryModal" type="button" class="px-4 py-2 text-body-sm font-semibold rounded-lg hover:bg-surface-container-high">Đóng</button>
+      <button id="printHistory" type="button" class="px-4 py-2 text-body-sm font-semibold rounded-lg bg-primary hover:bg-primary-container text-white">In biên bản lịch sử (PDF)</button>
+    </footer>
+  </section>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  const sidebar = byId('appSidebar');
+  const accordion = byId('supplierAccordionMenu');
+  let collapsed = false;
+  let accordionOpen = true;
+  function renderSidebar() {
+    sidebar.classList.toggle('is-collapsed', collapsed);
+    ['w-[230px]', 'min-w-[230px]'].forEach(c => sidebar.classList.toggle(c, !collapsed));
+    ['w-[68px]', 'min-w-[68px]'].forEach(c => sidebar.classList.toggle(c, collapsed));
+    sidebar.querySelectorAll('.sidebar-label').forEach(el => el.classList.toggle('hidden', collapsed));
+    byId('sidebarHeaderWrapper').classList.toggle('hidden', collapsed);
+    byId('collapsedExpandHeader').classList.toggle('hidden', !collapsed);
+    byId('collapsedExpandHeader').classList.toggle('flex', collapsed);
+    accordion.classList.toggle('hidden', collapsed || !accordionOpen);
+    accordion.style.maxHeight = accordionOpen ? '200px' : '0px';
+    accordion.style.opacity = accordionOpen ? '1' : '0';
+    byId('supplierAccordionChevron').classList.toggle('rotate-180', !accordionOpen);
+    byId('supplierAccordionBtn').setAttribute('aria-expanded', String(!collapsed && accordionOpen));
+    byId('btnToggleSidebar').setAttribute('aria-expanded', String(!collapsed));
+  }
+  byId('btnToggleSidebar').addEventListener('click', () => { collapsed = !collapsed; renderSidebar(); });
+  ['btnExpandSidebarDirect', 'collapsedLogoIcon'].forEach(id => {
+    const el = byId(id);
+    el.addEventListener('click', () => { collapsed = false; renderSidebar(); });
+    if (el.tagName !== 'BUTTON') {
+      el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+    }
+  });
+  byId('supplierAccordionBtn').addEventListener('click', () => {
+    if (collapsed) collapsed = false;
+    else accordionOpen = !accordionOpen;
+    renderSidebar();
+  });
+  window.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+      e.preventDefault(); collapsed = !collapsed; renderSidebar();
+    }
+  });
+  renderSidebar();
+
+  window.showToast = (message, type = 'success') => {
+    const toast = document.createElement('div');
+    toast.className = 'pointer-events-auto px-4 py-3 rounded-xl shadow-xl border bg-white text-body-sm max-w-md ' + (type === 'error' ? 'border-error/40 text-error' : 'border-primary/30 text-on-surface');
+    toast.textContent = String(message).replace(/<\/?(?:strong|em)>/g, '');
+    byId('toastContainer').appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+  };
+  window.normalizeSearch = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
+  window.setupGridStatus = (table, rows, onFilter = () => {}) => {
+    const empty = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = table.tHead.rows[0].cells.length;
+    cell.className = 'p-6 text-center text-secondary';
+    cell.textContent = 'Không có dữ liệu phù hợp. Hãy thử từ khóa hoặc bộ lọc khác.';
+    empty.appendChild(cell); empty.hidden = true; table.tBodies[0].appendChild(empty);
+    const status = document.createElement('p');
+    status.className = 'text-label-sm text-secondary px-3 py-2';
+    status.setAttribute('role', 'status');
+    table.parentElement.before(status);
+    return () => {
+      const visible = rows.filter(r => r.isConnected && !r.hidden);
+      empty.hidden = visible.length > 0;
+      status.textContent = `Hiển thị ${visible.length} / ${rows.filter(r => r.isConnected).length} hồ sơ trong dữ liệu mẫu`;
+      rows.forEach(row => { if (row.hidden) row.querySelectorAll('input[type=checkbox]').forEach(cb => { cb.checked = false; }); });
+      onFilter();
+      return visible.length;
+    };
+  };
+
+  const pill = byId('aiFloatingBtn');
+  const pillButton = pill.querySelector('button');
+  const panel = byId('chatSlideOverPanel');
+  const input = byId('chatInputArea');
+  let open = false;
+  function setChat(next, restoreFocus = false) {
+    open = next;
+    panel.classList.toggle('translate-x-full', !open);
+    panel.inert = !open;
+    panel.setAttribute('aria-hidden', String(!open));
+    pillButton.setAttribute('aria-expanded', String(open));
+    pill.classList.toggle('assistant-pulse', !open);
+    if (open) setTimeout(() => { if (open) input.focus(); }, 300);
+    else if (restoreFocus) pillButton.focus({ preventScroll: true });
+  }
+  byId('closeChatPanelBtn').addEventListener('click', () => setChat(false, true));
+  byId('minimizeChatBtn').addEventListener('click', () => setChat(false, true));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) { e.preventDefault(); setChat(false, true); } });
+  let dragging = false, moved = false, positioned = false;
+  let startX = 0, startY = 0, originX = 0, originY = 0;
+  function place(x, y) {
+    const margin = 8;
+    const maxX = Math.max(margin, innerWidth - pill.offsetWidth - margin);
+    const maxY = Math.max(margin, innerHeight - pill.offsetHeight - margin);
+    pill.style.left = Math.max(margin, Math.min(maxX, x)) + 'px';
+    pill.style.top = Math.max(margin, Math.min(maxY, y)) + 'px';
+    pill.style.right = 'auto'; pill.style.bottom = 'auto'; positioned = true;
+  }
+  function start(x, y) {
+    dragging = true; moved = false; startX = x; startY = y;
+    const rect = pill.getBoundingClientRect(); originX = rect.left; originY = rect.top;
+  }
+  function move(x, y) {
+    if (!dragging) return;
+    const dx = x - startX, dy = y - startY;
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+    if (!moved) return;
+    pill.classList.remove('assistant-pulse'); pill.style.cursor = 'grabbing';
+    place(originX + dx, originY + dy);
+  }
+  function end() {
+    dragging = false; pill.style.cursor = '';
+    pill.classList.toggle('assistant-pulse', !open);
+  }
+  pill.addEventListener('mousedown', e => { if (e.button === 0) start(e.clientX, e.clientY); });
+  document.addEventListener('mousemove', e => { move(e.clientX, e.clientY); if (dragging && moved) e.preventDefault(); });
+  document.addEventListener('mouseup', end);
+  window.addEventListener('blur', end);
+  pillButton.addEventListener('click', e => {
+    if (e.detail !== 0 && moved) { e.preventDefault(); moved = false; return; }
+    setChat(!open);
+  });
+  pill.addEventListener('touchstart', e => { if (e.touches.length === 1) start(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  pill.addEventListener('touchmove', e => { if (e.touches.length === 1) { move(e.touches[0].clientX, e.touches[0].clientY); if (moved) e.preventDefault(); } }, { passive: false });
+  pill.addEventListener('touchend', end);
+  pill.addEventListener('touchcancel', end);
+  window.addEventListener('resize', () => {
+    const rect = pill.getBoundingClientRect();
+    if (positioned || rect.left < 8 || rect.top < 8) place(rect.left, rect.top);
+  });
+  setChat(false);
+
+  document.querySelectorAll('.chat-chip').forEach(chip => chip.addEventListener('click', () => { input.value = chip.dataset.prompt || chip.textContent.trim(); input.focus(); }));
+  const feed = byId('chatFeed');
+  function sendMessage() {
+    const text = input.value.trim(); if (!text) return;
+    const message = document.createElement('div');
+    message.className = 'self-end max-w-[92%] p-3 rounded-xl bg-inverse-surface text-white text-body-sm';
+    message.textContent = text; feed.appendChild(message); input.value = '';
+    const reply = document.createElement('p'); reply.className = 'p-3 rounded-xl border border-surface-container-high bg-white text-body-sm';
+    reply.textContent = window.readOnlyAssistantReply(text);
+    feed.appendChild(reply); feed.scrollTop = feed.scrollHeight;
+  }
+  byId('btnSendMessage').addEventListener('click', sendMessage);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); sendMessage(); } });
+})();
+
+</script>
+<script>const approvalPageData = {
+  "screen": 5,
+  "total": 42,
+  "records": [
+    {
+      "code": "NCC012",
+      "id": "LS-SUP-108",
+      "name": "Công ty CP Giải pháp Số Toàn Cầu",
+      "tax": "0312456789",
+      "category": "Thiết bị CNTT",
+      "ocr": "Khớp ĐKKD (OCR 99%) & MST",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-08T09:15:00+07:00",
+      "decision": "approved",
+      "note": "Đủ năng lực pháp lý, kích hoạt trạng thái Đang hoạt động.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC012.pdf",
+      "submittedAt": "2026-11-08T07:15:00+07:00"
+    },
+    {
+      "code": "NCC019",
+      "id": "LS-SUP-107",
+      "name": "Công ty TNHH Vật tư Minh Phát",
+      "tax": "0311122334",
+      "category": "Văn phòng phẩm",
+      "ocr": "Cảnh báo: MST khóa / OCR 72%",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-07T16:40:00+07:00",
+      "decision": "rejected",
+      "note": "Lý do trả về: Bản scan ĐKKD bị mờ địa chỉ trụ sở và MST đang ngừng hoạt động trên cổng thuế.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC019.pdf",
+      "submittedAt": "2026-11-07T14:40:00+07:00"
+    },
+    {
+      "code": "NCC074",
+      "id": "LS-SUP-106",
+      "name": "Công ty TNHH TMDV Hoàng Gia",
+      "tax": "0315544332",
+      "category": "Dịch vụ bảo trì",
+      "ocr": "Cảnh báo: Lệch tên chủ TK Ngân hàng",
+      "submitter": "Nguyễn Hữu Thắng",
+      "decidedAt": "2026-11-06T14:20:00+07:00",
+      "decision": "rejected",
+      "note": "Lý do trả về: Tên người thụ hưởng tài khoản nhận tiền không khớp tên pháp nhân trên ĐKKD.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC074.pdf",
+      "submittedAt": "2026-11-06T12:20:00+07:00"
+    },
+    {
+      "code": "NCC031",
+      "id": "LS-SUP-105",
+      "name": "Công ty CP Viễn thông Miền Nam",
+      "tax": "0313344556",
+      "category": "Thiết bị mạng",
+      "ocr": "Khớp ĐKKD (OCR 97%) & MST",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-05T10:05:00+07:00",
+      "decision": "approved",
+      "note": "Hồ sơ pháp lý và chứng chỉ đại lý ủy quyền hợp lệ.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC031.pdf",
+      "submittedAt": "2026-11-05T08:05:00+07:00"
+    },
+    {
+      "code": "NCC052",
+      "id": "LS-SUP-104",
+      "name": "Công ty TNHH Nội thất Hòa Bình",
+      "tax": "0317711229",
+      "category": "Nội thất VP",
+      "ocr": "Khớp ĐKKD (OCR 95%) & MST",
+      "submitter": "Nguyễn Hữu Thắng",
+      "decidedAt": "2026-11-04T15:30:00+07:00",
+      "decision": "approved",
+      "note": "Đã đối soát ĐKKD đầy đủ, đồng ý đưa vào danh mục NCC chính thức.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC052.pdf",
+      "submittedAt": "2026-11-04T13:30:00+07:00"
+    },
+    {
+      "code": "NCC066",
+      "id": "LS-SUP-103",
+      "name": "Công ty TNHH Cơ điện Thành Công",
+      "tax": "0316622118",
+      "category": "Xây dựng",
+      "ocr": "Thiếu chữ ký người đại diện ĐKKD",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-03T11:20:00+07:00",
+      "decision": "rejected",
+      "note": "Lý do trả về: Thiếu trang 2 Giấy phép ĐKKD có thông tin người đại diện pháp luật.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC066.pdf",
+      "submittedAt": "2026-11-03T09:20:00+07:00"
+    }
+  ],
+  "history": [
+    {
+      "code": "NCC012",
+      "id": "LS-SUP-108",
+      "name": "Công ty CP Giải pháp Số Toàn Cầu",
+      "tax": "0312456789",
+      "category": "Thiết bị CNTT",
+      "ocr": "Khớp ĐKKD (OCR 99%) & MST",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-08T09:15:00+07:00",
+      "decision": "approved",
+      "note": "Đủ năng lực pháp lý, kích hoạt trạng thái Đang hoạt động.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC012.pdf",
+      "submittedAt": "2026-11-08T07:15:00+07:00"
+    },
+    {
+      "code": "NCC019",
+      "id": "LS-SUP-107",
+      "name": "Công ty TNHH Vật tư Minh Phát",
+      "tax": "0311122334",
+      "category": "Văn phòng phẩm",
+      "ocr": "Cảnh báo: MST khóa / OCR 72%",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-07T16:40:00+07:00",
+      "decision": "rejected",
+      "note": "Lý do trả về: Bản scan ĐKKD bị mờ địa chỉ trụ sở và MST đang ngừng hoạt động trên cổng thuế.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC019.pdf",
+      "submittedAt": "2026-11-07T14:40:00+07:00"
+    },
+    {
+      "code": "NCC074",
+      "id": "LS-SUP-106",
+      "name": "Công ty TNHH TMDV Hoàng Gia",
+      "tax": "0315544332",
+      "category": "Dịch vụ bảo trì",
+      "ocr": "Cảnh báo: Lệch tên chủ TK Ngân hàng",
+      "submitter": "Nguyễn Hữu Thắng",
+      "decidedAt": "2026-11-06T14:20:00+07:00",
+      "decision": "rejected",
+      "note": "Lý do trả về: Tên người thụ hưởng tài khoản nhận tiền không khớp tên pháp nhân trên ĐKKD.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC074.pdf",
+      "submittedAt": "2026-11-06T12:20:00+07:00"
+    },
+    {
+      "code": "NCC031",
+      "id": "LS-SUP-105",
+      "name": "Công ty CP Viễn thông Miền Nam",
+      "tax": "0313344556",
+      "category": "Thiết bị mạng",
+      "ocr": "Khớp ĐKKD (OCR 97%) & MST",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-05T10:05:00+07:00",
+      "decision": "approved",
+      "note": "Hồ sơ pháp lý và chứng chỉ đại lý ủy quyền hợp lệ.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC031.pdf",
+      "submittedAt": "2026-11-05T08:05:00+07:00"
+    },
+    {
+      "code": "NCC052",
+      "id": "LS-SUP-104",
+      "name": "Công ty TNHH Nội thất Hòa Bình",
+      "tax": "0317711229",
+      "category": "Nội thất VP",
+      "ocr": "Khớp ĐKKD (OCR 95%) & MST",
+      "submitter": "Nguyễn Hữu Thắng",
+      "decidedAt": "2026-11-04T15:30:00+07:00",
+      "decision": "approved",
+      "note": "Đã đối soát ĐKKD đầy đủ, đồng ý đưa vào danh mục NCC chính thức.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC052.pdf",
+      "submittedAt": "2026-11-04T13:30:00+07:00"
+    },
+    {
+      "code": "NCC066",
+      "id": "LS-SUP-103",
+      "name": "Công ty TNHH Cơ điện Thành Công",
+      "tax": "0316622118",
+      "category": "Xây dựng",
+      "ocr": "Thiếu chữ ký người đại diện ĐKKD",
+      "submitter": "Trần Lâm Anh Khoa",
+      "decidedAt": "2026-11-03T11:20:00+07:00",
+      "decision": "rejected",
+      "note": "Lý do trả về: Thiếu trang 2 Giấy phép ĐKKD có thông tin người đại diện pháp luật.",
+      "department": "Phòng Mua sắm",
+      "approver": "Lê Hoàng Nam",
+      "attachment": "DKKD_NCC066.pdf",
+      "submittedAt": "2026-11-03T09:20:00+07:00"
+    }
+  ]
+};
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const freeze = value => {
+    if (value && typeof value === 'object' && !Object.isFrozen(value)) {
+      Object.values(value).forEach(freeze);
+      Object.freeze(value);
+    }
+    return value;
+  };
+  const data = freeze(approvalPageData);
+  const isHistory = data.screen === 5;
+  const records = data.records;
+  const table = $(isHistory ? 'approvalHistoryTable' : 'supplierDirectoryTable');
+  const rowMap = new Map(Array.from(table.querySelectorAll('tr[data-record-id]')).map(row => [row.dataset.recordId, row]));
+  const recordKey = record => isHistory ? record.id : record.code;
+  const search = normalizeSearch;
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+  const dateParts = value => Object.fromEntries(new Intl.DateTimeFormat('vi-VN', {
+    timeZone:'Asia/Bangkok', day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', hourCycle:'h23'
+  }).formatToParts(new Date(value)).map(part => [part.type, part.value]));
+  const formatDate = value => {
+    const parts = dateParts(value);
+    return `${parts.day}/${parts.month}/${parts.year} • ${parts.hour}:${parts.minute}`;
+  };
+  const filterIds = isHistory ? ['decisionFilter','timeFilter','submitterFilter'] : ['categoryFilter','statusFilter','rankFilter'];
+  const decisionText = record => record.decision === 'approved' ? 'Đã duyệt' : 'Bị từ chối';
+  const sortState = { key:null, direction:'none' };
+  let filtered = [...records];
+  function withinTime(record) {
+    const value = $('timeFilter').value;
+    if (value === 'all') return true;
+    const today = dateParts(new Date());
+    const midnight = Date.parse(`${today.year}-${today.month}-${today.day}T00:00:00+07:00`);
+    let lower;
+    if (value === 'quarter') {
+      const month = String(Math.floor((Number(today.month)-1)/3)*3+1).padStart(2,'0');
+      lower = Date.parse(`${today.year}-${month}-01T00:00:00+07:00`);
+    } else lower = midnight - (Number(value)-1)*86400000;
+    const time = Date.parse(record.decidedAt);
+    return time >= lower && time < midnight + 86400000;
+  }
+  function applyFilters() {
+    const query = search($('tableSearchInput').value);
+    filtered = records.filter(record => {
+      const text = isHistory
+        ? `${record.id} ${record.code} ${record.name} ${record.tax} ${record.category}`
+        : `${record.code} ${record.name} ${record.tax} ${record.phone} ${record.category}`;
+      if (!search(text).includes(query)) return false;
+      if (isHistory) return (!$('decisionFilter').value || record.decision === $('decisionFilter').value)
+        && (!$('submitterFilter').value || record.submitter === $('submitterFilter').value) && withinTime(record);
+      return (!$('categoryFilter').value || record.category === $('categoryFilter').value)
+        && (!$('statusFilter').value || record.status === $('statusFilter').value)
+        && (!$('rankFilter').value || record.rank === $('rankFilter').value);
+    });
+    if (sortState.key && sortState.direction !== 'none') {
+      const multiplier = sortState.direction === 'asc' ? 1 : -1;
+      filtered.sort((a,b) => {
+        const key = sortState.key;
+        if (key === 'score') return (a.score - b.score)*multiplier;
+        if (key === 'decidedAt') return (Date.parse(a.decidedAt)-Date.parse(b.decidedAt))*multiplier;
+        const left = key === 'decision' ? decisionText(a) : a[key];
+        const right = key === 'decision' ? decisionText(b) : b[key];
+        return String(left).localeCompare(String(right),'vi',{numeric:true,sensitivity:'base'})*multiplier;
+      });
+    }
+    const visible = filtered.slice(0,Number($('rowsPerPage').value));
+    const visibleKeys = new Set(visible.map(recordKey));
+    rowMap.forEach((row,key) => { row.hidden = !visibleKeys.has(key); });
+    visible.forEach(record => $('dataBody').insertBefore(rowMap.get(recordKey(record)),$('emptyState')));
+    $('emptyState').hidden = visible.length > 0;
+    $('gridStatus').textContent = `${filtered.length} / ${records.length} dòng đại diện phù hợp • Dữ liệu mô phỏng`;
+    const range = visible.length ? `1 - ${visible.length}` : '0 - 0';
+    const noun = isHistory ? 'bản ghi lịch sử xét duyệt' : 'nhà cung cấp trên hệ thống';
+    $('resultRange').textContent = filtered.length === records.length
+      ? `Hiển thị ${range} trong tổng số ${data.total} ${noun}`
+      : `Hiển thị ${range} trong ${filtered.length} kết quả mẫu phù hợp (tổng hệ thống: ${data.total})`;
+    return filtered.length;
+  }
+  ['quickSearchInput','tableSearchInput'].forEach(id => $(id).addEventListener('input', () => {
+    $(id === 'quickSearchInput' ? 'tableSearchInput' : 'quickSearchInput').value = $(id).value;
+    applyFilters();
+  }));
+  filterIds.forEach(id => $(id).addEventListener('change',applyFilters));
+  $('applyFilters').addEventListener('click', () => showToast(`Đã lọc: ${applyFilters()} dòng dữ liệu mẫu phù hợp.`));
+  $('resetFilters').addEventListener('click', () => {
+    $('quickSearchInput').value = ''; $('tableSearchInput').value = '';
+    filterIds.forEach(id => { $(id).selectedIndex = 0; });
+    sortState.key = null; sortState.direction = 'none';
+    updateSortIndicators(); applyFilters();
+  });
+  $('rowsPerPage').addEventListener('change',applyFilters);
+  function updateSortIndicators() {
+    table.querySelectorAll('[data-sort-header]').forEach(header => {
+      const active = header.dataset.sortHeader === sortState.key && sortState.direction !== 'none';
+      header.setAttribute('aria-sort',active ? (sortState.direction === 'asc' ? 'ascending' : 'descending') : 'none');
+      header.querySelector('[data-sort-icon]').textContent = active ? (sortState.direction === 'asc' ? '↑' : '↓') : '↕';
+    });
+  }
+  table.querySelectorAll('[data-sort]').forEach(button => button.addEventListener('click', () => {
+    const key = button.dataset.sort;
+    sortState.direction = key !== sortState.key || sortState.direction === 'none' ? 'asc' : sortState.direction === 'asc' ? 'desc' : 'none';
+    sortState.key = key;
+    updateSortIndicators(); applyFilters();
+  }));
+  document.querySelectorAll('[data-page]').forEach(button => button.addEventListener('click', () => {
+    if (button.dataset.page === '1' || button.dataset.page === 'previous') return;
+    showToast(`Bản mẫu có ${records.length} dòng đại diện trên trang 1. Các trang còn lại cần dữ liệu từ hệ thống.`, 'info');
+  }));
+
+  // Export only the current filtered and sorted read-only data.
+  $('exportExcelBtn').addEventListener('click', () => {
+    const columns = isHistory
+      ? [['Mã NCC','code'],['Mã lịch sử','id'],['Tên pháp nhân','name'],['MST','tax'],['Loại NCC','category'],['OCR & RPA','ocr'],['Người trình','submitter'],['Thời gian duyệt','decidedAt'],['Quyết định','decision'],['Ghi chú / Lý do trả về','note']]
+      : [['Mã NCC','code'],['Tên pháp nhân','name'],['MST','tax'],['SĐT','phone'],['Loại NCC','category'],['OCR & RPA','legal'],['Hạng','rank'],['Điểm đánh giá','score'],['Hợp đồng / PO','contracts'],['Trạng thái HĐ','status']];
+    const cell = value => {
+      let text = String(value ?? '');
+      if (/^[=+@-]/.test(text)) text = "'" + text;
+      return '"'+text.replace(/"/g,'""')+'"';
+    };
+    const csv = [columns.map(([label]) => cell(label)).join(','), ...filtered.map(record => columns.map(([,key]) => cell(key === 'decidedAt' ? formatDate(record[key]) : key === 'decision' ? decisionText(record) : record[key])).join(','))].join('\r\n');
+    const url = URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
+    const link = document.createElement('a'); link.href = url; link.download = isHistory ? 'IAProc_lich_su_xet_duyet.csv' : 'IAProc_danh_muc_ncc.csv';
+    document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url),1000);
+    showToast(`Đã xuất ${filtered.length} dòng, định dạng CSV UTF-8 tương thích Excel.`);
+  });
+
+  const modal = $(isHistory ? 'historyDetailModal' : 'supplierReadOnlyModal');
+  let previousFocus = null;
+  function openModal() {
+    previousFocus = document.activeElement;
+    modal.hidden = false;
+    $('mainContentWrapper').inert = true; $('appSidebar').inert = true;
+    $('chatSlideOverPanel').inert = true;
+    modal.querySelector('[role="dialog"]').focus({preventScroll:true});
+    modal.querySelector('.dialog-body').scrollTop = 0;
+  }
+  function closeModal() {
+    modal.hidden = true;
+    $('mainContentWrapper').inert = false; $('appSidebar').inert = false;
+    $('chatSlideOverPanel').inert = $('chatSlideOverPanel').classList.contains('translate-x-full');
+    if (previousFocus && previousFocus.isConnected) previousFocus.focus({preventScroll:true});
+  }
+  modal.addEventListener('click',event => { if (event.target === modal) closeModal(); });
+  document.addEventListener('keydown',event => {
+    if (modal.hidden) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeModal(); return; }
+    if (event.key === 'Tab') {
+      const controls = Array.from(modal.querySelectorAll('button:not(:disabled),a[href],[tabindex="0"]')).filter(el => el.getClientRects().length);
+      const first = controls[0], last = controls[controls.length-1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === modal.querySelector('[role="dialog"]'))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  });
+  const fields = entries => '<dl class="detail-grid">'+entries.map(([label,value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')+'</dl>';
+  const decisionNote = record => `<div class="detail-note ${record.decision === 'approved' ? 'bg-tertiary/5 border-tertiary/25 text-tertiary' : 'bg-error/5 border-error/25 text-error'}"><strong class="block mb-1">${record.decision === 'approved' ? 'Ghi chú phê duyệt' : 'Lý do trả về bắt buộc • BR-SUP-05.2'}</strong>${esc(record.note)}</div>`;
+  function historyTimeline(record) {
+    return `<ol class="timeline text-body-sm"><li><strong>1. Bộ phận Mua sắm trình duyệt</strong><p class="text-secondary mt-1">${esc(record.submitter)} • ${esc(record.department)}</p><time class="text-label-sm" datetime="${esc(record.submittedAt)}">${formatDate(record.submittedAt)}</time></li><li><strong>2. Cấp phê duyệt ra quyết định: ${decisionText(record)}</strong><p class="text-secondary mt-1">${esc(record.approver)} • Trưởng ĐMMS</p><time class="text-label-sm" datetime="${esc(record.decidedAt)}">${formatDate(record.decidedAt)}</time></li></ol>`;
+  }
+  function openHistory(record) {
+    $('historyModalSubtitle').textContent = `${record.id} • ${record.code} • Chỉ đọc`;
+    $('historyModalContent').innerHTML = `<section class="detail-block"><h3>Thông tin hồ sơ NCC</h3>${fields([['Mã NCC',record.code],['Tên pháp nhân',record.name],['Mã số thuế',record.tax],['Loại NCC',record.category],['Người trình',record.submitter],['Phòng ban / Đơn vị tạo',record.department],['Tài liệu đính kèm ĐKKD',record.attachment],['Mã lịch sử bất biến',record.id]])}</section><section class="detail-block"><h3>Đối soát OCR &amp; RPA tại thời điểm xét duyệt</h3><p class="text-body-sm ${record.decision === 'approved' ? 'text-tertiary' : 'text-error'}">${esc(record.ocr)}</p></section><section class="detail-block"><h3>Timeline lịch sử xử lý</h3>${historyTimeline(record)}<p class="text-label-sm text-secondary mt-3">Dữ liệu mô phỏng; thời điểm trình duyệt được minh họa để thể hiện quy trình 2 bước.</p></section>${decisionNote(record)}`;
+    modal.dataset.recordId = record.id;
+    openModal();
+  }
+  function selectSupplierTab(tab, moveFocus = false) {
+    ['legal','history'].forEach(key => {
+      const selected = tab === key;
+      const button = $(key === 'legal' ? 'legalDetailTab' : 'historyDetailTab');
+      button.setAttribute('aria-selected',String(selected)); button.tabIndex = selected ? 0 : -1;
+      $(key === 'legal' ? 'legalDetailPanel' : 'historyDetailPanel').hidden = !selected;
+      if (selected && moveFocus) button.focus();
+    });
+  }
+  function openSupplier(record, tab) {
+    $('supplierModalSubtitle').textContent = `${record.code} • ${record.name}`;
+    const legalTone = record.status === 'Đang hoạt động' ? 'text-tertiary' : record.status === 'Tạm dừng' ? 'text-amber-800' : 'text-error';
+    $('legalDetailPanel').innerHTML = `<section class="detail-block"><h3>Hồ sơ pháp lý • 4.2.3.a</h3>${fields([['Mã NCC',record.code],['Tên pháp nhân',record.name],['Mã số thuế',record.tax],['Loại NCC',record.category],['Địa chỉ trụ sở',record.address],['Người đại diện pháp luật',record.representative],['Số điện thoại',record.phone],['Email',record.email],['Tài khoản ngân hàng (NFR-SUP-03)',record.bank],['Trạng thái hoạt động (BR-SUP-06.1)',record.status]])}</section><section class="detail-block"><h3>Kết quả đối soát OCR / RPA</h3><p class="text-body-sm font-semibold ${legalTone}">${esc(record.legal)}</p></section><section class="detail-block"><h3>Chứng từ đính kèm</h3><div class="flex flex-wrap gap-2">${['Giay_phep_DKKD.pdf','Ho_so_nang_luc.pdf'].map(file => `<button type="button" data-document="${file}" class="px-3 py-2 rounded-lg bg-white border border-surface-container-high text-primary text-body-sm font-semibold">${file}</button>`).join('')}</div><p class="mt-3 text-label-sm text-secondary">Dữ liệu mô phỏng. Các trường chưa được cung cấp được ghi rõ; chứng từ chỉ có bản xem mô phỏng.</p></section>`;
+    const history = data.history.filter(item => item.code === record.code);
+    $('historyDetailPanel').innerHTML = `<section class="detail-block"><h3>Lịch sử phê duyệt hồ sơ</h3>${history.length ? history.map(item => `<article class="space-y-3"><p class="text-label-sm text-secondary">${esc(item.id)}</p>${historyTimeline(item)}${decisionNote(item)}</article>`).join('') : '<p class="text-body-sm">Hồ sơ cập nhật NCC045 hiện đang chờ Cấp phê duyệt tại Tab 1. Chưa có bản ghi quyết định trước đó trong dữ liệu mẫu này.</p>'}</section><section class="detail-block"><h3>Lịch sử điểm đánh giá</h3><div class="space-y-2">${record.evaluations.map(item => `<div class="flex items-center justify-between gap-3 bg-white border border-surface-container-high p-3 rounded-lg text-body-sm"><span>${esc(item.period)}</span><strong class="${item.rank === 'A' ? 'text-tertiary' : item.rank === 'B' ? 'text-amber-800' : 'text-error'}">Hạng ${item.rank} • ${item.score.toFixed(1)}đ</strong></div>`).join('')}</div><p class="mt-3 text-label-sm text-secondary">Điểm kỳ gần nhất theo danh mục; kỳ trước là dữ liệu minh họa cho giao diện lịch sử.</p></section>`;
+    modal.dataset.recordId = record.code;
+    selectSupplierTab(tab); openModal();
+  }
+  if (isHistory) {
+    $('closeHistoryModal').addEventListener('click',closeModal);
+    $('printHistory').addEventListener('click', () => showToast(`Mô phỏng in biên bản lịch sử ${modal.dataset.recordId} (PDF).`,'info'));
+    table.querySelectorAll('[data-history-detail]').forEach(button => button.addEventListener('click', () => openHistory(records.find(record => record.id === button.dataset.historyDetail))));
+  } else {
+    $('closeSupplierModal').addEventListener('click',closeModal);
+    table.querySelectorAll('[data-supplier-detail]').forEach(button => button.addEventListener('click', () => openSupplier(records.find(record => record.code === button.dataset.supplierDetail),button.dataset.detailTab)));
+    ['legalDetailTab','historyDetailTab'].forEach((id,index) => {
+      $(id).addEventListener('click', () => selectSupplierTab(index === 0 ? 'legal' : 'history'));
+      $(id).addEventListener('keydown',event => {
+        if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+        event.preventDefault();
+        selectSupplierTab(event.key === 'Home' ? 'legal' : event.key === 'End' ? 'history' : index === 0 ? 'history' : 'legal',true);
+      });
+    });
+    modal.addEventListener('click',event => {
+      const button = event.target.closest('[data-document]');
+      if (button) showToast(`Xem chứng từ ${button.dataset.document} của ${modal.dataset.recordId} (mô phỏng).`,'info');
+    });
+  }
+  window.readOnlyAssistantReply = prompt => {
+    const text = search(prompt);
+    if (isHistory) {
+      if (text.includes('ncc019')) return 'NCC019 • LS-SUP-107 • 07/11/2026 • 16:40: Lê Hoàng Nam trả về do bản scan ĐKKD mờ địa chỉ trụ sở và MST đang ngừng hoạt động. Lý do được lưu trong Audit Log chỉ đọc.';
+      if (text.includes('don vi')) return 'Tổng hợp mô phỏng: Phòng Mua sắm có 42 hồ sơ đã xét duyệt, 36 đã phê duyệt (85.7%) và 6 trả về (14.3%). Chưa có dữ liệu của đơn vị khác để so sánh.';
+      return 'Trong 30 ngày qua (dữ liệu tổng hợp mô phỏng): 3 hồ sơ lỗi ĐKKD/OCR, 2 hồ sơ lệch tài khoản ngân hàng, 1 hồ sơ MST khóa. Tổng cộng 6 hồ sơ trả về trên 42 hồ sơ đã xét duyệt.';
+    }
+    if (text.includes('blacklist') || text.includes('khoa')) return 'NCC019 — Công ty TNHH Vật tư Minh Phát • Hạng C (62.0đ) • Khóa/Blacklist • MST ngừng hoạt động. Theo BR-SUP-06.2, NCC này bị ẩn khỏi danh sách chọn gói thầu mới.';
+    if (text.includes('so sanh')) return 'So sánh chỉ đọc: NCC012 đạt 92.5đ, 08 HĐ / 24 PO; NCC031 đạt 88.0đ, 05 HĐ / 14 PO. Cả hai đạt Hạng A, đang hoạt động và đã đối soát ĐKKD/MST. Chênh lệch điểm: 4.5đ.';
+    if (text.includes('cntt') && !text.includes('mang')) return 'NCC012 — Công ty CP Giải pháp Số Toàn Cầu • Thiết bị CNTT • Hạng A (92.5đ) • Đang hoạt động • 08 HĐ / 24 PO. Hồ sơ ĐKKD/MST đã đối soát (dữ liệu mô phỏng).';
+    return 'Nhóm CNTT & Mạng đạt Hạng A đang hoạt động: NCC012 — 92.5đ (Thiết bị CNTT), NCC031 — 88.0đ (Thiết bị mạng). Thông tin trên dữ liệu mô phỏng chỉ phục vụ tra cứu và phân tích điều hành.';
+  };
+  applyFilters();
+})();
+</script>
+</body></html>

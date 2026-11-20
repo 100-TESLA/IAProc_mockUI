@@ -1,113 +1,308 @@
-<!DOCTYPE html><html class="h-full" lang="vi"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;height:100%;}body{overscroll-behavior:none;}}
-/* Custom elegant scrollbar styling */
-.custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
-.custom-scroll::-webkit-scrollbar-track { background: transparent; }
-.custom-scroll::-webkit-scrollbar-thumb { background: #c3c6d7; border-radius: 9999px; }
-.custom-scroll::-webkit-scrollbar-thumb:hover { background: #737686; }
-.hide-scrollbar::-webkit-scrollbar { display: none; }
-.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Micro-interaction & Keyframe Animations */
-@keyframes shimmer-sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-.btn-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-.btn-shimmer::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 50%; height: 100%;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
-  transform: translateX(-150%);
-  pointer-events: none;
-}
-.btn-shimmer:hover::after {
-  animation: shimmer-sweep 1.2s infinite;
-}
-
-@keyframes float-subtle {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-3px) scale(1.01); }
-}
-.animate-float {
-  animation: float-subtle 3s ease-in-out infinite;
-}
-
-@keyframes ai-glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-  50% { box-shadow: 0 0 16px 4px rgba(37, 99, 235, 0.2); }
-}
-.animate-ai-glow {
-  animation: ai-glow-pulse 2.5s infinite;
-}
-
-@keyframes toast-slide-down {
-  0% { opacity: 0; transform: translateY(-16px) scale(0.95); }
-  15% { opacity: 1; transform: translateY(0) scale(1); }
-  85% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-16px) scale(0.95); }
-}
-.toast-animation {
-  animation: toast-slide-down 3.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes data-refresh {
-  0% { opacity: 0.5; filter: blur(1px); }
-  100% { opacity: 1; filter: blur(0px); }
-}
-.table-refreshing {
-  animation: data-refresh 0.35s ease-out;
-}
-
-/* Sidebar collapsed tooltip and transitions */
-.sidebar-transition {
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Draggable Floating AI Button */
-#btnHeaderAiTrigger {
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
-}
-#btnHeaderAiTrigger:active, #btnHeaderAiTrigger.dragging {
-  cursor: grabbing !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-shimmer:hover::after, .animate-float, .animate-ai-glow, .toast-animation, .table-refreshing, .sidebar-transition {
-    animation: none !important;
-    transition: none !important;
+<!DOCTYPE html>
+<html class="h-full" lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IAProc — Danh mục Loại NCC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=Manrope:wght@200..800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {
+  "darkMode": "class",
+  "theme": {
+    "extend": {
+      "colors": {
+        "surface": "#f8f9ff",
+        "surface-dim": "#cbdbf5",
+        "surface-bright": "#f8f9ff",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#eff4ff",
+        "surface-container": "#e5eeff",
+        "surface-container-high": "#dce9ff",
+        "surface-container-highest": "#d3e4fe",
+        "on-surface": "#0b1c30",
+        "on-surface-variant": "#434655",
+        "inverse-surface": "#213145",
+        "inverse-on-surface": "#eaf1ff",
+        "outline": "#737686",
+        "outline-variant": "#c3c6d7",
+        "surface-tint": "#0053db",
+        "primary": "#004ac6",
+        "on-primary": "#ffffff",
+        "primary-container": "#2563eb",
+        "on-primary-container": "#eeefff",
+        "inverse-primary": "#b4c5ff",
+        "secondary": "#565e74",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#dae2fd",
+        "on-secondary-container": "#5c647a",
+        "tertiary": "#006058",
+        "on-tertiary": "#ffffff",
+        "tertiary-container": "#007b71",
+        "on-tertiary-container": "#b3fff3",
+        "error": "#ba1a1a",
+        "on-error": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-error-container": "#93000a",
+        "primary-fixed": "#dbe1ff",
+        "primary-fixed-dim": "#b4c5ff",
+        "on-primary-fixed": "#00174b",
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed": "#dae2fd",
+        "secondary-fixed-dim": "#bec6e0",
+        "on-secondary-fixed": "#131b2e",
+        "on-secondary-fixed-variant": "#3f465c",
+        "tertiary-fixed": "#89f5e7",
+        "tertiary-fixed-dim": "#6bd8cb",
+        "on-tertiary-fixed": "#00201d",
+        "on-tertiary-fixed-variant": "#005049",
+        "background": "#f8f9ff",
+        "on-background": "#0b1c30",
+        "surface-variant": "#d3e4fe"
+      },
+      "borderRadius": {
+        "sm": "0.25rem",
+        "DEFAULT": "0.5rem",
+        "md": "0.75rem",
+        "lg": "1rem",
+        "xl": "1.5rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "gutter": "1rem",
+        "gutter-dense": "0.5rem",
+        "margin": "1.5rem",
+        "margin-mobile": "1rem",
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "space-md": "0.75rem",
+        "space-lg": "1.25rem",
+        "space-xl": "2rem"
+      },
+      "fontFamily": {
+        "display-lg": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-xl": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-xl-mobile": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-lg": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-md": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "headline-sm": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "body-lg": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "body-md": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "body-sm": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "label-md": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "label-sm": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "data-tabular": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ],
+        "headline": [
+          "Manrope",
+          "sans-serif"
+        ],
+        "body": [
+          "Hanken Grotesk",
+          "sans-serif"
+        ]
+      },
+      "fontSize": {
+        "display-lg": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.025em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-xl": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-xl-mobile": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-lg": [
+          "22px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-md": [
+          "18px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "headline-sm": [
+          "16px",
+          {
+            "lineHeight": "22px",
+            "letterSpacing": "-0.005em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-lg": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "body-md": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.005em",
+            "fontWeight": "400"
+          }
+        ],
+        "label-md": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "600"
+          }
+        ],
+        "label-sm": [
+          "11px",
+          {
+            "lineHeight": "14px",
+            "letterSpacing": "0.03em",
+            "fontWeight": "600"
+          }
+        ],
+        "data-tabular": [
+          "13px",
+          {
+            "lineHeight": "18px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "500"
+          }
+        ]
+      }
+    }
   }
-}
-</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-fixed-dim": "#bec6e0", "on-tertiary-container": "#b3fff3", "tertiary-fixed-dim": "#6bd8cb", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "error-container": "#ffdad6", "surface-container-low": "#eff4ff", "primary-container": "#2563eb", "on-tertiary-fixed": "#00201d", "primary-fixed-dim": "#b4c5ff", "secondary": "#565e74", "on-secondary": "#ffffff", "on-primary-fixed": "#00174b", "primary-fixed": "#dbe1ff", "background": "#f8f9ff", "surface": "#f8f9ff", "surface-variant": "#d3e4fe", "on-primary-fixed-variant": "#003ea8", "on-secondary-fixed": "#131b2e", "tertiary-container": "#007b71", "surface-container-high": "#dce9ff", "inverse-surface": "#213145", "inverse-on-surface": "#eaf1ff", "on-primary-container": "#eeefff", "on-secondary-fixed-variant": "#3f465c", "secondary-container": "#dae2fd", "primary": "#004ac6", "outline": "#737686", "on-secondary-container": "#5c647a", "surface-dim": "#cbdbf5", "on-surface": "#0b1c30", "tertiary": "#006058", "inverse-primary": "#b4c5ff", "on-error": "#ffffff", "secondary-fixed": "#dae2fd", "on-primary": "#ffffff", "on-background": "#0b1c30", "tertiary-fixed": "#89f5e7", "on-tertiary": "#ffffff", "surface-bright": "#f8f9ff", "on-surface-variant": "#434655", "on-tertiary-fixed-variant": "#005049", "surface-container-highest": "#d3e4fe", "on-error-container": "#93000a", "surface-tint": "#0053db", "outline-variant": "#c3c6d7", "surface-container": "#e5eeff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "space-xl": "2rem", "gutter-dense": "0.5rem", "space-sm": "0.5rem", "margin": "1.5rem", "gutter": "1rem", "space-lg": "1.25rem", "margin-mobile": "1rem", "space-md": "0.75rem" }, fontFamily: { "body-sm": ["Hanken Grotesk"], "headline-xl": ["Manrope"], "body-lg": ["Hanken Grotesk"], "headline-md": ["Manrope"], "data-tabular": ["Hanken Grotesk"], "headline-sm": ["Manrope"], "headline-lg": ["Manrope"], "display-lg": ["Manrope"], "label-md": ["Hanken Grotesk"], "headline-xl-mobile": ["Manrope"], "body-md": ["Hanken Grotesk"], "label-sm": ["Hanken Grotesk"], "tab": ["Plus Jakarta Sans", "Hanken Grotesk", "sans-serif"] }, fontSize: { "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "data-tabular": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }], "headline-sm": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-xl-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }] } } } };</script></head>
-<body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary h-screen w-full overflow-hidden flex">
-<!-- NOTIFICATION TOAST CONTAINER -->
-<div class="fixed top-5 right-6 z-[100] flex flex-col gap-2 pointer-events-none" id="toastContainer"></div>
-<!-- FLOATING DRAGGABLE AI ASSISTANT BUTTON (Free drag anywhere across UI, viewport bounded, high z-50) -->
-<div class="fixed z-50 select-none shadow-[0_10px_25px_-3px_rgba(37,99,235,0.4),0_4px_10px_rgba(0,0,0,0.1)] transition-shadow hover:shadow-[0_14px_30px_-3px_rgba(37,99,235,0.5),0_6px_15px_rgba(0,0,0,0.15)] rounded-full" id="btnHeaderAiTrigger" style="inset: 14px auto auto 722px;" title="Kéo để di chuyển khắp màn hình • Click nhẹ để mở Trợ lý IAProc">
-<button class="btn-shimmer bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white px-3.5 py-1.5 rounded-full flex items-center gap-2 font-headline-sm text-headline-sm border border-white/25 select-none ring-2 ring-blue-400/30 hover:scale-105 active:scale-95 transition-transform" type="button">
-<div class="relative flex items-center justify-center pointer-events-none">
-<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
-</div>
-<span class="font-semibold text-body-sm whitespace-nowrap pointer-events-none">Trợ lý IAProc</span>
-<span class="relative flex h-2.5 w-2.5 pointer-events-none">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 ring-2 ring-blue-700"></span>
-</span>
-</button>
-</div>
-<!-- LEFT SIDEBAR: Collapsible 230px <-> 72px Navy #0F172A matching SCREEN_4 -->
-<aside class="shrink-0 h-screen bg-inverse-surface text-inverse-on-surface z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] select-none sidebar-transition relative group/sidebar overflow-x-hidden w-[230px] min-w-[230px]" id="appSidebar">
+};</script>
+<style>html,body { margin:0; padding:0; height:100%; }
+body { font-family:'Hanken Grotesk',sans-serif; overscroll-behavior:none; }
+.material-symbols-outlined { font-family:'Material Symbols Outlined'; font-weight:400; font-style:normal; line-height:1; letter-spacing:normal; text-transform:none; display:inline-block; white-space:nowrap; word-wrap:normal; direction:ltr; -webkit-font-smoothing:antialiased; font-feature-settings:'liga'; }
+.custom-scroll { scrollbar-width:thin; scrollbar-color:#c3c6d7 transparent; }
+.custom-scroll::-webkit-scrollbar { width:6px; height:6px; }
+.custom-scroll::-webkit-scrollbar-thumb { background:#c3c6d7; border-radius:9999px; }
+.hide-scrollbar { scrollbar-width:none; }
+.hide-scrollbar::-webkit-scrollbar { display:none; }
+#appSidebar { width:230px; min-width:230px; transition:width .3s ease,min-width .3s ease; }
+#appSidebar.is-collapsed { width:68px; min-width:68px; }
+#appSidebar.is-collapsed #sidebarNav > a,
+#appSidebar.is-collapsed #supplierAccordionBtn { justify-content:center; }
+#appSidebar.is-collapsed #supplierAccordionBtn > div { justify-content:center; }
+#mainWorkspace > * { flex-shrink:0; }
+.dense-grid th { font-size:11px; line-height:16px; letter-spacing:.02em; }
+.dense-grid td { font-size:12px; line-height:18px; overflow-wrap:anywhere; }
+.dense-grid th,.dense-grid td { min-width:0; }
+.dense-grid td > *, .dense-grid td span { max-width:100%; }
+.dense-grid th .whitespace-nowrap,.dense-grid td .whitespace-nowrap { white-space:normal; }
+.dense-grid td .truncate { white-space:normal; overflow:visible; text-overflow:clip; }
+.dense-grid td .flex { min-width:0; flex-wrap:wrap; }
+.dense-grid td button { flex-shrink:0; }
+.dense-grid td button .material-symbols-outlined { font-size:18px; }
+.dense-grid td:last-child button { padding:4px; }
+.dense-grid td:last-child > .flex { gap:2px; }
+#categoryTable th,#categoryTable td { padding-left:6px; padding-right:6px; }
+#categoryTable .font-headline-sm { font-family:'Hanken Grotesk',sans-serif; font-size:13px; line-height:18px; }
+#approvalQueueTable .action-buttons-container { gap:5px; }
+#approvalQueueTable .action-buttons-container button { font-size:11px; padding:6px 8px; white-space:nowrap; }
+[hidden] { display:none !important; }
+#chatSlideOverPanel.translate-x-full { transform:translateX(100%); pointer-events:none; visibility:hidden; }
+#chatSlideOverPanel { transition:transform .3s ease-out,visibility .3s; }
+#chatSlideOverPanel:not(.translate-x-full) { transform:translateX(0); visibility:visible; }
+#chatFeed { min-height:0; }
+#chatFeed > * { flex-shrink:0; }
+#chatFeed .truncate { white-space:normal; overflow:visible; text-overflow:clip; overflow-wrap:anywhere; }
+body[data-screen="1"] #btnConfirmDraft,body[data-screen="2"] #btnConfirmDraft { flex-basis:100%; }
+#chatSlideOverPanel textarea { box-shadow:none; }
+#aiFloatingBtn { touch-action:none; max-width:calc(100vw - 16px); border-radius:9999px; }
+.assistant-pulse { animation:assistant-pulse 3.2s infinite ease-in-out; }
+@keyframes assistant-pulse { 0%,100% { box-shadow:0 10px 25px -5px #004ac659; } 50% { box-shadow:0 12px 30px -3px #004ac68c; } }
+.modal-backdrop { transition:opacity .25s ease; }
+.modal-card { transition:transform .25s ease; max-height:calc(100vh - 32px); overflow-y:auto; }
+.sortable-header,.sortable-th { cursor:pointer; user-select:none; }
+.sortable-th:hover { background:#003ea8; }
+.table-refreshing { animation:table-refresh .3s ease; }
+@keyframes table-refresh { from { opacity:.4; } to { opacity:1; } }
+input,select,textarea { font-variant-numeric:tabular-nums; }
+.font-data-tabular { font-variant-numeric:tabular-nums; }
+[data-queue-scope][aria-pressed=true] { outline:2px solid #004ac6; outline-offset:-2px; }
+:focus-visible { outline:2px solid #004ac6; outline-offset:2px; }
+@media(max-width:1100px) { header > div:last-child { gap:8px; } header input { font-size:12px; } #tabSegmentContainer a { font-size:13px; padding-left:10px; padding-right:10px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+</style>
+</head>
+<body class="h-screen w-full overflow-hidden flex bg-background text-on-surface antialiased font-body-md" data-screen="3">
+<div id="toastContainer" role="status" aria-live="polite" class="fixed top-5 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+<aside class="shrink-0 h-screen bg-inverse-surface text-inverse-on-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] select-none sidebar-transition relative group/sidebar overflow-x-hidden w-[230px] min-w-[230px]" id="appSidebar">
 <div class="flex flex-col min-h-0 overflow-y-auto hide-scrollbar flex-1">
-<!-- TOP SIDEBAR HEADER -->
+<!-- 1. Expanded Header: Logo IAProc (Icon + Text) + Collapse Button '<<' -->
 <div class="min-h-[64px] px-3 py-2.5 flex items-center justify-between bg-inverse-surface/90 shrink-0 border-b border-surface-variant/10" id="sidebarHeaderWrapper">
 <div class="flex items-center gap-space-sm min-w-0 flex-1 overflow-hidden" id="sidebarBrandContainer">
-<div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0" title="IAProc">
+<div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 cursor-pointer" id="sidebarLogoIcon" title="Hệ thống IAProc">
 <span class="material-symbols-outlined text-on-primary-container text-[20px]">inventory_2</span>
 </div>
 <div class="flex flex-col min-w-0 sidebar-label overflow-hidden">
@@ -115,26 +310,28 @@
 <span class="font-label-sm text-label-sm text-secondary-fixed-dim truncate">Quản trị Mua sắm</span>
 </div>
 </div>
-<!-- Nút Thu gọn sidebar (chevron_left «) -->
-<button class="p-1 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0 sidebar-label" id="btnToggleSidebar" title="Thu gọn Sidebar (Ctrl+B)">
-<span class="material-symbols-outlined text-[20px]" id="sidebarToggleIcon">keyboard_double_arrow_left</span>
+<button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" aria-controls="appSidebar" aria-expanded="true" id="btnToggleSidebar" title="Thu gọn sidebar">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="sidebarToggleIcon">keyboard_double_arrow_left</span>
 </button>
 </div>
-<!-- NÚT MỞ RỘNG SIDEBAR (Hiển thị ngay dưới logo khi sidebar thu gọn) -->
-<div class="px-2 py-2 border-b border-surface-variant/10 hidden" id="sidebarExpandBar">
-<button class="w-full py-2 px-2 rounded-lg bg-primary/20 hover:bg-primary text-surface-container-lowest flex items-center justify-center transition-all duration-200 group/expand shadow-sm" id="btnExpandSidebarBelowLogo" title="Mở rộng Sidebar (Ctrl+B)" type="button">
-<span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-0.5">keyboard_double_arrow_right</span>
+<!-- 2. Collapsed Header Bar: Vẫn giữ Logo IAProc trên cùng (căn giữa) + Nút mở rộng (>>) ngay bên dưới logo -->
+<div class="py-3 px-2 flex-col items-center justify-center gap-2 bg-inverse-surface/95 border-b border-surface-variant/15 shrink-0 hidden" id="collapsedExpandHeader">
+<!-- Logo IAProc icon box (Giữ nguyên trên cùng căn giữa) -->
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform" id="collapsedLogoIcon" title="Hệ thống IAProc - Nhấp để mở rộng">
+<span class="material-symbols-outlined text-on-primary-container text-[22px]">inventory_2</span>
+</div>
+<!-- Nút mở rộng >> đặt ngay bên dưới Logo IAProc -->
+<button class="w-9 h-9 rounded-lg bg-on-secondary-fixed-variant/40 hover:bg-primary-container text-secondary-fixed-dim hover:text-white flex items-center justify-center transition-all duration-200 active:scale-95 shadow-sm group" id="btnExpandSidebarDirect" title="Mở rộng sidebar">
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-0.5">keyboard_double_arrow_right</span>
 </button>
 </div>
-<!-- NAVIGATION ITEMS -->
 <nav class="flex flex-col gap-1 px-space-xs py-space-sm" id="sidebarNav">
 <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200 group/nav" data-path="tong-quan" href="#" title="Tổng quan">
 <span class="material-symbols-outlined text-[20px] shrink-0">space_dashboard</span>
 <span class="font-body-sm text-body-sm sidebar-label truncate">Tổng quan</span>
 </a>
-<!-- Quản lý nhà cung cấp (Active Category) -->
 <div class="flex flex-col gap-0.5" id="supplierAccordionWrapper">
-<button class="w-full flex items-center justify-between px-space-sm py-2 transition-all duration-200 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm group/btn text-left" id="supplierAccordionBtn" title="Quản lý nhà cung cấp" type="button">
+<button class="w-full flex items-center justify-between px-space-sm py-2 transition-all duration-200 bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-sm group/btn text-left" aria-controls="supplierAccordionMenu" aria-expanded="true" id="supplierAccordionBtn" title="Quản lý nhà cung cấp" type="button">
 <div class="flex items-center gap-space-sm min-w-0">
 <span class="material-symbols-outlined text-[20px] shrink-0">corporate_fare</span>
 <span class="font-body-sm text-body-sm truncate sidebar-label font-semibold">Quản lý nhà cung cấp</span>
@@ -142,14 +339,12 @@
 <span class="material-symbols-outlined text-[16px] transition-transform duration-200 shrink-0 sidebar-label" id="supplierAccordionChevron">expand_more</span>
 </button>
 <div class="flex flex-col pl-6 pr-1 gap-1 overflow-hidden transition-all duration-300 sidebar-label" id="supplierAccordionMenu" style="max-height: 200px; opacity: 1;">
-<a class="flex items-center gap-2.5 py-2 px-3 rounded-lg bg-[#243552] text-white font-body-sm font-bold transition-all duration-200 shadow-sm" data-path="ho-so-nha-cung-cap" href="#">
-<span class="w-1.5 h-1.5 bg-white shrink-0 rounded-[1px] inline-block"></span>
-<span class="truncate text-[13px] font-bold text-white">Hồ sơ nhà cung cấp</span>
+<a class="py-1.5 px-space-xs rounded-lg text-white font-semibold bg-white/10 hover:bg-white/15 font-body-sm text-body-sm transition-all duration-200 truncate flex items-center gap-1.5 border-l-2 border-primary-container" data-path="ho-so-nha-cung-cap" href="code-ui-1.html">
+<span class="text-primary-fixed">•</span> Hồ sơ nhà cung cấp
 </a>
-<a class="flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm transition-all duration-200 truncate" data-path="danh-gia-xep-hang" href="#">
-<span class="w-1.5 h-1.5 bg-secondary-fixed-dim shrink-0 rounded-[1px] inline-block opacity-75"></span>
-<span class="truncate text-[13px]">Đánh giá &amp; Xếp hạng</span>
-</a>
+<a class="py-1.5 px-space-xs rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest font-body-sm text-body-sm transition-all duration-200 truncate" data-path="danh-gia-xep-hang" href="#">
+            • Đánh giá &amp; Xếp hạng
+          </a>
 </div>
 </div>
 <a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-container-lowest transition-all duration-200" data-path="danh-muc-hang-hoa" href="#" title="Danh mục hàng hóa">
@@ -175,26 +370,20 @@
 <button class="p-1.5 rounded-lg hover:bg-on-secondary-fixed-variant text-secondary-fixed-dim hover:text-surface-container-lowest transition-colors flex items-center justify-center shrink-0" title="Cài đặt hệ thống">
 <span class="material-symbols-outlined text-[20px]">tune</span>
 </button>
-<span class="font-label-sm text-secondary-fixed-dim sidebar-label truncate">IAProc v1.0 - Phân vùng Nội bộ</span>
+<span class="font-semibold text-xs text-secondary-fixed-dim tracking-wide sidebar-label whitespace-nowrap">IAProc v1.0</span>
 </div>
 </div>
 </aside>
-<!-- MAIN WRAPPER: Takes remainder width, contains Header + Dual Split Panes (Workspace + AI Assistant) -->
-<div class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden relative transition-all duration-300">
-<!-- TOP HEADER: Đồng bộ 100% SCREEN_4 (Search 320px, Cảnh báo + Profile bên phải) -->
-<header class="h-16 shrink-0 bg-surface/95 backdrop-blur-xl border-b border-surface-container-high/60 z-30 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg text-on-surface-variant border border-outline-variant/30 focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all w-[320px]"><span class="material-symbols-outlined text-[18px] text-outline">search</span><input class="bg-transparent text-body-sm font-body-sm placeholder:text-outline focus:outline-none w-full text-on-surface" placeholder="Tra cứu nhanh nhà cung cấp, mã số thuế, hợp đồng..." type="text"></div></div><!-- Empty flexible space in center to allow dragging trigger across freely --><div class="flex-1"></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 shadow-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer"><span class="material-symbols-outlined text-[16px] text-amber-800">warning</span><span class="font-label-sm text-label-sm font-semibold whitespace-nowrap">2 hồ sơ trả về cần xử lý</span></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-2.5"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight whitespace-nowrap">Trần Lâm Anh Khoa</span><span class="font-label-sm text-label-sm text-secondary whitespace-nowrap">Bộ phận Mua sắm</span></div><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm transition-transform hover:scale-105 shrink-0"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header>
-<!-- CONTENT VIEWPORT: Flex container holding Main Workspace and Right AI Panel -->
-<div class="flex-1 flex flex-row min-h-0 overflow-hidden relative" id="splitViewport">
-<!-- 1. CENTER MAIN WORKSPACE: Fully independent scrollable area -->
-<main class="flex-1 min-w-0 h-full overflow-y-auto custom-scroll bg-background px-space-lg py-space-md flex flex-col gap-space-md transition-all duration-300" id="mainWorkspace">
+<div id="mainContentWrapper" class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden relative"><header class="h-16 shrink-0 bg-surface/95 backdrop-blur-xl border-b border-surface-container-high/60 z-30 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1.5 rounded-lg text-on-surface-variant border border-outline-variant/30 focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all w-[340px] max-w-full"><span class="material-symbols-outlined text-[18px] text-outline">search</span><input id="quickSearchInput" aria-label="Tra cứu nhanh" class="bg-transparent text-body-sm font-body-sm placeholder:text-outline focus:outline-none w-full min-w-0 border-0 p-0 focus:ring-0 text-on-surface" placeholder="Tra cứu nhanh mã loại, tên loại nhà cung cấp..." type="text"></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 shadow-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer"><span class="material-symbols-outlined text-[16px] text-amber-800">warning</span><span class="font-label-sm text-label-sm font-semibold whitespace-nowrap">2 hồ sơ trả về cần xử lý</span></div><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-2.5"><div class="flex flex-col text-right"><span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight whitespace-nowrap">Trần Lâm Anh Khoa</span><span class="font-label-sm text-label-sm text-secondary whitespace-nowrap">Bộ phận Mua sắm</span></div><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm transition-transform hover:scale-105 shrink-0"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header>
+<main id="mainWorkspace" class="flex-1 min-h-0 min-w-0 overflow-y-auto custom-scroll bg-background px-space-lg py-space-md flex flex-col gap-space-md">
 <!-- TOP BREADCRUMB & ACTION TOOLBAR (Giữ nguyên 100% 2 dòng riêng biệt: Dòng 1 Breadcrumb + Badge, Dòng 2 Nút hành động) -->
 <div class="flex flex-col gap-2.5 shrink-0"><div class="flex items-center gap-2 text-secondary whitespace-nowrap min-w-0"><span class="hover:text-primary transition-colors cursor-pointer text-secondary font-medium whitespace-nowrap text-[14px]">Quản lý nhà cung cấp</span><span class="material-symbols-outlined text-[16px] text-secondary shrink-0">chevron_right</span><h1 class="text-[20px] text-[#0F172A] font-bold whitespace-nowrap leading-tight m-0">Danh mục &amp; Hồ sơ nhà cung cấp</h1><span class="ml-1 inline-flex items-center px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-primary-fixed-variant text-label-sm font-label-sm font-semibold whitespace-nowrap shrink-0" id="totalRecordsBadge">12 Loại NCC</span></div><div class="flex items-center justify-between gap-2.5 whitespace-nowrap"><div class="flex items-center gap-2 text-body-sm text-secondary"></div><div class="flex items-center gap-2.5"><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm font-body-sm font-medium shadow-sm hover:bg-surface-container-low hover:border-primary/40 active:scale-95 transition-all border border-outline-variant/30" type="button"><span class="material-symbols-outlined text-[18px] text-secondary">file_download</span><span class="">Xuất Excel</span></button><button class="btn-shimmer inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary text-on-primary text-body-sm font-body-sm font-semibold shadow-md hover:bg-primary-container hover:shadow-lg active:scale-95 transition-all" id="btnHeaderAddCategory" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="">Thêm mới loại NCC</span></button></div></div></div>
 <!-- SUB-NAVIGATION SEGMENT TABS (ĐỒNG BỘ CHÍNH XÁC TYPOGRAPHY, CỠ CHỮ, MÀU SẮC, PILL COUNTER NHƯ SCREEN_4) -->
-<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-1.5 shadow-sm border border-surface-container-high/60 shrink-0"><div class="flex items-center gap-1.5" id="tabSegmentContainer"><button class="tab-item relative px-3.5 py-2 rounded-lg text-[#334155] hover:text-on-surface hover:bg-surface-container-low text-[15px] font-medium flex items-center gap-2 transition-all duration-200" type="button"><span class="">Hồ sơ Nhà cung cấp</span><span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold">128</span></button><button class="tab-item relative px-3.5 py-2 rounded-lg text-[#334155] hover:text-on-surface hover:bg-surface-container-low text-[15px] font-medium flex items-center gap-2 transition-all duration-200" type="button"><span class="">Bản nháp &amp; Hồ sơ cần xử lý</span><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm font-bold border border-amber-300">8</span></button><button class="tab-item relative px-3.5 py-2 rounded-lg bg-surface-container-low text-[#1D4ED8] text-[15px] flex items-center gap-2 font-bold transition-all duration-200 shadow-xs border-b-2 border-primary" type="button"><span class="">Danh mục Loại NCC</span><span class="px-2 py-0.5 rounded-full bg-primary text-white font-label-sm text-label-sm font-bold">12</span></button></div><div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary pr-2"><span class="flex items-center gap-2 bg-surface-container-low px-2.5 py-1 rounded-full border border-surface-container-high/50 hover:bg-surface-container-high/50 transition-colors"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="text-tertiary font-semibold">Bot RPA Thuế: Đang hoạt động</span></span></div></div>
+<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-1.5 shadow-sm border border-surface-container-high/60 shrink-0"><div class="flex items-center gap-1.5 flex-nowrap shrink-0 overflow-x-auto hide-scrollbar" id="tabSegmentContainer"><a href="code-ui-1.html" class="tab-item relative px-3.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-[15px] font-semibold flex items-center gap-2 transition-all duration-200 whitespace-nowrap shrink-0 border-b-2 border-transparent"><span class="whitespace-nowrap shrink-0">Hồ sơ Nhà cung cấp</span><span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container-high text-secondary">128</span></a><a href="code-ui-2.html" class="tab-item relative px-3.5 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low text-[15px] font-semibold flex items-center gap-2 transition-all duration-200 whitespace-nowrap shrink-0 border-b-2 border-transparent"><span class="whitespace-nowrap shrink-0">Bản nháp &amp; Hồ sơ cần xử lý</span><span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container-high text-secondary">8</span></a><a href="code-ui-3.html" class="tab-item relative px-3.5 py-2 rounded-lg bg-surface-container-low text-primary text-[15px] flex items-center gap-2 font-bold transition-all duration-200 border-b-2 border-primary whitespace-nowrap shrink-0" aria-current="page"><span class="whitespace-nowrap shrink-0">Danh mục Loại NCC</span><span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary text-white">12</span></a></div><div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary pr-2"><span class="flex items-center gap-2 bg-surface-container-low px-2.5 py-1 rounded-full border border-surface-container-high/50 hover:bg-surface-container-high/50 transition-colors"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="text-tertiary font-semibold">Bot RPA Thuế: Đang hoạt động</span></span></div></div>
 <!-- MAIN OPERATIONAL WORKSPACE: 32% Left Form + 68% Right Grid Card Layout -->
 <div class="flex items-start gap-space-md w-full">
 <!-- LEFT COLUMN: Input & Configuration Form Card (32%) -->
-<div class="w-[32%] shrink-0 bg-surface-container-lowest rounded-xl p-space-md shadow-sm border border-surface-container-high/60 hover:shadow-md transition-shadow flex flex-col">
+<div class="w-[32%] min-w-0 shrink-0 bg-surface-container-lowest rounded-xl p-space-md shadow-sm border border-surface-container-high/60 hover:shadow-md transition-shadow flex flex-col">
 <div class="flex flex-col mb-4">
 <h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Thêm mới / Cập nhật Loại NCC</h2>
 <p class="font-body-sm text-body-sm text-secondary mt-1">
@@ -222,7 +411,7 @@
             Đơn vị quản lý *
           </label>
 <div class="relative w-full">
-<select class="appearance-auto bg-none w-full h-9 pl-3 pr-9 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm border border-surface-container-high/50 focus:border-primary/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer" id="managingDept" name="managingDept">
+<select class="appearance-auto bg-none w-full h-9 pl-3 pr-9 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm border border-surface-container-high/50 focus:border-primary/30 focus:outline-none focus:bg-surface-container-lowest cursor-pointer" name="managingDept" id="managingDept">
 <option selected="" value="cntt">Phòng Mua sắm CNTT &amp; Hạ tầng</option>
 <option value="bql">Ban Quản lý Dự án</option>
 <option value="hc">Phòng Hành chính</option>
@@ -237,7 +426,7 @@
             Trạng thái hoạt động *
           </span>
 <div class="grid grid-cols-2 p-1 rounded-lg bg-surface-container-low gap-1 border border-surface-container-high/50" id="statusToggleGroup">
-<button class="py-1.5 px-3 rounded-md bg-[#1D4ED8] text-white font-label-md text-label-md font-semibold text-center transition-all shadow-xs cursor-pointer" id="btnStatusActive" type="button">
+<button class="py-1.5 px-3 rounded-md bg-primary text-white font-label-md text-label-md font-semibold text-center transition-all shadow-xs cursor-pointer" id="btnStatusActive" type="button">
               Đang hoạt động
             </button>
 <button class="py-1.5 px-3 rounded-md text-secondary hover:text-on-surface font-label-md text-label-md font-medium text-center transition-all cursor-pointer" id="btnStatusInactive" type="button">
@@ -257,7 +446,7 @@
 <button class="px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary hover:text-on-surface font-headline-sm text-headline-sm transition-all active:scale-95 cursor-pointer" id="btnResetForm" type="button">
             Làm mới
           </button>
-<button class="btn-shimmer px-5 py-2 rounded-lg bg-[#1D4ED8] hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold shadow-xs transition-all active:scale-95 cursor-pointer select-none" id="btnSaveCategory" type="button">
+<button class="btn-shimmer px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold shadow-xs transition-all active:scale-95 cursor-pointer select-none" id="btnSaveCategory" type="button">
             Lưu thông tin
           </button>
 </div>
@@ -283,7 +472,7 @@
 <input class="w-full h-9 pl-8 pr-2 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-outline border border-surface-container-high/50 focus:border-primary/30 focus:outline-none focus:bg-surface-container-lowest transition-all" id="tableSearchInput" placeholder="Tìm theo Mã hoặc Tên loại NCC..." type="text">
 </div>
 <div class="relative flex-1 min-w-0">
-<select class="appearance-auto bg-none w-full h-9 pl-2.5 pr-8 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface border border-surface-container-high/50 focus:border-primary/30 focus:outline-none cursor-pointer truncate">
+<select class="appearance-auto bg-none w-full h-9 pl-2.5 pr-8 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface border border-surface-container-high/50 focus:border-primary/30 focus:outline-none cursor-pointer truncate" id="categoryDeptFilter">
 <option>Đơn vị quản lý: Tất cả</option>
 <option>Phòng Mua sắm CNTT &amp; Hạ tầng</option>
 <option>Ban Quản lý Dự án</option>
@@ -293,7 +482,7 @@
 
 </div>
 <div class="relative flex-1 min-w-0">
-<select class="appearance-auto bg-none w-full h-9 pl-2.5 pr-8 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface border border-surface-container-high/50 focus:border-primary/30 focus:outline-none cursor-pointer truncate">
+<select class="appearance-auto bg-none w-full h-9 pl-2.5 pr-8 rounded-lg bg-surface-container-low text-body-sm font-body-sm text-on-surface border border-surface-container-high/50 focus:border-primary/30 focus:outline-none cursor-pointer truncate" id="categoryStatusFilter">
 <option>Trạng thái: Tất cả</option>
 <option>Đang hoạt động</option>
 <option>Ngừng sử dụng</option>
@@ -315,53 +504,54 @@
 <!-- DATA GRID TABLE: Header xanh Royal Blue #1D4ED8 in hoa trắng, rows hover êm ái -->
 <div class="w-full overflow-hidden rounded-lg border border-surface-container-high/60 bg-surface-container-lowest">
 <div class="overflow-x-auto w-full custom-scroll">
-<table class="w-full text-left border-collapse min-w-[700px]">
-<thead><tr class="bg-[#1D4ED8] text-white uppercase tracking-wider select-none text-[12px] font-bold">
-<th class="py-2.5 px-3 font-label-md text-label-md font-bold uppercase tracking-wider whitespace-nowrap w-[14%]" scope="col">
+<table id="categoryTable" class="w-full table-fixed border-collapse text-left text-body-sm dense-grid">
+<colgroup><col style="width:16%"><col style="width:27%"><col style="width:18%"><col style="width:12%"><col style="width:16%"><col style="width:11%"></colgroup>
+<thead><tr class="bg-primary text-white uppercase tracking-wider select-none text-[12px] font-bold">
+<th class="py-2.5 px-2.5 font-label-md text-label-md font-bold uppercase tracking-wider" scope="col">
                 MÃ LOẠI
               </th>
-<th class="py-2.5 px-3 font-label-md text-label-md font-bold uppercase tracking-wider whitespace-nowrap w-[36%]" scope="col">
+<th class="py-2.5 px-2.5 font-label-md text-label-md font-bold uppercase tracking-wider" scope="col">
                 TÊN LOẠI NHÀ CUNG CẤP &amp; GHI CHÚ
               </th>
-<th class="py-2.5 px-3 font-label-md text-label-md font-bold uppercase tracking-wider whitespace-nowrap w-[20%]" scope="col">
+<th class="py-2.5 px-2.5 font-label-md text-label-md font-bold uppercase tracking-wider" scope="col">
                 ĐƠN VỊ QUẢN LÝ
               </th>
-<th class="py-2.5 px-3 font-label-md text-label-md font-bold uppercase tracking-wider text-center whitespace-nowrap w-[12%]" scope="col">
+<th class="py-2.5 px-2.5 font-label-md text-label-md font-bold uppercase tracking-wider text-center" scope="col">
                 SỐ NCC TRỰC THUỘC
               </th>
-<th class="py-2.5 px-3 font-label-md text-label-md font-bold uppercase tracking-wider text-center whitespace-nowrap w-[10%]" scope="col">
+<th class="py-2.5 px-2.5 font-label-md text-label-md font-bold uppercase tracking-wider text-center" scope="col">
                 TRẠNG THÁI
               </th>
-<th class="py-2.5 px-3 font-label-md text-label-md font-bold uppercase tracking-wider text-center whitespace-nowrap w-[8%]" scope="col">
+<th class="py-2.5 px-2.5 font-label-md text-label-md font-bold uppercase tracking-wider text-center" scope="col">
                 THAO TÁC
               </th>
 </tr></thead>
 <tbody class="divide-y divide-surface-container-low text-on-surface text-[13px]" id="categoryTableBody"><!-- Row 1: Active & Selected -->
 <tr class="bg-blue-50/40 hover:bg-blue-50/50 hover:shadow-xs transition-colors cursor-pointer group" data-cat-code="LNCC-CNTT">
-<td class="py-3 px-3 font-data-tabular text-data-tabular font-bold text-primary relative whitespace-nowrap">
-<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+<td class="py-3 px-2.5 font-data-tabular text-data-tabular font-bold text-primary relative">
+<span class="absolute left-0 top-0 bottom-0 bg-primary"></span>
                 LNCC-CNTT
               </td>
-<td class="py-3 px-3">
+<td class="py-3 px-2.5">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight group-hover:text-primary transition-colors">Thiết bị CNTT &amp; Mạng</span>
 <span class="font-label-sm text-label-sm text-secondary mt-0.5">Máy chủ, thiết bị mạng, laptop</span>
 </div>
 </td>
-<td class="py-3 px-3 font-body-sm text-body-sm text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-body-sm text-body-sm text-on-surface">
                 Phòng Mua sắm CNTT
               </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="font-data-tabular text-data-tabular font-semibold text-on-surface">
                   42 NCC
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="px-2.5 py-1 rounded bg-tertiary-container/15 text-tertiary border border-tertiary/30 font-label-sm text-label-sm font-semibold inline-block">
                   Đang hoạt động
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <div class="flex items-center justify-center gap-1">
 <button class="p-1 rounded-md text-secondary hover:text-primary hover:bg-surface-container-high transition-all" title="Chỉnh sửa" type="button">
 <span class="material-symbols-outlined text-[18px]">edit_square</span>
@@ -374,29 +564,29 @@
 </tr>
 <!-- Row 2 -->
 <tr class="hover:bg-blue-50/50 transition-colors group cursor-pointer" data-cat-code="LNCC-XD">
-<td class="py-3 px-3 font-data-tabular text-data-tabular font-medium text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-data-tabular text-data-tabular font-medium text-on-surface">
                 LNCC-XD
               </td>
-<td class="py-3 px-3">
+<td class="py-3 px-2.5">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight group-hover:text-primary transition-colors">Xây dựng &amp; Cơ điện (M&amp;E)</span>
 <span class="font-label-sm text-label-sm text-secondary mt-0.5">Thi công xây lắp, hệ thống điện</span>
 </div>
 </td>
-<td class="py-3 px-3 font-body-sm text-body-sm text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-body-sm text-body-sm text-on-surface">
                 Ban Quản lý Dự án
               </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="font-data-tabular text-data-tabular font-semibold text-on-surface">
                   35 NCC
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="px-2.5 py-1 rounded bg-tertiary-container/15 text-tertiary border border-tertiary/30 font-label-sm text-label-sm font-semibold inline-block">
                   Đang hoạt động
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <div class="flex items-center justify-center gap-1">
 <button class="p-1 rounded-md text-secondary hover:text-primary hover:bg-surface-container-high transition-all" title="Chỉnh sửa" type="button">
 <span class="material-symbols-outlined text-[18px]">edit_square</span>
@@ -409,29 +599,29 @@
 </tr>
 <!-- Row 3 -->
 <tr class="hover:bg-blue-50/50 transition-colors group cursor-pointer" data-cat-code="LNCC-VPP">
-<td class="py-3 px-3 font-data-tabular text-data-tabular font-medium text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-data-tabular text-data-tabular font-medium text-on-surface">
                 LNCC-VPP
               </td>
-<td class="py-3 px-3">
+<td class="py-3 px-2.5">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight group-hover:text-primary transition-colors">Văn phòng phẩm &amp; Vật tư</span>
 <span class="font-label-sm text-label-sm text-secondary mt-0.5">Giấy in, mực in, vật tư tiêu hao</span>
 </div>
 </td>
-<td class="py-3 px-3 font-body-sm text-body-sm text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-body-sm text-body-sm text-on-surface">
                 Phòng Hành chính
               </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="font-data-tabular text-data-tabular font-semibold text-on-surface">
                   28 NCC
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="px-2.5 py-1 rounded bg-tertiary-container/15 text-tertiary border border-tertiary/30 font-label-sm text-label-sm font-semibold inline-block">
                   Đang hoạt động
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <div class="flex items-center justify-center gap-1">
 <button class="p-1 rounded-md text-secondary hover:text-primary hover:bg-surface-container-high transition-all" title="Chỉnh sửa" type="button">
 <span class="material-symbols-outlined text-[18px]">edit_square</span>
@@ -444,29 +634,29 @@
 </tr>
 <!-- Row 4: 0 NCC -> Delete Enabled -->
 <tr class="hover:bg-blue-50/50 transition-colors group cursor-pointer" data-cat-code="LNCC-TV">
-<td class="py-3 px-3 font-data-tabular text-data-tabular font-medium text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-data-tabular text-data-tabular font-medium text-on-surface">
                 LNCC-TV
               </td>
-<td class="py-3 px-3">
+<td class="py-3 px-2.5">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-tight group-hover:text-primary transition-colors">Dịch vụ Tư vấn Pháp lý</span>
 <span class="font-label-sm text-label-sm text-secondary mt-0.5">Mới tạo, chưa có hồ sơ đối tác</span>
 </div>
 </td>
-<td class="py-3 px-3 font-body-sm text-body-sm text-on-surface whitespace-nowrap">
+<td class="py-3 px-2.5 font-body-sm text-body-sm text-on-surface">
                 Phòng Pháp chế
               </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="font-data-tabular text-data-tabular font-semibold text-secondary">
                   0 NCC
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="px-2.5 py-1 rounded bg-tertiary-container/15 text-tertiary border border-tertiary/30 font-label-sm text-label-sm font-semibold inline-block">
                   Đang hoạt động
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <div class="flex items-center justify-center gap-1">
 <button class="p-1 rounded-md text-secondary hover:text-primary hover:bg-surface-container-high transition-all" title="Chỉnh sửa" type="button">
 <span class="material-symbols-outlined text-[18px]">edit_square</span>
@@ -479,29 +669,29 @@
 </tr>
 <!-- Row 5: Disabled Status -->
 <tr class="hover:bg-blue-50/50 transition-colors group opacity-85 cursor-pointer" data-cat-code="LNCC-IN">
-<td class="py-3 px-3 font-data-tabular text-data-tabular text-outline whitespace-nowrap">
+<td class="py-3 px-2.5 font-data-tabular text-data-tabular text-outline">
                 LNCC-IN
               </td>
-<td class="py-3 px-3">
+<td class="py-3 px-2.5">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-secondary line-through leading-tight">Dịch vụ In ấn quảng cáo cũ</span>
 <span class="font-label-sm text-label-sm text-outline mt-0.5">Đã gộp sang nhóm Truyền thông</span>
 </div>
 </td>
-<td class="py-3 px-3 font-body-sm text-body-sm text-secondary whitespace-nowrap">
+<td class="py-3 px-2.5 font-body-sm text-body-sm text-secondary">
                 Phòng Hành chính
               </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="font-data-tabular text-data-tabular font-medium text-secondary">
                   4 NCC
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <span class="px-2.5 py-1 rounded bg-surface-container-high text-secondary border border-surface-container-high/60 font-label-sm text-label-sm font-medium inline-block">
                   Ngừng sử dụng
                 </span>
 </td>
-<td class="py-3 px-3 text-center whitespace-nowrap">
+<td class="py-3 px-2.5 text-center">
 <div class="flex items-center justify-center gap-1">
 <button class="p-1 rounded-md text-secondary hover:text-primary hover:bg-surface-container-high transition-all" title="Chỉnh sửa" type="button">
 <span class="material-symbols-outlined text-[18px]">edit_square</span>
@@ -520,7 +710,7 @@
 <span class="">Hiển thị <strong class="text-on-surface">1 - 5</strong> trong tổng số <strong class="text-on-surface">12</strong> loại nhà cung cấp</span>
 <div class="flex items-center gap-1 ml-2">
 <span class="font-label-sm text-label-sm">Dòng / trang:</span>
-<select class="appearance-auto bg-none bg-surface-container-lowest rounded px-2 py-0.5 text-label-sm font-label-sm text-on-surface focus:outline-none border border-surface-container-high transition-colors">
+<select class="appearance-auto bg-none bg-surface-container-lowest rounded px-2 py-0.5 text-label-sm font-label-sm text-on-surface focus:outline-none border border-surface-container-high transition-colors" id="categoryPageSize">
 <option>10</option>
 <option>20</option>
 <option>50</option>
@@ -542,59 +732,35 @@
 </div>
 </div>
 </main>
-<!-- 2. RESIZABLE SPLITTER / DRAG DIVIDER -->
-<div class="w-1.5 hover:w-2 bg-surface-container-high/70 hover:bg-primary cursor-col-resize shrink-0 transition-all duration-150 z-20 flex items-center justify-center relative select-none group hidden" id="dragDivider" title="Kéo chuột sang trái/phải để đổi kích thước khung AI">
-<div class="w-0.5 h-8 bg-outline-variant group-hover:bg-white rounded-full transition-colors"></div>
 </div>
-<!-- 3. RIGHT DOCKED PANEL: IAProc AI Chatbot & RPA Assistant (Resizable & Collapsible) -->
-<aside class="w-[380px] min-w-[280px] max-w-[560px] shrink-0 h-full bg-surface-container-lowest border-l border-surface-container-high flex flex-col z-30 shadow-lg relative transition-all duration-300 ease-in-out" id="aiAssistantPanel" style="width: 350px;">
-<!-- Panel Header: Copilot Presence & Collapse Button -->
-<div class="p-space-md bg-gradient-to-r from-surface-container-low via-surface-container-lowest to-surface-container-low flex items-center justify-between border-b border-surface-container-high/50 shrink-0">
-<div class="flex items-center gap-space-sm min-w-0">
-<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-container to-tertiary-container text-surface-container-lowest flex items-center justify-center shadow-sm shrink-0 animate-ai-glow">
-<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+<aside id="chatSlideOverPanel" role="dialog" aria-label="Trợ lý IAProc" aria-hidden="true" inert class="fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[410px] bg-white border-l border-surface-container-high shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-out translate-x-full">
+<!-- Chat Header -->
+<div class="p-3.5 bg-gradient-to-r from-[#0b1c30] via-[#0F172A] to-[#1e293b] text-white flex items-center justify-between border-b border-slate-700/80 shrink-0">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-blue-400 text-white flex items-center justify-center shadow-md font-bold text-sm shrink-0">
+<span class="text-amber-300 text-base leading-none">✦</span>
 </div>
-<div class="flex flex-col min-w-0">
+<div class="truncate">
 <div class="flex items-center gap-1.5">
-<span class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Trợ lý IAProc</span>
-<span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-primary font-semibold shrink-0">AI &amp; Bot RPA</span>
+<h3 class="font-headline font-bold text-xs tracking-wide text-white truncate">Trợ lý IAProc</h3>
+<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30">AI &amp; RPA</span>
 </div>
-<div class="flex items-center gap-1.5 text-label-sm font-label-sm text-tertiary font-medium">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
-</span>
-<span class="truncate">Trực tuyến • Sẵn sàng tiếp nhận lệnh</span>
+<div class="flex items-center gap-1.5 text-[10px] text-slate-300 mt-0.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+<span class="truncate text-emerald-400 font-medium">Trực tuyến • Sẵn sàng tiếp nhận lệnh</span>
 </div>
 </div>
 </div>
-<!-- Collapse Button -->
-<div class="flex items-center gap-1 text-secondary shrink-0">
-<button class="p-1.5 hover:bg-surface-container-high rounded-lg text-secondary hover:text-on-surface active:scale-90 transition-all duration-200 flex items-center justify-center" id="collapseBtn" title="Thu gọn khung trợ lý">
-<span class="material-symbols-outlined text-[20px]">dock_to_right</span>
+<div class="flex items-center gap-1 shrink-0">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/60 transition-colors" id="minimizeChatBtn" title="Thu nhỏ panel">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/60 transition-colors" id="closeChatPanelBtn" title="Đóng trợ lý">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
 </div>
 </div>
-<!-- Quick Action Chips (Horizontally Scrollable) -->
-<div class="px-space-md py-2 bg-surface-container-low/50 flex items-center gap-1.5 overflow-x-auto hide-scrollbar border-b border-surface-container-high/40 shrink-0" id="quickActionChips">
-<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-primary text-label-sm font-label-sm font-semibold shadow-sm hover:bg-surface-container-high hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1 border border-primary/10" data-prompt="+ Thêm nhanh loại NCC: ">
-<span class="material-symbols-outlined text-[14px]">add_circle</span>
-<span class="">+ Thêm nhanh loại NCC</span>
-</button>
-<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-secondary hover:text-on-surface text-label-sm font-label-sm font-medium shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1 border border-outline-variant/30" data-prompt="Tra cứu thông tin MST bằng RPA: ">
-<span class="material-symbols-outlined text-[14px]">search_check</span>
-<span class="">Tra cứu MST bằng RPA</span>
-</button>
-<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-secondary hover:text-on-surface text-label-sm font-label-sm font-medium shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1 border border-outline-variant/30" data-prompt="Cập nhật trạng thái nhà cung cấp: ">
-<span class="material-symbols-outlined text-[14px]">published_with_changes</span>
-<span class="">Sửa trạng thái NCC</span>
-</button>
-<button class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-surface-container-lowest text-secondary hover:text-error text-label-sm font-label-sm font-medium shadow-sm hover:scale-105 active:scale-95 transition-all duration-200 border border-outline-variant/30" data-prompt="Kiểm tra các loại NCC chưa có đối tác">
-<span class="">Kiểm tra loại NCC rỗng</span>
-</button>
-</div>
-<!-- Dedicated Scrollable Conversation Feed -->
-<div class="flex-1 p-space-md overflow-y-auto custom-scroll flex flex-col gap-space-md" id="chatFeed">
+<div id="quickActionChips" class="px-space-md py-2 bg-surface-container-low flex gap-1.5 overflow-x-auto hide-scrollbar border-b border-surface-container-high shrink-0"><button type="button" class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-white text-primary text-label-sm font-semibold border border-surface-container-high hover:bg-surface-container-high" data-prompt="+ Thêm nhanh loại NCC">+ Thêm nhanh loại NCC</button><button type="button" class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-white text-primary text-label-sm font-semibold border border-surface-container-high hover:bg-surface-container-high" data-prompt="Kiểm tra loại NCC rỗng">Kiểm tra loại NCC rỗng</button><button type="button" class="chat-chip whitespace-nowrap px-2.5 py-1 rounded-full bg-white text-primary text-label-sm font-semibold border border-surface-container-high hover:bg-surface-container-high" data-prompt="Tra cứu MST bằng RPA">Tra cứu MST bằng RPA</button></div><div class="flex-1 p-space-md overflow-y-auto custom-scroll flex flex-col gap-space-md" id="chatFeed">
 <!-- System Timestamp Marker -->
 <div class="flex items-center justify-center shrink-0">
 <span class="px-2.5 py-0.5 rounded-full bg-surface-container-low text-secondary text-label-sm font-label-sm">
@@ -626,7 +792,7 @@
 <div class="flex items-center justify-between bg-surface-container-lowest px-2.5 py-1.5 rounded-lg shadow-sm border border-surface-container-high/40">
 <div class="flex items-center gap-1.5 text-primary text-label-sm font-label-sm font-semibold">
 <span class="material-symbols-outlined text-[16px]">psychology</span>
-<span class="">Đã bóc tách thực thể (Intent: create_category)</span>
+<span class="">Đã bóc tách thực thể (Intent: create_supplier_category)</span>
 </div>
 
 </div>
@@ -673,7 +839,6 @@
 <span class="">Gợi ý: Bạn có thể nhập <em>"Tìm các loại NCC do Phòng Hành chính quản lý"</em> để lọc nhanh.</span>
 </div>
 </div>
-<!-- Docked Input & Multi-modal Dispatch Controls -->
 <div class="p-space-md bg-surface-container-lowest flex flex-col gap-2 border-t border-surface-container-high/60 shrink-0">
 <div class="relative flex items-center rounded-xl bg-surface-container-low p-1.5 shadow-sm border border-transparent focus-within:border-primary/40 focus-within:bg-surface-container-lowest transition-all">
 <textarea class="w-full bg-transparent resize-none px-2 py-1 text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none" id="chatInputArea" placeholder="Nhập yêu cầu tạo/sửa loại NCC hoặc tra cứu..." rows="2"></textarea>
@@ -694,390 +859,267 @@
 </div>
 </div>
 </aside>
-</div>
-</div>
-<!-- SCRIPT INTERACTION HANDLER -->
+<div id="aiFloatingBtn" class="fixed z-40 select-none cursor-grab assistant-pulse" style="top:10px; right:424px;"><button type="button" aria-controls="chatSlideOverPanel" aria-expanded="false" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary hover:bg-primary-container text-white text-xs font-bold shadow-xl border border-white/20 transition-transform active:scale-95"><span class="text-amber-300">✦</span><span>Trợ lý IAProc</span><span class="w-2 h-2 rounded-full bg-emerald-400"></span></button></div>
 <script>
-  (function() {
-    const aiPanel = document.getElementById('aiAssistantPanel');
-    const collapseBtn = document.getElementById('collapseBtn');
-    const btnFloatingAi = document.getElementById('btnHeaderAiTrigger');
-    const toastContainer = document.getElementById('toastContainer');
-    
-    // Sidebar elements
-    const appSidebar = document.getElementById('appSidebar');
-    const btnToggleSidebar = document.getElementById('btnToggleSidebar');
-    const sidebarExpandBar = document.getElementById('sidebarExpandBar');
-    const btnExpandSidebarBelowLogo = document.getElementById('btnExpandSidebarBelowLogo');
-    const supplierAccordionBtn = document.getElementById('supplierAccordionBtn');
-    const supplierAccordionMenu = document.getElementById('supplierAccordionMenu');
-    const supplierAccordionChevron = document.getElementById('supplierAccordionChevron');
-    const sidebarBrandContainer = document.getElementById('sidebarBrandContainer');
-
-    let isSidebarCollapsed = false;
-    let isAccordionOpen = true;
-
-    // --- 1. SIDEBAR TOGGLE & ACCORDION BEHAVIOR (Without toast popup) ---
-    function setSidebarCollapsed(collapsed) {
-      isSidebarCollapsed = collapsed;
-      const labels = appSidebar.querySelectorAll('.sidebar-label');
-      
-      if (isSidebarCollapsed) {
-        // Thu hẹp sidebar về 72px
-        appSidebar.classList.remove('w-[230px]', 'min-w-[230px]');
-        appSidebar.classList.add('w-[72px]', 'min-w-[72px]');
-        
-        // Ẩn các text label
-        labels.forEach(el => el.classList.add('hidden'));
-        
-        // Căn giữa logo và icon
-        if (sidebarBrandContainer) {
-          sidebarBrandContainer.classList.add('justify-center');
-        }
-        
-        // Hiển thị thanh nút Mở rộng bên dưới logo
-        if (sidebarExpandBar) {
-          sidebarExpandBar.classList.remove('hidden');
-        }
-      } else {
-        // Mở rộng sidebar về 230px
-        appSidebar.classList.remove('w-[72px]', 'min-w-[72px]');
-        appSidebar.classList.add('w-[230px]', 'min-w-[230px]');
-        
-        // Hiện lại các text label
-        labels.forEach(el => el.classList.remove('hidden'));
-        
-        // Khôi phục layout logo ban đầu
-        if (sidebarBrandContainer) {
-          sidebarBrandContainer.classList.remove('justify-center');
-        }
-        
-        // Ẩn thanh nút Mở rộng dưới logo
-        if (sidebarExpandBar) {
-          sidebarExpandBar.classList.add('hidden');
-        }
-
-        // Đảm bảo trạng thái accordion con
-        if (isAccordionOpen && supplierAccordionMenu) {
-          supplierAccordionMenu.classList.remove('hidden');
-          supplierAccordionMenu.style.maxHeight = '200px';
-          supplierAccordionMenu.style.opacity = '1';
-        }
-      }
+(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  const sidebar = byId('appSidebar');
+  const accordion = byId('supplierAccordionMenu');
+  let collapsed = false;
+  let accordionOpen = true;
+  function renderSidebar() {
+    sidebar.classList.toggle('is-collapsed', collapsed);
+    ['w-[230px]', 'min-w-[230px]'].forEach(c => sidebar.classList.toggle(c, !collapsed));
+    ['w-[68px]', 'min-w-[68px]'].forEach(c => sidebar.classList.toggle(c, collapsed));
+    sidebar.querySelectorAll('.sidebar-label').forEach(el => el.classList.toggle('hidden', collapsed));
+    byId('sidebarHeaderWrapper').classList.toggle('hidden', collapsed);
+    byId('collapsedExpandHeader').classList.toggle('hidden', !collapsed);
+    byId('collapsedExpandHeader').classList.toggle('flex', collapsed);
+    accordion.classList.toggle('hidden', collapsed || !accordionOpen);
+    accordion.style.maxHeight = accordionOpen ? '200px' : '0px';
+    accordion.style.opacity = accordionOpen ? '1' : '0';
+    byId('supplierAccordionChevron').classList.toggle('rotate-180', !accordionOpen);
+    byId('supplierAccordionBtn').setAttribute('aria-expanded', String(!collapsed && accordionOpen));
+    byId('btnToggleSidebar').setAttribute('aria-expanded', String(!collapsed));
+  }
+  byId('btnToggleSidebar').addEventListener('click', () => { collapsed = !collapsed; renderSidebar(); });
+  ['btnExpandSidebarDirect', 'collapsedLogoIcon'].forEach(id => {
+    const el = byId(id);
+    el.addEventListener('click', () => { collapsed = false; renderSidebar(); });
+    if (el.tagName !== 'BUTTON') {
+      el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
     }
-
-    if (btnToggleSidebar) {
-      btnToggleSidebar.addEventListener('click', function(e) {
-        e.preventDefault();
-        setSidebarCollapsed(true);
-      });
+  });
+  byId('supplierAccordionBtn').addEventListener('click', () => {
+    if (collapsed) collapsed = false;
+    else accordionOpen = !accordionOpen;
+    renderSidebar();
+  });
+  window.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+      e.preventDefault(); collapsed = !collapsed; renderSidebar();
     }
+  });
+  renderSidebar();
 
-    if (btnExpandSidebarBelowLogo) {
-      btnExpandSidebarBelowLogo.addEventListener('click', function(e) {
-        e.preventDefault();
-        setSidebarCollapsed(false);
-      });
-    }
-
-    // Keyboard shortcut Ctrl+B or Cmd+B to toggle sidebar
-    window.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
-        e.preventDefault();
-        setSidebarCollapsed(!isSidebarCollapsed);
-      }
-    });
-
-    if (supplierAccordionBtn && supplierAccordionMenu && supplierAccordionChevron) {
-      supplierAccordionBtn.addEventListener('click', function() {
-        if (isSidebarCollapsed) {
-          setSidebarCollapsed(false);
-          return;
-        }
-        isAccordionOpen = !isAccordionOpen;
-        if (isAccordionOpen) {
-          supplierAccordionMenu.style.maxHeight = '200px';
-          supplierAccordionMenu.style.opacity = '1';
-          supplierAccordionMenu.classList.remove('hidden');
-          supplierAccordionChevron.classList.remove('rotate-180');
-        } else {
-          supplierAccordionMenu.style.maxHeight = '0px';
-          supplierAccordionMenu.style.opacity = '0';
-          setTimeout(() => {
-            if (!isAccordionOpen) supplierAccordionMenu.classList.add('hidden');
-          }, 250);
-          supplierAccordionChevron.classList.add('rotate-180');
-        }
-      });
-    }
-
-    // --- 2. TOAST UTILITY ---
-    window.showToast = function(message, type = 'success') {
-      const toast = document.createElement('div');
-      const isError = type === 'error';
-      toast.className = `toast-animation pointer-events-auto flex items-center gap-2.5 px-4 py-2.5 rounded-xl shadow-xl text-body-sm font-medium border ${
-        isError 
-          ? 'bg-error-container text-on-error-container border-error/30' 
-          : 'bg-surface-container-lowest text-on-surface border-tertiary/40'
-      }`;
-      toast.innerHTML = `
-        <span class="material-symbols-outlined text-[20px] ${isError ? 'text-error' : 'text-tertiary'}">
-          ${isError ? 'error' : 'check_circle'}
-        </span>
-        <span class="font-medium">${message}</span>
-      `;
-      toastContainer.appendChild(toast);
-      setTimeout(() => {
-        if (toast.parentNode) toast.remove();
-      }, 3300);
+  window.showToast = (message, type = 'success') => {
+    const toast = document.createElement('div');
+    toast.className = 'pointer-events-auto px-4 py-3 rounded-xl shadow-xl border bg-white text-body-sm max-w-md ' + (type === 'error' ? 'border-error/40 text-error' : 'border-primary/30 text-on-surface');
+    toast.textContent = String(message).replace(/<\/?(?:strong|em)>/g, '');
+    byId('toastContainer').appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+  };
+  window.normalizeSearch = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
+  window.setupGridStatus = (table, rows, onFilter = () => {}) => {
+    const empty = document.createElement('tr');
+    const cell = document.createElement('td');
+    cell.colSpan = table.tHead.rows[0].cells.length;
+    cell.className = 'p-6 text-center text-secondary';
+    cell.textContent = 'Không có dữ liệu phù hợp. Hãy thử từ khóa hoặc bộ lọc khác.';
+    empty.appendChild(cell); empty.hidden = true; table.tBodies[0].appendChild(empty);
+    const status = document.createElement('p');
+    status.className = 'text-label-sm text-secondary px-3 py-2';
+    status.setAttribute('role', 'status');
+    table.parentElement.before(status);
+    return () => {
+      const visible = rows.filter(r => r.isConnected && !r.hidden);
+      empty.hidden = visible.length > 0;
+      status.textContent = `Hiển thị ${visible.length} / ${rows.filter(r => r.isConnected).length} hồ sơ trong dữ liệu mẫu`;
+      rows.forEach(row => { if (row.hidden) row.querySelectorAll('input[type=checkbox]').forEach(cb => { cb.checked = false; }); });
+      onFilter();
+      return visible.length;
     };
+  };
 
-    // --- 3. DRAGGABLE FLOATING AI BUTTON WITH VIEWPORT BOUNDARIES & SMART CLICK DETECTION ---
-    if (btnFloatingAi) {
-      let isDragging = false;
-      let startX = 0;
-      let startY = 0;
-      let initialLeft = 0;
-      let initialTop = 0;
-      let dragDistance = 0;
-      const DRAG_THRESHOLD = 5; // px
+  const pill = byId('aiFloatingBtn');
+  const pillButton = pill.querySelector('button');
+  const panel = byId('chatSlideOverPanel');
+  const input = byId('chatInputArea');
+  let open = false;
+  function setChat(next, restoreFocus = false) {
+    open = next;
+    panel.classList.toggle('translate-x-full', !open);
+    panel.inert = !open;
+    panel.setAttribute('aria-hidden', String(!open));
+    pillButton.setAttribute('aria-expanded', String(open));
+    pill.classList.toggle('assistant-pulse', !open);
+    if (open) setTimeout(() => { if (open) input.focus(); }, 300);
+    else if (restoreFocus) pillButton.focus({ preventScroll: true });
+  }
+  byId('closeChatPanelBtn').addEventListener('click', () => setChat(false, true));
+  byId('minimizeChatBtn').addEventListener('click', () => setChat(false, true));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) { e.preventDefault(); setChat(false, true); } });
+  let dragging = false, moved = false, positioned = false;
+  let startX = 0, startY = 0, originX = 0, originY = 0;
+  function place(x, y) {
+    const margin = 8;
+    const maxX = Math.max(margin, innerWidth - pill.offsetWidth - margin);
+    const maxY = Math.max(margin, innerHeight - pill.offsetHeight - margin);
+    pill.style.left = Math.max(margin, Math.min(maxX, x)) + 'px';
+    pill.style.top = Math.max(margin, Math.min(maxY, y)) + 'px';
+    pill.style.right = 'auto'; pill.style.bottom = 'auto'; positioned = true;
+  }
+  function start(x, y) {
+    dragging = true; moved = false; startX = x; startY = y;
+    const rect = pill.getBoundingClientRect(); originX = rect.left; originY = rect.top;
+  }
+  function move(x, y) {
+    if (!dragging) return;
+    const dx = x - startX, dy = y - startY;
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+    if (!moved) return;
+    pill.classList.remove('assistant-pulse'); pill.style.cursor = 'grabbing';
+    place(originX + dx, originY + dy);
+  }
+  function end() {
+    dragging = false; pill.style.cursor = '';
+    pill.classList.toggle('assistant-pulse', !open);
+  }
+  pill.addEventListener('mousedown', e => { if (e.button === 0) start(e.clientX, e.clientY); });
+  document.addEventListener('mousemove', e => { move(e.clientX, e.clientY); if (dragging && moved) e.preventDefault(); });
+  document.addEventListener('mouseup', end);
+  window.addEventListener('blur', end);
+  pillButton.addEventListener('click', e => {
+    if (e.detail !== 0 && moved) { e.preventDefault(); moved = false; return; }
+    setChat(!open);
+  });
+  pill.addEventListener('touchstart', e => { if (e.touches.length === 1) start(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  pill.addEventListener('touchmove', e => { if (e.touches.length === 1) { move(e.touches[0].clientX, e.touches[0].clientY); if (moved) e.preventDefault(); } }, { passive: false });
+  pill.addEventListener('touchend', end);
+  pill.addEventListener('touchcancel', end);
+  window.addEventListener('resize', () => {
+    const rect = pill.getBoundingClientRect();
+    if (positioned || rect.left < 8 || rect.top < 8) place(rect.left, rect.top);
+  });
+  setChat(false);
 
-      function toggleAiPanel() {
-        if (aiPanel) {
-          if (aiPanel.classList.contains('hidden')) {
-            aiPanel.classList.remove('hidden');
-            aiPanel.style.width = '350px';
-            showToast('Đã mở Trợ lý IAProc AI & RPA', 'info');
-          } else {
-            aiPanel.classList.add('hidden');
-          }
-        }
-      }
+  document.querySelectorAll('.chat-chip').forEach(chip => chip.addEventListener('click', () => { input.value = chip.dataset.prompt || chip.textContent.trim(); input.focus(); }));
+  const feed = byId('chatFeed');
+  function sendMessage() {
+    const text = input.value.trim(); if (!text) return;
+    const message = document.createElement('div');
+    message.className = 'self-end max-w-[92%] p-3 rounded-xl bg-inverse-surface text-white text-body-sm';
+    message.textContent = text; feed.appendChild(message); input.value = '';
+    const reply = document.createElement('p'); reply.className = 'p-3 rounded-xl border border-surface-container-high bg-white text-body-sm';
+    reply.textContent = document.body.dataset.screen === '4'
+      ? 'Đã tiếp nhận yêu cầu thẩm định. Phiên mô phỏng chỉ tra cứu và tóm tắt dữ liệu; quyết định duyệt/trả về cần xác nhận qua modal BR-SUP-05.'
+      : 'Đã tiếp nhận yêu cầu. Đây là phiên mô phỏng AI/RPA; vui lòng kiểm tra thẻ xác nhận trước khi lưu hoặc gửi xét duyệt.';
+    feed.appendChild(reply); feed.scrollTop = feed.scrollHeight;
+  }
+  byId('btnSendMessage').addEventListener('click', sendMessage);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); sendMessage(); } });
+  byId('btnConfirmDraft').addEventListener('click', () => {
+    byId('btnHeaderAddCategory').click();
+    byId('categoryCode').value = 'LNCC-VT';
+    byId('categoryName').value = 'Thiết bị viễn thông & vệ tinh';
+    setChat(false); byId('categoryCode').focus();
+    showToast('Đã điền đề xuất loại NCC vào biểu mẫu để kiểm tra và lưu.');
+  });
+  byId('btnCancelCard').addEventListener('click', () => showToast('Đã hủy thao tác trên thẻ xác nhận.', 'info'));
+})();
 
-      function onStart(clientX, clientY) {
-        isDragging = true;
-        dragDistance = 0;
-        startX = clientX;
-        startY = clientY;
-        
-        const rect = btnFloatingAi.getBoundingClientRect();
-        initialLeft = rect.left;
-        initialTop = rect.top;
-        
-        btnFloatingAi.classList.add('dragging');
-      }
-
-      function onMove(clientX, clientY) {
-        if (!isDragging) return;
-        
-        const dx = clientX - startX;
-        const dy = clientY - startY;
-        dragDistance = Math.hypot(dx, dy);
-
-        let newLeft = initialLeft + dx;
-        let newTop = initialTop + dy;
-
-        // Viewport boundaries constraint
-        const btnWidth = btnFloatingAi.offsetWidth;
-        const btnHeight = btnFloatingAi.offsetHeight;
-        const maxLeft = window.innerWidth - btnWidth - 8;
-        const maxTop = window.innerHeight - btnHeight - 8;
-
-        newLeft = Math.max(8, Math.min(newLeft, maxLeft));
-        newTop = Math.max(8, Math.min(newTop, maxTop));
-
-        btnFloatingAi.style.left = `${newLeft}px`;
-        btnFloatingAi.style.top = `${newTop}px`;
-        btnFloatingAi.style.right = 'auto';
-        btnFloatingAi.style.bottom = 'auto';
-      }
-
-      function onEnd() {
-        if (!isDragging) return;
-        isDragging = false;
-        btnFloatingAi.classList.remove('dragging');
-
-        // Check if movement was below threshold -> treat as click
-        if (dragDistance < DRAG_THRESHOLD) {
-          toggleAiPanel();
-        }
-      }
-
-      // Mouse events
-      btnFloatingAi.addEventListener('mousedown', function(e) {
-        if (e.button !== 0) return; // Only primary mouse button
-        onStart(e.clientX, e.clientY);
-
-        function mouseMoveHandler(e) {
-          onMove(e.clientX, e.clientY);
-        }
-
-        function mouseUpHandler(e) {
-          window.removeEventListener('mousemove', mouseMoveHandler);
-          window.removeEventListener('mouseup', mouseUpHandler);
-          onEnd();
-        }
-
-        window.addEventListener('mousemove', mouseMoveHandler);
-        window.addEventListener('mouseup', mouseUpHandler);
-      });
-
-      // Touch events
-      btnFloatingAi.addEventListener('touchstart', function(e) {
-        if (e.touches.length > 0) {
-          onStart(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, { passive: true });
-
-      window.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
-        if (e.touches.length > 0) {
-          onMove(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, { passive: false });
-
-      window.addEventListener('touchend', function(e) {
-        if (isDragging) {
-          onEnd();
-        }
-      });
-    }
-
-    if (collapseBtn && aiPanel) {
-      collapseBtn.addEventListener('click', function() {
-        aiPanel.classList.add('hidden');
-      });
-    }
-
-    // --- 4. FORM SEGMENTED STATUS TOGGLE & ACTIONS ---
-    const btnActive = document.getElementById('btnStatusActive');
-    const btnInactive = document.getElementById('btnStatusInactive');
-    
-    if (btnActive && btnInactive) {
-      btnActive.addEventListener('click', function() {
-        btnActive.className = 'py-1.5 px-3 rounded-md bg-[#1D4ED8] text-white font-label-md text-label-md font-semibold text-center transition-all shadow-xs cursor-pointer';
-        btnInactive.className = 'py-1.5 px-3 rounded-md text-secondary hover:text-on-surface font-label-md text-label-md font-medium text-center transition-all cursor-pointer';
-      });
-
-      btnInactive.addEventListener('click', function() {
-        btnInactive.className = 'py-1.5 px-3 rounded-md bg-secondary text-on-secondary font-label-md text-label-md font-semibold text-center transition-all shadow-xs cursor-pointer';
-        btnActive.className = 'py-1.5 px-3 rounded-md text-secondary hover:text-on-surface font-label-md text-label-md font-medium text-center transition-all cursor-pointer';
-      });
-    }
-
-    const btnReset = document.getElementById('btnResetForm');
-    if (btnReset) {
-      btnReset.addEventListener('click', function() {
-        document.getElementById('categoryCode').value = '';
-        document.getElementById('categoryName').value = '';
-        document.getElementById('categoryDesc').value = '';
-        btnActive.click();
-        showToast('Đã làm mới biểu mẫu tạo Loại NCC', 'info');
-      });
-    }
-
-    const btnSave = document.getElementById('btnSaveCategory');
-    if (btnSave) {
-      btnSave.addEventListener('click', function() {
-        const code = document.getElementById('categoryCode').value.trim();
-        const name = document.getElementById('categoryName').value.trim();
-        if (!code || !name) {
-          showToast('Vui lòng nhập đầy đủ Mã và Tên loại nhà cung cấp!', 'error');
-          return;
-        }
-        showToast('Đã lưu thành công loại nhà cung cấp: ' + code);
-      });
-    }
-
-    const btnHeaderAdd = document.getElementById('btnHeaderAddCategory');
-    if (btnHeaderAdd) {
-      btnHeaderAdd.addEventListener('click', function() {
-        document.getElementById('categoryCode').focus();
-        showToast('Vui lòng nhập thông tin loại NCC mới vào biểu mẫu');
-      });
-    }
-
-    const btnFilter = document.getElementById('btnFilterGrid');
-    if (btnFilter) {
-      btnFilter.addEventListener('click', function() {
-        const tbody = document.getElementById('categoryTableBody');
-        if (tbody) {
-          tbody.classList.add('table-refreshing');
-          setTimeout(() => tbody.classList.remove('table-refreshing'), 300);
-        }
-        showToast('Đã áp dụng bộ lọc danh mục thành công');
-      });
-    }
-
-    // Row selection fill into form
-    const rows = document.querySelectorAll('#categoryTableBody tr');
-    rows.forEach(r => {
-      r.addEventListener('click', function(e) {
-        if (e.target.closest('button')) return;
-        const code = this.getAttribute('data-cat-code');
-        const nameEl = this.querySelector('.font-headline-sm');
-        if (code && nameEl) {
-          document.getElementById('categoryCode').value = code;
-          document.getElementById('categoryName').value = nameEl.textContent.trim();
-          showToast('Đã tải thông tin ' + code + ' lên biểu mẫu chỉnh sửa');
-        }
-      });
-    });
-
-    // Chat chips & Send message
-    const chatInput = document.getElementById('chatInputArea');
-    const chatChips = document.querySelectorAll('.chat-chip');
-    chatChips.forEach(chip => {
-      chip.addEventListener('click', function() {
-        const promptText = chip.getAttribute('data-prompt');
-        if (chatInput && promptText) {
-          chatInput.value = promptText;
-          chatInput.focus();
-        }
-      });
-    });
-
-    const btnSendMessage = document.getElementById('btnSendMessage');
-    const chatFeed = document.getElementById('chatFeed');
-    if (btnSendMessage && chatInput && chatFeed) {
-      btnSendMessage.addEventListener('click', function() {
-        const text = chatInput.value.trim();
-        if (!text) return;
-        
-        const userMsg = document.createElement('div');
-        userMsg.className = 'flex flex-col items-end gap-1 shrink-0';
-        userMsg.innerHTML = `
-          <div class="max-w-[90%] bg-inverse-surface text-inverse-on-surface rounded-2xl rounded-tr-none px-3.5 py-2.5 shadow-sm text-body-sm font-body-sm leading-relaxed">
-            ${text}
-          </div>
-          <div class="flex items-center gap-1 text-label-sm font-label-sm text-secondary">
-            <span>Bạn</span>
-            <span>• Vừa xong</span>
-          </div>
-        `;
-        chatFeed.appendChild(userMsg);
-        chatInput.value = '';
-        chatFeed.scrollTop = chatFeed.scrollHeight;
-      });
-    }
-
-    const btnConfirmDraft = document.getElementById('btnConfirmDraft');
-    if (btnConfirmDraft) {
-      btnConfirmDraft.addEventListener('click', function() {
-        document.getElementById('categoryCode').value = 'LNCC-VT';
-        document.getElementById('categoryName').value = 'Thiết bị viễn thông & vệ tinh';
-        showToast('✓ Đã điền thông tin đề xuất vào form!');
-      });
-    }
-
-    const btnCancelCard = document.getElementById('btnCancelCard');
-    if (btnCancelCard) {
-      btnCancelCard.addEventListener('click', function() {
-        showToast('Đã hủy thao tác', 'error');
-      });
-    }
-  })();
 </script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const tbody = $('categoryTableBody');
+  const rows = Array.from(tbody.querySelectorAll('tr[data-cat-code]'));
+  const table = $('categoryTable');
+  let active = true;
+  let editing = rows[0];
+  const status = setupGridStatus(table, rows);
+  const text = (r, i) => r.cells[i].textContent.trim();
+  const count = r => parseInt(text(r, 3), 10) || 0;
+  const isActive = r => normalizeSearch(text(r, 4)).includes('dang hoat dong');
+  const depts = { cntt:'Phòng Mua sắm CNTT', bql:'Ban Quản lý Dự án', hc:'Phòng Hành chính', pc:'Phòng Pháp chế' };
+  function setActive(value) {
+    active = value;
+    ['btnStatusActive','btnStatusInactive'].forEach((id, i) => {
+      const selected = i === 0 ? active : !active;
+      $(id).className = 'py-1.5 px-3 rounded-md text-label-md font-semibold transition-all ' + (selected ? 'bg-primary text-white shadow-sm' : 'text-secondary hover:bg-surface-container-high');
+      $(id).setAttribute('aria-pressed', String(selected));
+    });
+  }
+  $('btnStatusActive').addEventListener('click', () => setActive(true));
+  $('btnStatusInactive').addEventListener('click', () => setActive(false));
+  function filter() {
+    const query = normalizeSearch($('tableSearchInput').value);
+    const dept = $('categoryDeptFilter'), state = $('categoryStatusFilter');
+    rows.forEach(row => {
+      row.hidden = !normalizeSearch(row.dataset.catCode + ' ' + text(row, 1)).includes(query)
+        || (dept.selectedIndex > 0 && !normalizeSearch(dept.value).includes(normalizeSearch(text(row, 2))))
+        || (state.selectedIndex > 0 && isActive(row) !== (state.selectedIndex === 1));
+    });
+    return status();
+  }
+  function load(row) {
+    editing = row;
+    $('categoryCode').value = row.dataset.catCode;
+    $('categoryName').value = row.cells[1].querySelector('.font-headline-sm').textContent.trim();
+    $('categoryDesc').value = row.cells[1].querySelector('.font-label-sm').textContent.trim();
+    $('managingDept').value = Object.keys(depts).find(k => normalizeSearch(depts[k]) === normalizeSearch(text(row, 2))) || 'cntt';
+    setActive(isActive(row)); $('categoryCode').focus();
+    showToast('Đã tải ' + row.dataset.catCode + ' lên biểu mẫu chỉnh sửa.');
+  }
+  function actions(row) {
+    const enabled = isActive(row);
+    row.classList.toggle('opacity-85', !enabled);
+    const name = row.cells[1].querySelector('.font-headline-sm');
+    name.classList.toggle('line-through', !enabled);
+    name.classList.toggle('text-secondary', !enabled);
+    name.classList.toggle('text-on-surface', enabled);
+    row.cells[4].querySelector('span').className = 'inline-block rounded px-2 py-1 text-label-sm font-semibold ' + (enabled ? 'bg-tertiary/10 text-tertiary' : 'bg-surface-container-high text-secondary');
+    const cell = row.cells[5]; cell.replaceChildren();
+    const wrap = document.createElement('div'); wrap.className = 'flex items-center justify-center gap-1'; cell.appendChild(wrap);
+    const state = isActive(row) ? (count(row) > 0 ? 'pause_circle' : 'delete') : 'restart_alt';
+    [['edit_square','Chỉnh sửa'],[state, state === 'delete' ? 'Xóa phân loại chưa có NCC' : state === 'restart_alt' ? 'Khôi phục sử dụng' : 'Ngừng sử dụng']].forEach(([icon,title]) => {
+      const button = document.createElement('button'); button.type = 'button'; button.title = title; button.className = 'p-1 rounded-md text-secondary hover:bg-surface-container-high hover:text-primary';
+      const symbol = document.createElement('span'); symbol.className = 'material-symbols-outlined text-[18px]'; symbol.textContent = icon; button.appendChild(symbol); wrap.appendChild(button);
+      button.addEventListener('click', () => {
+        if (icon === 'edit_square') return load(row);
+        if (icon === 'delete') {
+          if (count(row) > 0) return showToast('BR-SUP-00.2: Không được xóa loại đã có NCC trực thuộc.', 'error');
+          row.remove(); if (editing === row) reset(); filter(); return showToast('Đã xóa loại chưa có NCC trong phiên mô phỏng.');
+        }
+        row.cells[4].querySelector('span').textContent = icon === 'restart_alt' ? 'Đang hoạt động' : 'Ngừng sử dụng';
+        row.cells[4].querySelector('span').className = 'inline-block rounded px-2 py-1 text-label-sm font-semibold ' + (isActive(row) ? 'bg-tertiary/10 text-tertiary' : 'bg-surface-container-high text-secondary');
+        actions(row); if (editing === row) setActive(isActive(row)); filter(); showToast('Đã cập nhật trạng thái loại NCC.');
+      });
+    });
+  }
+  function attach(row) {
+    actions(row);
+    row.addEventListener('click', e => { if (!e.target.closest('button')) load(row); });
+  }
+  rows.forEach(attach);
+  function reset() {
+    editing = null; ['categoryCode','categoryName','categoryDesc'].forEach(id => { $(id).value = ''; });
+    $('managingDept').value = 'cntt'; setActive(true);
+  }
+  $('btnResetForm').addEventListener('click', reset);
+  $('btnHeaderAddCategory').addEventListener('click', () => { reset(); $('categoryCode').focus(); });
+  $('btnSaveCategory').addEventListener('click', () => {
+    const code = $('categoryCode').value.trim().toUpperCase(), name = $('categoryName').value.trim();
+    if (!code || !name) return showToast('Vui lòng nhập đầy đủ Mã và Tên loại nhà cung cấp!', 'error');
+    if (rows.some(r => r.isConnected && r !== editing && r.dataset.catCode.toUpperCase() === code)) return showToast('Mã loại NCC đã tồn tại.', 'error');
+    if (editing && code !== editing.dataset.catCode && count(editing) > 0) return showToast('Không đổi mã loại đang có NCC trực thuộc; có thể cập nhật tên, mô tả và trạng thái.', 'error');
+    let row = editing;
+    if (!row) { row = rows[0].cloneNode(true); row.hidden = false; rows.push(row); tbody.appendChild(row); row.cells[3].textContent = '0 NCC'; attach(row); }
+    row.dataset.catCode = code; row.cells[0].textContent = code;
+    row.cells[1].querySelector('.font-headline-sm').textContent = name;
+    row.cells[1].querySelector('.font-label-sm').textContent = $('categoryDesc').value.trim();
+    row.cells[2].textContent = depts[$('managingDept').value];
+    row.cells[4].querySelector('span').textContent = active ? 'Đang hoạt động' : 'Ngừng sử dụng';
+    actions(row); editing = row; filter(); showToast('Đã lưu loại nhà cung cấp: ' + code + ' (phiên mô phỏng).');
+  });
+  ['tableSearchInput','quickSearchInput'].forEach(id => $(id).addEventListener('input', () => { $(id === 'tableSearchInput' ? 'quickSearchInput' : 'tableSearchInput').value = $(id).value; filter(); }));
+  ['categoryDeptFilter','categoryStatusFilter'].forEach(id => $(id).addEventListener('change', filter));
+  $('btnFilterGrid').addEventListener('click', () => showToast(`Đã lọc: ${filter()} loại NCC phù hợp.`));
+  setActive(true); filter();
+})();
 
-
-</body></html>
+</script>
+</body>
+</html>
