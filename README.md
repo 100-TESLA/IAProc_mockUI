@@ -19,7 +19,7 @@ Ba tab dành cho bộ phận mua sắm:
 Ba tab dành cho cấp phê duyệt:
 
 4. [Hồ sơ chờ phê duyệt](./QLNCC/code-ui-4.html)
-5. Lịch sử đã xét duyệt
-6. Tra cứu Danh mục NCC
+5. [Lịch sử đã xét duyệt](./QLNCC/code-ui-5.html)
+6. [Tra cứu Danh mục NCC](./QLNCC/code-ui-6.html)
 
 Hiện tại, repository có giao diện cho tab **Hồ sơ chờ phê duyệt**; giao diện cho hai tab còn lại chưa có file HTML tương ứng.
